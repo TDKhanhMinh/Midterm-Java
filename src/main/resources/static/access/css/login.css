@@ -1,0 +1,46 @@
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
+.login-google .google-img {
+    width: 30px;
+    height: 30px;
+    background-color: white !important;;
+}
+
+.login-google {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    border-radius: 30px;
+    line-height: 40px;
+    color: black;
+    margin-top: 10px;
+    padding: 0 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.login-google:hover {
+    opacity: 0.8;
+    background-color: #e4ecfb;
+}
+
+.error{
+    color: red;
+}

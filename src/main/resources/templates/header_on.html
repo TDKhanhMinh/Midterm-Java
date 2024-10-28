@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS imports -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/access/css/home.css}"/>
+
+
+    <!-- JavaScript imports - order is important -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- First load Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+    <!-- Then load Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<th:block th:fragment="header_on">
+    <div class="container-fluid fixed-top border-bottom" style="background-color: white; max-height: 125px">
+        <div class="row flex-nowrap" style="max-height: 65px">
+            <div class="col-md-2 mt-2 ml-5">
+                <a style="font-size: small" class="d-flex justify-content-center mt-2"
+                   th:href="@{/uploadHome}">
+                    <img style="height: 85%;width: 40%" th:src="@{/access/img/rolex-logo-png-transparent.png}"
+                         alt="image of logo" class="img-fluid">
+                </a>
+
+            </div>
+
+            <div class="col-md-8 mt-2">
+                <div class="input-group row mt-3 d-flex justify-content-end">
+                    <form th:action="@{/search}" method="get" class="col-md-10 d-flex flex-nowrap">
+                        <input name="searchKey" id="search" type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search"
+                               aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" id="button-addon2">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-2 mt-4 d-flex flex-nowrap justify-content-center">
+                <a th:href="@{/cart}" class="btn btn-sm btn-hover-on rounded">
+                    <img style="width: 30px; height: 30px" th:src="@{/access/img/icons8-cart-48 (2).png}" alt="">
+                </a>
+                <div class="btn-group dropdown">
+                    <button class="btn btn-sm btn-hover-on rounded mx-2 dropdown-toggle" type="button"
+                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img style="width: 30px; height: 30px" th:src="@{/access/img/icons8-user-32.png}" alt="">
+                    </button>
+                    <ul class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
+                        <li>
+                            <a style="font-size:large;color: black" class="dropdown-item mt-2 disabled">
+                                <i class="fa-solid fa-circle-user"></i>
+                                <!--                                <label class="mx-2" sec:authentication="principal.username"></label>-->
+                                <label class="mx-2" sec:authentication="principal.username"></label>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2"
+                               th:href="@{/home-page}">
+                                <h6><i class="fa-solid fa-house"></i> Trang chủ</h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2"
+                               th:href="@{/profile(customerId=${session.id})}">
+                                <h6><i class="fa-regular fa-address-card"></i>
+                                    Tài khoản của tôi</h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="" class="dropdown-item mt-2" th:href="@{/placeOrder}">
+                                <h6>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-layout-text-sidebar-reverse" viewBox="0 0 16 16">
+                                        <path d="M12.5 3a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm0 3a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm.5 3.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
+                                        <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM4 1v14H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm1 0h9a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5z"/>
+                                    </svg>
+                                    Đơn hàng của tôi
+                                </h6>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/logout}">
+                                <h6><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    Đăng xuất</h6>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <section class="navigation">
+            <header class="navbar-style-12 position-relative">
+                <!-- main navbar Start -->
+                <div class="container">
+                    <nav class="row align-items-center">
+                        <div class="position-static">
+                            <div class="navbar-container navbar-sidebar-12">
+                                <!-- navbar close  Ends -->
+                                <div class="navbar-close d-lg-none">
+                                    <a class="close-mobile-menu-12" href="javascript:void(0)"><i
+                                            class="mdi mdi-close"></i></a>
+                                </div>
+                                <!-- navbar close  Ends -->
+                                <div class="main-navbar">
+                                    <!-- navbar menu Start -->
+                                    <ul style="list-style: none" class="main-menu-horizontal">
+                                        <li class="position-static menu-item-has-children">
+                                            <a href="#0" class="" data-bs-toggle="collapse"
+                                               data-bs-target="#menuVertical12-1"
+                                               aria-controls="menuVertical12-1" aria-expanded="true"
+                                               aria-label="Toggle navigation">Thương hiệu <i
+                                                    class="mdi mdi-chevron-right"></i>
+                                            </a>
+                                            <!-- sub mega dropdown Start -->
+                                            <ul class="sub-mega-dropdown collapse show" id="menuVertical12-1" style="">
+                                                <li>
+                                                    <div class="mega-dropdown-menu">
+                                                        <ul class="container mega-dropdown d-flex justify-content-around">
+                                                            <li class="
+                                  mega-dropdown-list
+                                  menu-item-has-children
+                                ">
+                                                                <h6 style="text-transform: uppercase" class="
+                                    heading-6
+                                    font-weight-500
+                                    mega-title
+                                    collapsed
+                                  " data-bs-toggle="collapse" data-bs-target="#menuVertical12-2"
+                                                                    aria-controls="menuVertical12-2"
+                                                                    aria-expanded="false"
+                                                                    aria-label="Toggle navigation">
+                                                                    Đồng hồ nhật bản
+                                                                    <i class="mdi mdi-chevron-right"></i>
+                                                                </h6>
+                                                                <ul class="collapse" id="menuVertical12-2">
+                                                                    <li>
+                                                                        <a th:href="@{/allProducts(brandName=${'Casio LTP'})}">Casio
+                                                                            LTP</a></li>
+                                                                    <li>
+                                                                        <a th:href="@{/allProducts(brandName=${'Casio Edificie'})}">Casio
+                                                                            Edificie</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a th:href="@{/allProducts(brandName=${'Casio G-Shock'})}">Casio
+                                                                            G-Shock</a></li>
+                                                                    <li>
+                                                                        <a th:href="@{/allProducts(brandName=${'Casio Sheen'})}">Casio
+                                                                            Sheen</a></li>
+                                                                    <li>
+                                                                        <a th:href="@{/allProducts(brandName=${'Casio MTP'})}">Casio
+                                                                            MTP</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="
+                                  mega-dropdown-list
+                                  menu-item-has-children
+                                ">
+                                                                <h6 style="text-transform: uppercase" class="
+                                    heading-6
+                                    font-weight-500
+                                    mega-title
+                                    collapsed
+                                  " data-bs-toggle="collapse" data-bs-target="#menuVertical12-3"
+                                                                    aria-controls="menuVertical12-3"
+                                                                    aria-expanded="false"
+                                                                    aria-label="Toggle navigation">
+                                                                    đồng hồ châu âu<i class="mdi mdi-chevron-right"></i>
+                                                                </h6>
+                                                                <ul class="collapse" id="menuVertical12-3">
+                                                                    <li>
+                                                                        <a th:href="@{/allProducts(brandName=${'Pierre Lannier'})}">Pierre
+                                                                            Lannier</a></li>
+                                                                    <li>
+                                                                        <a th:href="@{/allProducts(brandName=${'Daniel Wellington'})}">Daniel
+                                                                            Wellington</a></li>
+                                                                    <li>
+                                                                        <a th:href="@{/allProducts(brandName=${'MVMT'})}">MVMT</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a th:href="@{/allProducts(brandName=${'Seiko'})}">Seiko</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="
+                                  mega-dropdown-list
+                                  menu-item-has-children
+                                ">
+                                                                <h6 style="text-transform: uppercase" class="
+                                    heading-6
+                                    font-weight-500
+                                    mega-title
+                                    collapsed
+                                  " data-bs-toggle="collapse" data-bs-target="#menuVertical12-4"
+                                                                    aria-controls="menuVertical12-4"
+                                                                    aria-expanded="false"
+                                                                    aria-label="Toggle navigation">
+                                                                    Đồng hồ thụy sĩ
+                                                                    <i class="mdi mdi-chevron-right"></i>
+                                                                </h6>
+                                                                <ul class="collapse" id="menuVertical12-4">
+                                                                    <li>
+                                                                        <a href="#0">Tissot</a>
+                                                                    </li>
+                                                                    <li><a href="#0">Rolex</a></li>
+                                                                    <li><a href="#0">Omega</a></li>
+                                                                    <li><a href="#0">TAG Heuer</a></li>
+                                                                    <li><a href="#0">Hublot</a></li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <!-- sub mega dropdown Ends -->
+                                        </li>
+                                        <li><a th:href="@{/home-page}">Trang chủ</a></li>
+                                        <li class="menu-item-has-children">
+                                            <a href="#0" class="collapsed" data-bs-toggle="collapse"
+                                               data-bs-target="#menuVertical12-5" aria-controls="menuVertical12-5"
+                                               aria-expanded="false" aria-label="Toggle navigation">Phụ kiện<i
+                                                    class="mdi mdi-chevron-right"></i>
+                                            </a>
+                                            <!-- sub menu Start -->
+                                            <ul class="sub-menu collapse" id="menuVertical12-5">
+                                                <li><a href="#0">Dropped Menu 1</a></li>
+                                                <li><a href="#0">Dropped Menu 2</a></li>
+                                                <li><a href="#0">Dropped Menu 3</a></li>
+                                                <li><a href="#0">Dropped Menu 4</a></li>
+                                            </ul>
+                                            <!-- sub menu Ends -->
+                                        </li>
+                                    </ul>
+                                    <!-- navbar menu Ends -->
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <!-- main navbar Ends -->
+
+            </header>
+
+            <!--====== Navbar Style 12 Part Ends ======-->
+        </section>
+    </div>
+
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Update Profile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" th:href="@{/access/css/registration.css}"/>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="registration-form">
+        <form th:action="@{/saveProfile}" enctype="multipart/form-data"
+              th:object="${customerUpdate}" method="POST">
+            <div class="create-account-content">
+                Update information
+            </div>
+            <div class="form-group mt-4">
+                <input type="hidden" class="form-control item" th:field="*{customerId}" id="customerId"
+                       name="customerId">
+            </div>
+            <div class="form-group mt-4">
+                <label class="form-label mx-3">First name</label>
+                <input type="text" class="form-control item" th:field="*{firstName}" id="firstname"
+                       placeholder="FirstName">
+            </div>
+            <div class="form-group">
+                <label class="form-label mx-3">Last name</label>
+                <input type="text" class="form-control item" th:field="*{lastName}" id="lastname"
+                       placeholder="LastName"></div>
+            <div class="form-group">
+                <label class="form-label mx-3">Email address</label>
+                <input type="email" th:field="*{email}" class="form-control item" id="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label class="form-label mx-3">Birth day</label>
+                <input type="date" th:field="*{birthday}" class="form-control item" id="birthday"
+                       placeholder="Birthday">
+            </div>
+            <div class="form-group">
+                <label class="form-label mx-3">Phone number</label>
+                <input type="text" th:field="*{phone}" class="form-control item" id="phone" placeholder="Phone Number">
+            </div>
+            <div class="province-district-ward mb-3">
+                <label class="form-label mx-3">Gender</label>
+                <select th:field="*{gender}" name="" id="">
+                    <option disabled value=""></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+            <div class="province-district-ward">
+                <label class="form-label mx-3">Address</label>
+                <select th:field="*{province}" name="city" id="city">
+                    <option value="">Tỉnh/Thành phố</option>
+                </select>
+                <div class="province-district-ward mt-3">
+                    <select th:field="*{district}" name="district" id="district">
+                        <option value="">Quận/Huyện</option>
+                    </select>
+                    <select th:field="*{ward}" class="mx-4" name="ward" id="ward">
+                        <option value="">Phường/Xã</option>
+                    </select></div>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" th:field="*{password}" class="form-control item" id="password"
+                       placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input type="hidden" th:field="*{confirmPassword}" class="form-control item" id="confirmPassword"
+                       placeholder="Password">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" value="Submit" class="btn btn-block create-account">Save Update</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script th:src="@{/access/js/apiprovince.js}"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" th:href="@{/access/css/registration.css}"/>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="registration-form">
+        <form th:action="@{/checkRegisterCustomer}"
+              th:object="${customer}" method="POST">
+<!--            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+            <div th:if="${success}">
+                <div class="alert alert-success" th:text="${success}"></div>
+            </div>
+            <div th:if="${error}">
+                <div class="alert alert-warning" th:text="${error}"></div>
+            </div>
+            <div class="create-account-content">
+                Create new account
+            </div>
+            <div class="form-group row flex-nowrap justify-content-between mt-4">
+                <div class="col col-6">
+                    <label class="form-label mx-3">First name</label>
+                    <input type="text" class="form-control item" th:field="*{firstName}" id="firstname" name="firstName"
+                           placeholder="FirstName">
+                    <span th:field="${#fields.hasErrors('firstName')}"
+                          th:errors="*{firstName}"
+                          class="error mx-3"></span>
+                </div>
+                <div class="col col-6">
+                    <label class="form-label mx-3">Last name</label>
+                    <input type="text" class="form-control item" th:field="*{lastName}" id="lastname"
+                           placeholder="LastName">
+                    <span th:field="${#fields.hasErrors('lastName')}"
+                          th:errors="*{lastName}"
+                          class="error mx-3"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label mx-3">Email address</label>
+                <input type="email" th:field="*{email}" class="form-control item" id="email" placeholder="Email">
+                <span th:field="${#fields.hasErrors('email')}"
+                      th:errors="*{email}"
+                      class="error mx-3"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label mx-3">Password</label>
+                <input type="password" class="form-control item" th:field="*{password}" id="password"
+                       placeholder="Password">
+                <span th:field="${#fields.hasErrors('password')}"
+                      th:errors="*{password}"
+                      class="error mx-3"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label mx-3">Confirm password</label>
+                <input type="password" class="form-control item" id="" name="confirm" th:field="*{confirmPassword}"
+                       placeholder="Confirm password">
+                <span th:field="${#fields.hasErrors('confirmPassword')}"
+                      th:errors="*{confirmPassword}"
+                      class="error mx-3"></span>
+            </div>
+
+
+            <div class="form-group">
+                <button type="submit" value="Submit" class="btn btn-block create-account">Create Account</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
+        integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>

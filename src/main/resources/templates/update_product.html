@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Product</title>
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link th:href="@{/access/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js">
+    <!-- Custom styles for this template-->
+    <link th:href="@{/access/css/sb-admin-2.min.css}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <th:block th:replace="~{admin_sidebar :: admin_sidebar}"></th:block>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <th:block th:replace="~{header_admin :: header_admin}"></th:block>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+
+            <div th:if="${success}">
+                <div class="alert alert-success" th:text="${success}"></div>
+            </div>
+            <div th:if="${error}">
+                <div class="alert alert-warning" th:text="${error}"></div>
+            </div>
+            <!--Update category-->
+            <div class="container-sm">
+                <form th:action="@{/admin/saveUpdateProduct}" enctype="multipart/form-data" method="post"
+                      th:object="${productUpdate}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2">Update product</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group mb-3">
+                            <input th:field="*{productId}" type="hidden" class="form-control" id="productId"
+                                   name="productId">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="productName" class="col-form-label">Name</label>
+                            <input th:field="*{name}" type="text" class="form-control" id="productName"
+                                   name="productName">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="productType" class="col-form-label">Type</label>
+                            <select th:field="*{productType}" id="productType" name="productType" class="form-control">
+                                <option th:value="Nam">Nam</option>
+                                <option th:value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="price" class="col-form-label">Price</label>
+                            <input th:field="*{originalPrice}" type="number" class="form-control" id="price"
+                                   name="price">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="salePrice" class="col-form-label">Sale Price</label>
+                            <input th:field="*{salePrice}" type="number" class="form-control" id="salePrice"
+                                   name="salePrice">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="quantity" class="col-form-label">Quantity</label>
+                            <input th:field="*{quantity}" type="text" class="form-control" id="quantity"
+                                   name="quantity">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="imageProduct" class="col-form-label">Image</label>
+                            <input type="file" class="form-control" id="imageProduct"
+                                   name="imageProduct">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="category" class="col-form-label">Category</label>
+                            <select id="category" name="category" class="form-control">
+                                <option th:text="${productUpdate.getCategory().name}"
+                                        th:value="${productUpdate.getCategory().categoryId}"></option>
+                                <option th:each="category:${categories}"
+                                        th:value="${category.categoryId}"
+                                        th:text="${category.name}"
+                                ></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal">
+                            <a class="text-white" style="text-decoration: none"
+                               th:href="@{/admin/product}">Cancel</a>
+                        </button>
+                        <button type="submit" value="Submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+            <!--End update category-->
+
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/access/vendor/jquery/jquery.min.js}"></script>
+
+<script th:src="@{/access/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!--<script th:src="@{/access/js/category.js}"></script>-->
+<!-- Core plugin JavaScript-->
+<script th:src="@{/access/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/access/js/sb-admin-2.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+        integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>
