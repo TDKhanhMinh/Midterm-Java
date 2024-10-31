@@ -18,10 +18,10 @@
 </head>
 <body>
 <th:block th:insert="~{header_on :: header_on}"></th:block>
-<hr>
 
 
-<div class="container" th:object="${orderList}" style="padding-top: 150px; min-height: 500px">
+
+<div class="container pt-4" th:object="${orderList}" style="min-height: 500px">
     <div class="container d-flex justify-content-center">
         <div th:if="${success}">
             <div class="alert alert-success" th:text="${success}"></div>

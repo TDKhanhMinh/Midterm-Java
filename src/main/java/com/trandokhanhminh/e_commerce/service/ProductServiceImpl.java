@@ -105,8 +105,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> sortProductsBySalePriceAsc(String categoryName) {
-        return productRepo.sortProductsBySalePriceAsc(categoryName);
+    public List<Product> sortProductsBySalePriceDesc(String categoryName) {
+        return productRepo.sortProductsBySalePriceDesc(categoryName);
     }
 
     @Override

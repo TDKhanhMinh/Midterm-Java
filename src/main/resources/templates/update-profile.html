@@ -82,6 +82,9 @@
 
             <div class="form-group">
                 <button type="submit" value="Submit" class="btn btn-block create-account">Save Update</button>
+                <a th:href="@{/profile(customerId=${customerUpdate.customerId})}" class="btn bg-danger  btn-danger btn-block create-account">
+                    Cancel Changes
+                </a>
             </div>
         </form>
 

@@ -177,7 +177,7 @@ h6 {
 .product-style-3 .product-content {
     background-color: #fff;
     position: relative;
-    z-index: 5;
+    z-index: 1;
     padding: 10px 20px;
 }
 
@@ -1404,4 +1404,7 @@ span {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+}
+.header-full{
+    z-index: 3;
 }

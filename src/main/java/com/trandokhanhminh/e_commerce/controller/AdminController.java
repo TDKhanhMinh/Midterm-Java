@@ -41,9 +41,9 @@ public class AdminController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session,Model model) {
         session.removeAttribute("USERNAME");
-        //session.invalidate();
+        model.addAttribute("success", "Log out successfully");
         return "login";
     }
 

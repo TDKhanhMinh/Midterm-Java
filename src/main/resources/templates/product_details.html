@@ -25,12 +25,18 @@
 <body>
 <th:block th:insert="~{header_on :: header_on}" th:if="${session.USERNAME}"></th:block>
 
-<div class="container-sm " style="padding-top: 100px" th:object="${product}">
+<div class="container-sm " th:object="${product}">
+
+
     <div class="pt-5">
         <h6 class="mb-0"><a th:href="@{/home-page}" class="text-body"><i
                 class="fas fa-long-arrow-alt-left me-2"></i>Trang chủ</a></h6>
     </div>
+    <div th:if="${success}">
+        <div class="alert alert-success text-center my-2" th:text="${success}"></div>
+    </div>
     <div class="row d-flex align-items-center justify-content-center">
+
         <div class="img col-md-5">
             <div class="main-image d-flex justify-content-end">
                 <img id="mainImage" style="width: 400px;height: 400px;"
@@ -52,13 +58,14 @@
             <p th:text="'Đồng hồ '+ ${product.category.name.split(' ')[0]}+ ' '+ ${product.name} +' là sự kết hợp hoàn hảo giữa vẻ ngoài lịch lãm và tính năng mạnh mẽ.
                 Thiết kế hiện đại với bộ máy Chronograph.'"></p>
             <p><strong th:text="'Mã sản phẩm: '+${product.name}"></strong></p>
-            <div class="row my-4" >
+            <div class="row my-4">
                 <div class="d-flex align-items-center justify-content-center">
                     <button style="width: 245px;height: 45px" id="shop-button" class="btn btn-danger mb-2">Mua Ngay
                         (Freeship COD)
                     </button>
                 </div>
-                <form class="d-flex align-items-center justify-content-center" th:action="@{/addToCart}" method="post">
+                <form class="d-flex align-items-center justify-content-center" th:action="@{/addToCartInSide}"
+                      method="post">
                     <input type="hidden" name="productId" th:value="${product.productId}">
                     <button type="submit" class="main-btn primary-btn cart">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -69,8 +76,8 @@
                     </button>
                 </form>
             </div>
-
-            <form method="post" th:action="@{/buyNow}" th:object="${user}" id="customer-form" class="customer_info form-control" style="display: none;"
+            <form method="post" th:action="@{/buyNow}" th:object="${user}" id="customer-form"
+                  class="customer_info form-control" style="display: none;"
                   novalidate="novalidate">
                 <div th:if="${error}">
                     <div class="alert alert-warning" th:text="${error}"></div>
@@ -78,17 +85,20 @@
                 <input type="hidden" name="productId" th:value="${product.productId}">
                 <div class="form-group mb-2">
                     <label class="form-label mx-2" for="customer_name">Họ tên:</label>
-                    <input th:value="${user.lastName}+' '+${user.firstName}" class="form-control" type="text" id="customer_name" name="customer_name" placeholder="Họ tên"
+                    <input th:value="${user.lastName}+' '+${user.firstName}" class="form-control" type="text"
+                           id="customer_name" name="customer_name" placeholder="Họ tên"
                            value="" required="">
                 </div>
                 <div class="form-group mb-2">
                     <label class="form-label mx-2" for="phone">Số điện thoại:</label>
-                    <input th:value="${user.phone}" class="form-control" type="tel" id="phone" name="phone" placeholder="Số điện thoại" value=""
+                    <input th:value="${user.phone}" class="form-control" type="tel" id="phone" name="phone"
+                           placeholder="Số điện thoại" value=""
                            required="">
                 </div>
                 <div class="form-group mb-2">
                     <label class="form-label mx-2" for="email">Email</label>
-                    <input class="form-control" type="email" id="email" name="email" placeholder="Email" th:value="${user.email}"
+                    <input class="form-control" type="email" id="email" name="email" placeholder="Email"
+                           th:value="${user.email}"
                            required="" readonly>
                 </div>
                 <div class="form-group mb-2">
@@ -101,7 +111,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button id="shop-button-search" type="submit" value="Submit" class="btn btn-primary form-control">Mua ngay</button>
+                    <button id="shop-button-search" type="submit" value="Submit" class="btn btn-primary form-control">
+                        Mua ngay
+                    </button>
                 </div>
             </form>
 

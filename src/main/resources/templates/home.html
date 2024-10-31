@@ -20,8 +20,7 @@
 
 <th:block th:insert="~{ header_off :: header_off}" th:unless="${session.USERNAME}"></th:block>
 
-<div class="container " style="margin-top: 130px">
-</div>
+
 
 
 <div class="container pt-10">
@@ -370,8 +369,8 @@
         </form>
     </div>
 </div>
-<div th:each="categoryItem,step:${categoryList}" class="products">
-    <div class="container-sm" style="width: 80%">
+<div  th:each="categoryItem,step:${categoryList}" class="products">
+    <div th:if="${categoryItem.getProducts().size() > 0}" class="container-sm" style="width: 80%;">
         <div class="row">
             <section class="product-wrapper pt-70">
                 <div class="container-fluid rounded-2"
@@ -440,6 +439,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 

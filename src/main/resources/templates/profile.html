@@ -15,14 +15,16 @@
     <link rel="stylesheet" th:href="@{/access/css/home.css}"/>
 
 
-
 </head>
 <body>
 <th:block th:insert="~{header_on :: header_on}"></th:block>
-<hr>
-<section class="profile-wrapper pt-100 pb-100">
+
+<section class="profile-wrapper pt-4 pb-100" >
     <div class="container">
-        <form th:object="${customer}" method="post">
+        <form th:object="${customer}">
+            <div th:if="${success}">
+                <div class="alert alert-success" th:text="${success}"></div>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-lg-9">
                     <div class="profile">
@@ -118,6 +120,11 @@
                                         <p th:text="${customer.birthday}"></p>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="profile-title">
+                                <h5 class="title">Change Password</h5>
+                                <a class="profile-link" th:href="@{/changePassword(customerId=${customer.customerId})}">Edit
+                                </a>
                             </div>
                         </div>
                         <div class="profile-footer mt-45">

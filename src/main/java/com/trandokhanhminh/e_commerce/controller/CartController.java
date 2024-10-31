@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class CartController {
@@ -31,12 +33,18 @@ public class CartController {
     @GetMapping("/cart")
     public String getCart(Model model, Principal principal) {
         User user = userService.findCustomerByEmail(principal.getName());
+        List<Product> products = productService.findAllProducts();
+        Collections.shuffle(products);
+        List<Product> randomProducts = products.stream()
+                .limit(20)
+                .toList();
         System.out.println(user);
         Cart cart = user.getCart();
         if (cart == null) {
             model.addAttribute("message", "No item in your cart");
         }
         model.addAttribute("cart", cart);
+        model.addAttribute("products",randomProducts);
         return "cart";
     }
 
@@ -47,6 +55,16 @@ public class CartController {
         Cart cart = cartService.addToCart(product, quantity, user);
         model.addAttribute("cart", cart);
         return "redirect:/home-page";
+    }
+
+    @PostMapping("/addToCartInSide")
+    public String addToCartInSide(Model model, RedirectAttributes redirectAttributes, Principal principal, @RequestParam("productId") int productId, @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
+        Product product = productService.findProductByProductId(productId);
+        User user = userService.findCustomerByEmail(principal.getName());
+        Cart cart = cartService.addToCart(product, quantity, user);
+        model.addAttribute("cart", cart);
+        redirectAttributes.addFlashAttribute("success", "Thêm vào giỏ hàng thành công");
+        return "redirect:/productDetails?productId=" + productId;
     }
 
     @PostMapping("/addToCartNow")

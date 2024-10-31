@@ -25,7 +25,7 @@ public interface ProductService {
 
     List<Product> sortProductsByCategoryASC(String categoryName);
 
-    List<Product> sortProductsBySalePriceAsc(String categoryName);
+    List<Product> sortProductsBySalePriceDesc(String categoryName);
 
     List<Product> findAllByOrderBySalePriceDesc();
 

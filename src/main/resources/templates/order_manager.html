@@ -58,10 +58,6 @@
                     <p>No order</p>
                 </div>
             </div>
-<!--            <button type="button" class="btn btn-primary mb-2 mx-2" data-bs-toggle="modal"-->
-<!--                    data-bs-target="#exampleModal"-->
-<!--                    data-bs-whatever="@mdo">Add new category-->
-<!--            </button>-->
             <table class="table mx-2" th:object="${size}" th:if="${size>0}">
                 <thead>
                 <tr>
@@ -80,17 +76,17 @@
                     <th th:text="${item.oder_id}"></th>
                     <td th:text="${item.product_quantity}"></td>
                     <td th:text="${item.date}"></td>
-                    <td class="priceSale"  th:text="${item.total_price/10}"></td>
+                    <td class="priceSale" th:text="${item.total_price/10}"></td>
                     <td th:text="${item.user.customerId}"></td>
                     <td th:text="${item.status}"></td>
                     <td th:text="${item.expected_date}"></td>
                     <td class="text-center">
                         <!--Update category-->
-<!--                        <a-->
-<!--                                id="updateBtn"-->
-<!--                           class="btn btn-info btn-sm ">-->
-<!--                            Update-->
-<!--                        </a>-->
+                        <!--                        <a-->
+                        <!--                                id="updateBtn"-->
+                        <!--                           class="btn btn-info btn-sm ">-->
+                        <!--                            Update-->
+                        <!--                        </a>-->
                         <!--End update category-->
                         <a th:href="@{/admin/deleteOrder(orderId=${item.oder_id})}"
                            class="btn btn-danger btn-sm"

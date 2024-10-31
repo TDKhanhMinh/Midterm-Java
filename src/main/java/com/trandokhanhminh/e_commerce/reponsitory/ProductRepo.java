@@ -58,8 +58,8 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
     @Query("SELECT p FROM Product p where" +
             "(:categoryName is null OR p.category.name = :categoryName)" +
-            "order by p.salePrice asc ")
-    List<Product> sortProductsBySalePriceAsc(@Param("categoryName") String categoryName);
+            "order by p.salePrice desc ")
+    List<Product> sortProductsBySalePriceDesc(@Param("categoryName") String categoryName);
 
 
 

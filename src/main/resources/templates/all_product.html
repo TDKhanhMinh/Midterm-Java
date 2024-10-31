@@ -20,7 +20,7 @@
 
 <th:block th:insert="~{ header_off :: header_off}" th:unless="${session.USERNAME}"></th:block>
 
-<div class="container " style="margin-top: 150px">
+<div class="container">
 </div>
 <div class="container text-center mt-4">
     <h2 class="text-uppercase" th:text="'đồng hồ '+${brandName}+' chính hãng'"></h2>
@@ -179,7 +179,19 @@
     <div class="container-sm" style="width: 80%">
         <div class="row">
             <section class="product-wrapper pt-70">
-                <div class="container-fluid rounded-2" style="background-color: #e3f4ff">
+                <div th:if="${products.size() == 0 }" class="alert alert-info text-center row">
+                    <p class="col-md-12 fs-5">
+                        Sản phẩm này hiện đang hết hàng
+                    </p>
+                    <a th:href="@{/home-page}">
+                        <div class="col-md-12 d-flex align-items-center justify-content-center">
+                            <div style="width: 300px; height: 40px;" class="bg-success rounded-2">
+                                <span class=" text-white mt-2">Mua mặt hàng khác</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div th:if="${products.size()>0}" class="container-fluid rounded-2" style="background-color: #e3f4ff">
                     <h3 th:text="'Đồng hồ '+${brandName}" class=" pt-2 text-center"
                         style="text-transform: uppercase"></h3>
                     <div class="row">

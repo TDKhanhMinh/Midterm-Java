@@ -120,7 +120,7 @@ public class HomeController {
     @GetMapping("/saleAsc")
     public String showProductBySalePrice(Model model, @Param("brand") String brand) {
         if (!brand.equals("all")) {
-            List<Product> products = productService.sortProductsBySalePriceAsc(brand);
+            List<Product> products = productService.sortProductsBySalePriceDesc(brand);
             model.addAttribute("products", products);
             model.addAttribute("brandName", brand);
             return "search_result";

@@ -2,15 +2,22 @@ package com.trandokhanhminh.e_commerce.controller;
 
 import com.trandokhanhminh.e_commerce.entity.User;
 import com.trandokhanhminh.e_commerce.reponsitory.UserRepo;
+import com.trandokhanhminh.e_commerce.service.ProductService;
 import com.trandokhanhminh.e_commerce.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -19,10 +26,16 @@ public class CustomersController {
     private final UserService customerService;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private final BCryptPasswordEncoder encoder;
 
 
-    public CustomersController(UserService theCustomerService) {
+    public CustomersController(UserService theCustomerService, BCryptPasswordEncoder encoder) {
         customerService = theCustomerService;
+        this.encoder = encoder;
     }
 
 
@@ -111,6 +124,39 @@ public class CustomersController {
             customerService.updateCustomer(theCustomer);
             return "redirect:/list";
         }
+    }
+
+
+    @GetMapping("/forgotPassword")
+    public String getForgotPassword(Principal principal, Model model) {
+        User user = customerService.findCustomerByEmail(principal.getName());
+        model.addAttribute("user", user);
+        return "forgot-password";
+    }
+
+    @GetMapping("/changePassword")
+    public String changePassword(Model model, Principal principal) {
+        User user = customerService.findCustomerByEmail(principal.getName());
+        model.addAttribute("user", user);
+        return "change-password";
+    }
+
+    @PostMapping("/savePassword")
+    public String savePassword(RedirectAttributes redirectAttributes, Principal principal, @RequestParam("new-password") String newPassword) {
+        User user = customerService.findCustomerByEmail(principal.getName());
+        user.setPassword(encoder.encode(newPassword));
+        userRepo.save(user);
+        redirectAttributes.addFlashAttribute("success", "Password has been changed");
+        return "redirect:/profile?customerId=" + user.getCustomerId();
+    }
+
+    @PostMapping("/resetPassword")
+    public String resetPassword(RedirectAttributes redirectAttributes, @RequestParam("email") String email, @RequestParam("password") String password) {
+        User user = customerService.findCustomerByEmail(email);
+        user.setPassword(encoder.encode(password));
+        userRepo.save(user);
+        redirectAttributes.addFlashAttribute("success", "Password reset successfully");
+        return "redirect:/showLogin";
     }
 
 
