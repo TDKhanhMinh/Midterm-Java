@@ -21,6 +21,7 @@
 <th:block th:insert="~{ header_off :: header_off}" th:unless="${session.USERNAME}"></th:block>
 
 <div class="container">
+
 </div>
 <div class="container text-center mt-4">
     <h2 class="text-uppercase" th:text="'đồng hồ chính hãng'"></h2>
@@ -65,7 +66,8 @@
         <span>Sắp xếp theo:</span>
         <a th:href="@{/saleAsc(brand=${brandName})}" class="mx-2 my-2 text-dark-emphasis">Giảm giá</a>
         <a th:href="@{/bestSeller(brand=${brandName})}" class="mx-2 my-2 text-dark-emphasis">Bán chạy</a>
-        <a style="display: inline-block" class="text-dark-emphasis dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <a style="display: inline-block" class="text-dark-emphasis dropdown-toggle" type="button"
+           id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             Giá
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -75,6 +77,19 @@
 
     </div>
     <hr class="my-4">
+    <div th:if="${products.size() == 0 }" class="alert alert-info text-center row">
+        <p class="col-md-12 fs-5">
+            Sản phẩm này hiện đang hết hàng
+        </p>
+        <a th:href="@{/home-page}">
+            <div class="col-md-12 d-flex align-items-center justify-content-center">
+                <div style="width: 300px; height: 40px;" class="bg-success rounded-2">
+                    <span class=" text-white mt-2">Mua mặt hàng khác</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
     <div class="col-md-8" id="customer-form" style="display: none;">
         <form th:action="@{/searchProduct}" method="get" class="customer_info form-control"
               novalidate="novalidate">

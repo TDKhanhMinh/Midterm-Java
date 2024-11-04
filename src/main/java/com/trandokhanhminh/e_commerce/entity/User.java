@@ -9,9 +9,7 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 
-@Setter
-@Getter
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "customer")
 @NoArgsConstructor
@@ -33,17 +31,17 @@ public class User {
     public String lastName;
 
     @NotNull(message = "Please fill in this field")
-    @Size(min = 1, message = "Please fill in this field")
+    @Size(min = 6, message = "Password must be more than 6 digit")
     @Column(name = "password")
     public String password;
 
     @NotNull(message = "Please fill in this field")
-    @Size(min = 1, message = "Please fill in this field")
+    @Size(min = 6, message = "Password must be more than 6 digit")
     public String confirmPassword;
 
     @NotNull(message = "Please fill in this field")
     @Size(min = 1, message = "Please fill in this field")
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     public String email;
 
     @Column(name = "gender")
@@ -69,7 +67,7 @@ public class User {
 
     @Setter
     @Getter
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "customer_role", joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
             , inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
     private Collection<Role> roles;

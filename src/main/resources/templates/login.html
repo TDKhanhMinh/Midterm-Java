@@ -38,7 +38,9 @@
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-5">
-                                <!--                <form th:action="@{/home/checkLogin}" method="POST">-->
+                                <div th:if="${param.error}" class="alert alert-danger mt-3 text-center" role="alert">
+                                    Tên tài khoản hoặc mật khẩu không chính xác.
+                                </div>
                                 <form class="my-4" th:action="@{/login}" method="POST">
 
                                     <div class="text-center">

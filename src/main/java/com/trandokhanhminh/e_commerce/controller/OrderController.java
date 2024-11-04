@@ -37,7 +37,7 @@ public class OrderController {
 
 
     @GetMapping("/checkout")
-    public String checkout(Principal principal, Model model, @Param("address")String address) {
+    public String checkout(Principal principal, Model model, @Param("address") String address) {
         User user = userService.findCustomerByEmail(principal.getName());
         Cart cart = user.getCart();
         model.addAttribute("address", address);
@@ -56,18 +56,28 @@ public class OrderController {
     }
 
     @PostMapping("/saveOrder")
-    public String saveOrder(Principal principal,RedirectAttributes redirectAttributes) {
-        User user = userService.findCustomerByEmail(principal.getName());
-        Cart cart = user.getCart();
-        orderService.saveOrder(cart);
-        redirectAttributes.addFlashAttribute("success","Đặt hàng thành công");
-        return "redirect:/placeOrder";
+    public String saveOrder(Principal principal, RedirectAttributes redirectAttributes,
+                            @Param("city") String city,
+                            @Param("district") String district,
+                            @Param("ward") String ward,
+                            @Param("address") String address) {
+        if (address.isEmpty() || city.isEmpty() || district.isEmpty() || ward.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Vui lòng nhập địa chỉ cụ thể");
+            return "redirect:/checkout";
+        } else {
+            User user = userService.findCustomerByEmail(principal.getName());
+            Cart cart = user.getCart();
+            String location = address + "," + ward + "," + district + "," + city;
+            orderService.saveOrder(cart, location);
+            redirectAttributes.addFlashAttribute("success", "Đặt hàng thành công");
+            return "redirect:/placeOrder";
+        }
     }
 
     @GetMapping("/deleteOrder")
-    public String deleteOrder(@RequestParam("orderId") int orderId,RedirectAttributes redirectAttributes) {
+    public String deleteOrder(@RequestParam("orderId") int orderId, RedirectAttributes redirectAttributes) {
         orderService.deleteOrder(orderId);
-        redirectAttributes.addFlashAttribute("success","Hủy đơn hàng thành công");
+        redirectAttributes.addFlashAttribute("success", "Hủy đơn hàng thành công");
         return "redirect:/placeOrder";
     }
 }

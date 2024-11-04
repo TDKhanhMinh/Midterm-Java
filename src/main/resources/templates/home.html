@@ -20,7 +20,14 @@
 
 <th:block th:insert="~{ header_off :: header_off}" th:unless="${session.USERNAME}"></th:block>
 
-
+<div class="container">
+    <div th:if="${success}">
+        <div class="alert alert-success" th:text="${success}"></div>
+    </div>
+    <div th:if="${error}">
+        <div class="alert alert-success" th:text="${error}"></div>
+    </div>
+</div>
 
 
 <div class="container pt-10">

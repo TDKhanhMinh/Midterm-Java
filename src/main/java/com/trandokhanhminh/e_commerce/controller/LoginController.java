@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
@@ -42,8 +43,6 @@ public class LoginController {
 
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
-
-
     @GetMapping("/access-denied")
     public String showDenied() {
         return "access-denied";
@@ -75,7 +74,6 @@ public class LoginController {
             return "registration-form";
         }
         if (theCustomer.getPassword().equals(theCustomer.getConfirmPassword())) {
-
             userService.saveCustomer(theCustomer);
             theModel.addAttribute("success", "Successfully registered");
             return "login";
@@ -89,10 +87,10 @@ public class LoginController {
 
 
     @GetMapping("/logout")
-    public String logout(HttpSession session, Model model) {
+    public String logout(HttpSession session, RedirectAttributes model) {
         model.addAttribute("success", "Successfully logged out");
         session.removeAttribute("USERNAME");
-        return "login";
+        return "redirect:/home-page";
     }
 }
 

@@ -165,10 +165,16 @@
                                         </div>
                                     </div>
                                     <div class="product-content">
-                                        <a th:href="@{/productDetails(productId=${tmpProduct.productId})}"><h4
-                                                style="font-size: 10px;"
+                                        <a style="text-decoration: none;"
+                                           th:href="@{/productDetails(productId=${tmpProduct.productId})}">
+                                            <h4 style="font-size: 10px;
+                                                       width: 120px;
+                                                       white-space: nowrap;
+                                                       overflow: hidden;
+                                                       text-overflow: ellipsis;"
                                                 th:text="${tmpProduct.category.name.split(' ')[0]}+' '+${tmpProduct.name}"
-                                                class="title"></h4></a>
+                                                class="title"></h4>
+                                        </a>
 
                                         <div>
                                             <span class="priceOriginal price-original"

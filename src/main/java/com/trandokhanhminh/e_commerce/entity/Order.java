@@ -37,12 +37,14 @@ public class Order {
     @Column(name = "total_price")
     public double total_price;
 
+    @Column(name = "address")
+    private String address;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private User user;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<OderDetails> orderDetailList;
-
 
 
     public Order(int product_quantity, Date date, double total_price) {

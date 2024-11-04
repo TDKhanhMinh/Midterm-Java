@@ -25,7 +25,7 @@
     <div class="registration-form">
         <form th:action="@{/checkRegisterCustomer}"
               th:object="${customer}" method="POST">
-<!--            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+            <!--            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
             <div th:if="${success}">
                 <div class="alert alert-success" th:text="${success}"></div>
             </div>
@@ -80,9 +80,13 @@
 
 
             <div class="form-group">
-                <button type="submit" value="Submit" class="btn btn-block create-account">Create Account</button>
+                <button type="submit" value="Submit" class="btn btn-block btn-primary create-account">
+                    Create Account
+                </button>
+                <a th:href="@{/showLogin}" class="btn bg-danger  btn-danger btn-block create-account">
+                    Cancel Create
+                </a>
             </div>
-
         </form>
 
     </div>

@@ -3,11 +3,13 @@ package com.trandokhanhminh.e_commerce.controller;
 import com.trandokhanhminh.e_commerce.entity.Category;
 import com.trandokhanhminh.e_commerce.entity.Order;
 import com.trandokhanhminh.e_commerce.entity.Product;
+import com.trandokhanhminh.e_commerce.entity.User;
 import com.trandokhanhminh.e_commerce.reponsitory.CategoryRepo;
 import com.trandokhanhminh.e_commerce.reponsitory.ProductRepo;
 import com.trandokhanhminh.e_commerce.service.CategoryService;
 import com.trandokhanhminh.e_commerce.service.OrderService;
 import com.trandokhanhminh.e_commerce.service.ProductService;
+import com.trandokhanhminh.e_commerce.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,6 +31,8 @@ public class AdminController {
     private CategoryRepo categoryRepo;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/admin")
     public String getAdmin() {
@@ -41,7 +45,7 @@ public class AdminController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session,Model model) {
+    public String logout(HttpSession session, Model model) {
         session.removeAttribute("USERNAME");
         model.addAttribute("success", "Log out successfully");
         return "login";
@@ -130,14 +134,6 @@ public class AdminController {
     @Autowired
     private ProductRepo productRepo;
 
-//    @GetMapping("/product")
-//    public String getProduct(Model model) {
-//        List<Product> products = productService.findAllProducts();
-//        model.addAttribute("products", products);
-//        model.addAttribute("size", products.size());
-//        model.addAttribute("newProduct", new Product());
-//        return "product";
-//    }
 
     @GetMapping("/product/{pageNum}")
     public String getProductPage(@PathVariable("pageNum") int pageNum, Model model) {
@@ -196,9 +192,18 @@ public class AdminController {
         }
         return "redirect:/admin/product/0";
     }
-//Begin order controller
+
+    //Begin order controller
+
+
+    @GetMapping("/deleteOrder")
+    public String deleteOrder(@RequestParam("orderId") int orderId) {
+        orderService.deleteOrder(orderId);
+        return "redirect:/admin/order/0";
+    }
+
     @GetMapping("/order/{pageNum}")
-    public String getOrder(@PathVariable("pageNum") int pageNum,Model model) {
+    public String getOrder(@PathVariable("pageNum") int pageNum, Model model) {
         Page<Order> orders = orderService.pageOrder(pageNum);
         model.addAttribute("size", orders.getSize());
         model.addAttribute("totalPages", orders.getTotalPages());
@@ -207,11 +212,24 @@ public class AdminController {
         return "order_manager";
     }
 
-    @GetMapping("/deleteOrder")
-    public String deleteOrder(@RequestParam("orderId") int orderId) {
-        orderService.deleteOrder(orderId);
-        return "redirect:/admin/order/0";
+    //Customer controller
+
+    @GetMapping(value = "/user/{pageNo}")
+    public String getList(Model model, HttpSession session, @PathVariable int pageNo) {
+        if (session.getAttribute("USERNAME") != null) {
+            Page<User> users = userService.userPage(pageNo);
+            model.addAttribute("size", users.getSize());
+            model.addAttribute("totalPages", users.getTotalPages());
+            model.addAttribute("currentPage", pageNo);
+            model.addAttribute("users", users);
+            return "list-customers";
+        } else return "login";
     }
 
+    @GetMapping("/deleteUser")
+    public String deleteUser(@RequestParam("userId") int userId) {
+        userService.deleteCustomerById(userId);
+        return "redirect:/admin/user/0";
+    }
 
 }

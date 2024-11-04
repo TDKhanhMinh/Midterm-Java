@@ -8,8 +8,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 
 @Configuration
@@ -29,9 +27,9 @@ public class UserConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity, AuthenticationSuccessHandler successHandler) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity, UserSuccessHandler userSuccessHandler) throws Exception {
         httpSecurity.authorizeHttpRequests(config -> config
-                        //.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/").hasRole("USER")
                         .requestMatchers("/admin/**", "/").hasRole("ADMIN")
                         .requestMatchers("/showRegister").permitAll()
@@ -40,12 +38,11 @@ public class UserConfig {
                 .formLogin(login -> login
                         .loginPage("/showLogin")
                         .loginProcessingUrl("/login")
-                        .successHandler(successHandler)
+                        .successHandler(userSuccessHandler)
+                        .failureForwardUrl("/showLogin?error=true")
                         .permitAll())
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutUrl("/admin/logout")
-                        .logoutSuccessHandler((LogoutSuccessHandler) successHandler)
+                        .logoutSuccessHandler(userSuccessHandler)
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .permitAll()

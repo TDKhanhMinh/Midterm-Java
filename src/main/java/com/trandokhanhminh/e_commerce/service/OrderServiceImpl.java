@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderDetailsRepo orderDetailsRepo;
 
     @Override
-    public void saveOrder(Cart cart) {
+    public void saveOrder(Cart cart, String location) {
         Order order = new Order();
         order.setStatus("Đang vận chuyển");
         order.setDate(new java.sql.Date(System.currentTimeMillis()));
@@ -45,9 +45,9 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(cart.getUser());
         order.setProduct_quantity(cart.getTotal_items());
         order.setTotal_price(cart.getTotal_price());
+        order.setAddress(location);
         List<OderDetails> orderDetailsList = new ArrayList<>();
         for (CartItems cartItem : cart.getCartItems()) {
-
             OderDetails oderDetails = new OderDetails();
             oderDetails.setOrder(order);
             oderDetails.setQuantity(cartItem.getQuantity());

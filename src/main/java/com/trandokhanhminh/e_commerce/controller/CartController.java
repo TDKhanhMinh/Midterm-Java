@@ -7,6 +7,7 @@ import com.trandokhanhminh.e_commerce.service.CartService;
 import com.trandokhanhminh.e_commerce.service.ProductService;
 import com.trandokhanhminh.e_commerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,21 +79,13 @@ public class CartController {
 
     @PostMapping("/buyNow")
     public String buyNow(Model model, Principal principal,
-                         RedirectAttributes redirectAttributes,
-                         @RequestParam("phone") String phone,
                          @RequestParam("productId") int productId,
                          @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
-        if (phone.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "Vui lòng nhập số điện thoại");
-            return "redirect:/productDetails?productId=" + productId;
-        } else {
             Product product = productService.findProductByProductId(productId);
             User user = userService.findCustomerByEmail(principal.getName());
             Cart cart = cartService.addToCart(product, quantity, user);
             model.addAttribute("cart", cart);
             return "redirect:/checkout";
-        }
-
     }
 
     @PostMapping("/updateCart")

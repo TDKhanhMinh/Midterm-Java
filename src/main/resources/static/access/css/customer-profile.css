@@ -13,8 +13,7 @@
 }
 
 .profile .profile-header .profile-author {
-    padding: 32px;
-    padding-top: 5px;
+    padding: 5px 32px 32px;
     position: relative;
     z-index: 9;
     margin-top: -80px;

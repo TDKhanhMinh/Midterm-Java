@@ -39,16 +39,6 @@ public class CustomersController {
     }
 
 
-    @GetMapping(value = "/list")
-    public String getList(Model theModel, HttpSession session) {
-        if (session.getAttribute("USERNAME") != null) {
-            List<User> theList = customerService.findAll();
-            theModel.addAttribute("customers", theList);
-            return "list-customers";
-        } else return "login";
-    }
-
-
     @GetMapping("/addForm")
     public String addForm(Model theModel) {
         User theCustomer = new User();
@@ -78,23 +68,14 @@ public class CustomersController {
             return "update-profile";
         } else {
             user.setFirstName(customer.getFirstName());
-
             user.setLastName(customer.getLastName());
-
             user.setEmail(customer.getEmail());
-
             user.setBirthday(customer.getBirthday());
-
             user.setDistrict(customer.getDistrict());
-
             user.setGender(customer.getGender());
-
             user.setPhone(customer.getPhone());
-
             user.setProvince(customer.getProvince());
-
             user.setWard(customer.getWard());
-
             System.out.println(user);
             userRepo.save(user);
             return "redirect:/profile?customerId=" + customerID;
@@ -120,7 +101,6 @@ public class CustomersController {
             theModel.addAttribute("customer", theCustomer);
             return "registration-form";
         } else {
-            System.out.println(theCustomer.getCustomerId());
             customerService.updateCustomer(theCustomer);
             return "redirect:/list";
         }

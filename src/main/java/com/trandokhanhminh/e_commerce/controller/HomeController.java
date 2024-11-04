@@ -56,8 +56,14 @@ public class HomeController {
     @GetMapping("/allProducts")
     public String showAllProducts(Model model, @RequestParam("brandName") String brandName) {
         List<Product> products = productService.findAllByCategory(brandName);
+        List<Product> result = productService.findAllProducts();
+        Collections.shuffle(result);
+        List<Product> randomProducts = result.stream()
+                .limit(20)
+                .toList();
         model.addAttribute("brandName", brandName);
         model.addAttribute("products", products);
+        model.addAttribute("productsSuggest", randomProducts);
         return "all_product";
     }
 
@@ -160,7 +166,6 @@ public class HomeController {
         List<Product> products = productService.findAllByOrderByOriginalPriceDesc();
         model.addAttribute("products", products);
         model.addAttribute("brandName", brand);
-
         return "search_result";
     }
 }
