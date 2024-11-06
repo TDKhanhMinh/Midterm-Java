@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -25,11 +26,14 @@ public class UserConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer(){
+        return (web)-> web.ignoring().requestMatchers("*/img/**","*/css/**","*/js/**","*/scss/**","*/vendor/**");
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity, UserSuccessHandler userSuccessHandler) throws Exception {
         httpSecurity.authorizeHttpRequests(config -> config
-                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/").hasRole("USER")
                         .requestMatchers("/admin/**", "/").hasRole("ADMIN")
                         .requestMatchers("/showRegister").permitAll()

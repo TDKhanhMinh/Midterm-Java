@@ -7,7 +7,6 @@ import com.trandokhanhminh.e_commerce.service.CartService;
 import com.trandokhanhminh.e_commerce.service.ProductService;
 import com.trandokhanhminh.e_commerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,12 +44,14 @@ public class CartController {
             model.addAttribute("message", "No item in your cart");
         }
         model.addAttribute("cart", cart);
-        model.addAttribute("products",randomProducts);
+        model.addAttribute("products", randomProducts);
         return "cart";
     }
 
     @PostMapping("/addToCart")
-    public String addToCart(Model model, Principal principal, @RequestParam("productId") int productId, @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
+    public String addToCart(Model model, Principal principal,
+                            @RequestParam("productId") int productId,
+                            @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
         Product product = productService.findProductByProductId(productId);
         User user = userService.findCustomerByEmail(principal.getName());
         Cart cart = cartService.addToCart(product, quantity, user);
@@ -59,7 +60,9 @@ public class CartController {
     }
 
     @PostMapping("/addToCartInSide")
-    public String addToCartInSide(Model model, RedirectAttributes redirectAttributes, Principal principal, @RequestParam("productId") int productId, @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
+    public String addToCartInSide(Model model, RedirectAttributes redirectAttributes,
+                                  Principal principal, @RequestParam("productId") int productId,
+                                  @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
         Product product = productService.findProductByProductId(productId);
         User user = userService.findCustomerByEmail(principal.getName());
         Cart cart = cartService.addToCart(product, quantity, user);
@@ -69,7 +72,9 @@ public class CartController {
     }
 
     @PostMapping("/addToCartNow")
-    public String addToCartNow(Model model, Principal principal, @RequestParam("productId") int productId, @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
+    public String addToCartNow(Model model, Principal principal,
+                               @RequestParam("productId") int productId,
+                               @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
         Product product = productService.findProductByProductId(productId);
         User user = userService.findCustomerByEmail(principal.getName());
         Cart cart = cartService.addToCart(product, quantity, user);
@@ -81,15 +86,17 @@ public class CartController {
     public String buyNow(Model model, Principal principal,
                          @RequestParam("productId") int productId,
                          @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
-            Product product = productService.findProductByProductId(productId);
-            User user = userService.findCustomerByEmail(principal.getName());
-            Cart cart = cartService.addToCart(product, quantity, user);
-            model.addAttribute("cart", cart);
-            return "redirect:/checkout";
+        Product product = productService.findProductByProductId(productId);
+        User user = userService.findCustomerByEmail(principal.getName());
+        Cart cart = cartService.addToCart(product, quantity, user);
+        model.addAttribute("cart", cart);
+        return "redirect:/checkout";
     }
 
     @PostMapping("/updateCart")
-    public String updateCart(Principal principal, @RequestParam("productId") int productId, Model model, @RequestParam(value = "quantity") int quantity) {
+    public String updateCart(Principal principal,
+                             @RequestParam("productId") int productId, Model model,
+                             @RequestParam(value = "quantity") int quantity) {
         User user = userService.findCustomerByEmail(principal.getName());
         Product product = productService.findProductByProductId(productId);
         Cart cart = cartService.updateCart(user, product, quantity);

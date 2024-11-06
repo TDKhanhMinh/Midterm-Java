@@ -24,20 +24,17 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutS
         this.userService = userService;
     }
 
-    // Handle login success
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         System.out.println("In customAuthenticationSuccessHandler");
         String userName = authentication.getName();
         System.out.println("userName=" + userName);
 
-        // Find the user and set session attributes
         User theUser = userService.findCustomerByEmail(userName);
         HttpSession session = request.getSession();
         session.setAttribute("USERNAME", theUser.getFirstName());
         session.setAttribute("id", theUser.getCustomerId());
 
-        // Handle redirection based on role
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority authority : authorities) {
             if (authority.getAuthority().equals("ROLE_ADMIN")) {
@@ -52,11 +49,11 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutS
         response.sendRedirect(request.getContextPath() + "/login?error=true");
     }
 
-    // Handle logout success
+
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         if (authentication != null) {
-            // Invalidate session
+
             HttpSession session = request.getSession(false);
             if (session != null) {
                 session.invalidate();
