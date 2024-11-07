@@ -14,6 +14,8 @@ import java.util.Set;
 
 @Service
 public class CartServiceImpl implements CartService {
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private CartItemsRepo cartItemsRepo;
@@ -34,17 +36,21 @@ public class CartServiceImpl implements CartService {
         if (newcartItems == null) {
             newcartItems = new CartItems();
             newcartItems.setProduct(product);
+
             double cost = product.getOriginalPrice() - (double) (product.getOriginalPrice() * product.getSalePrice()) / 100;
             newcartItems.setTotalPrice(quantity * cost);
             newcartItems.setQuantity(quantity);
             newcartItems.setCart(cart);
+            Product productInDb = productService.findProductByProductId(product.getProductId());
+            productInDb.setQuantity(productInDb.getQuantity() - quantity);
+            productService.updateProductQuantity(productInDb);
             cartItems.add(newcartItems);
             cartItemsRepo.save(newcartItems);
         } else {
-                double cost = product.getOriginalPrice() - (double) (product.getOriginalPrice() * product.getSalePrice()) / 100;
-                newcartItems.setQuantity(newcartItems.getQuantity() + quantity);
-                newcartItems.setTotalPrice(newcartItems.getTotalPrice() + quantity * cost);
-                cartItemsRepo.save(newcartItems);
+            double cost = product.getOriginalPrice() - (double) (product.getOriginalPrice() * product.getSalePrice()) / 100;
+            newcartItems.setQuantity(newcartItems.getQuantity() + quantity);
+            newcartItems.setTotalPrice(newcartItems.getTotalPrice() + quantity * cost);
+            cartItemsRepo.save(newcartItems);
         }
 
         int totalItems = totalItems(cart.getCartItems());
@@ -63,6 +69,9 @@ public class CartServiceImpl implements CartService {
         Set<CartItems> cartItems = cart.getCartItems();
         CartItems newCartItems = findCartItems(cartItems, product.getProductId());
         newCartItems.setQuantity(quantity);
+        Product productInDb = productService.findProductByProductId(product.getProductId());
+        productInDb.setQuantity(productInDb.getQuantity() - quantity);
+        productService.updateProductQuantity(productInDb);
         newCartItems.setTotalPrice(quantity * (product.getOriginalPrice() - (double) (product.getOriginalPrice() * product.getSalePrice()) / 100));
         cartItemsRepo.save(newCartItems);
 
@@ -78,10 +87,9 @@ public class CartServiceImpl implements CartService {
     public Cart deleteCartItem(User user, Product product) {
         Cart cart = user.getCart();
         Set<CartItems> cartItems = cart.getCartItems();
-        CartItems newCartItems = findCartItems(cartItems,product.productId);
+        CartItems newCartItems = findCartItems(cartItems, product.productId);
         cartItems.remove(newCartItems);
         cartItemsRepo.delete(newCartItems);
-
 
         int totalItems = totalItems(cartItems);
         double totalPrice = totalPrice(cartItems);
@@ -90,6 +98,9 @@ public class CartServiceImpl implements CartService {
         cart.setTotal_items(totalItems);
         return cartRepo.save(cart);
     }
+
+
+
 
     private CartItems findCartItems(Set<CartItems> cartItems, int productId) {
 

@@ -1,16 +1,16 @@
 package com.trandokhanhminh.e_commerce.configuration;
 
 import com.trandokhanhminh.e_commerce.service.UserService;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-
+@EnableWebSecurity
 @Configuration
 public class UserConfig {
 
@@ -26,9 +26,10 @@ public class UserConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
+
     @Bean
-    public WebSecurityCustomizer webSecurityCustomizer(){
-        return (web)-> web.ignoring().requestMatchers("*/img/**","*/css/**","*/js/**","*/scss/**","*/vendor/**");
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("*/img/**", "*/css/**", "*/js/**", "*/scss/**", "*/vendor/**");
     }
 
     @Bean
@@ -39,6 +40,7 @@ public class UserConfig {
                         .requestMatchers("/showRegister").permitAll()
                         .requestMatchers("/showLogin").permitAll()
                         .anyRequest().authenticated())
+
                 .formLogin(login -> login
                         .loginPage("/showLogin")
                         .loginProcessingUrl("/login")
@@ -46,12 +48,13 @@ public class UserConfig {
                         .failureForwardUrl("/showLogin?error=true")
                         .permitAll())
                 .logout(logout -> logout
+                        .logoutUrl("/logout")
                         .logoutSuccessHandler(userSuccessHandler)
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .permitAll()
                 )
-                .exceptionHandling(exeption -> exeption.accessDeniedPage("/access-denied"));
+                .exceptionHandling(exception -> exception.accessDeniedPage("/access-denied"));
         return httpSecurity.build();
     }
 

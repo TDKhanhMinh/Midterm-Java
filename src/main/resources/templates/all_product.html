@@ -192,6 +192,9 @@
                         </div>
                     </a>
                 </div>
+                <div th:if="${success}" class="pt-2" >
+                    <div class="alert alert-success mt-2 text-center" th:text="${success}"></div>
+                </div>
                 <div th:if="${products.size()>0}" class="container-fluid rounded-2" style="background-color: #e3f4ff">
                     <h3 th:text="'Đồng hồ '+${brandName}" class=" pt-2 text-center"
                         style="text-transform: uppercase"></h3>

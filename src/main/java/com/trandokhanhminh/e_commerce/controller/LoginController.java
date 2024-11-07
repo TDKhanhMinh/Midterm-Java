@@ -3,9 +3,9 @@ package com.trandokhanhminh.e_commerce.controller;
 import com.trandokhanhminh.e_commerce.entity.User;
 import com.trandokhanhminh.e_commerce.reponsitory.RoleRepo;
 import com.trandokhanhminh.e_commerce.reponsitory.UserRepo;
-import com.trandokhanhminh.e_commerce.service.ProductService;
 import com.trandokhanhminh.e_commerce.service.UserService;
 import com.trandokhanhminh.e_commerce.service.UserServiceImpl;
+import jakarta.annotation.security.PermitAll;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.security.Principal;
 
 
 @Controller
@@ -43,6 +41,7 @@ public class LoginController {
 
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
+
     @GetMapping("/access-denied")
     public String showDenied() {
         return "access-denied";
@@ -85,12 +84,12 @@ public class LoginController {
     }
 
 
-
     @GetMapping("/logout")
-    public String logout(HttpSession session, RedirectAttributes model) {
-        model.addAttribute("success", "Successfully logged out");
+    public String logout(HttpSession session, Model model) {
+        model.addAttribute("success", "Log out successfully");
         session.removeAttribute("USERNAME");
-        return "redirect:/home-page";
+        System.out.println("User logged out");
+        return "login";
     }
 }
 

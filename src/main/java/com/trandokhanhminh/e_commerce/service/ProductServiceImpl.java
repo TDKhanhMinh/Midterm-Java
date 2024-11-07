@@ -34,6 +34,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepo.findAll();
     }
 
+
     @Override
     public List<Product> findAllByCategory(String categoryName) {
         Category category = categoryRepo.findByName(categoryName);
@@ -67,6 +68,11 @@ public class ProductServiceImpl implements ProductService {
         productNew.setQuantity(product.getQuantity());
         productNew.setSalePrice(product.getSalePrice());
         productRepo.save(productNew);
+    }
+
+    @Override
+    public void updateProductQuantity(Product product) {
+        productRepo.save(product);
     }
 
     @Override

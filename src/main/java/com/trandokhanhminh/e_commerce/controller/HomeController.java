@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -84,12 +85,22 @@ public class HomeController {
         Double minPrice = null;
         Double maxPrice = null;
         if (rangePrice != null && !rangePrice.isEmpty()) {
-            if (!rangePrice.contains(",")) {
-                minPrice = Double.valueOf(rangePrice);
-            } else {
-                String[] prices = rangePrice.split(",");
-                minPrice = Double.valueOf(prices[0]);
-                maxPrice = Double.valueOf(prices[1]);
+            String[] rangeParts = rangePrice.split("&");
+            List<Double> allPrices = new ArrayList<>();
+
+            for (String part : rangeParts) {
+                if (part.contains(",")) {
+                    String[] prices = part.split(",");
+                    for (String price : prices) {
+                        allPrices.add(Double.valueOf(price));
+                    }
+                } else {
+                    allPrices.add(Double.valueOf(part));
+                }
+            }
+            if (!allPrices.isEmpty()) {
+                minPrice = Collections.min(allPrices);
+                maxPrice = Collections.max(allPrices);
             }
         }
 

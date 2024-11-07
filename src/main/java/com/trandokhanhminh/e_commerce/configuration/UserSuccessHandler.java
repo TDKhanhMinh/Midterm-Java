@@ -45,7 +45,6 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutS
                 return;
             }
         }
-
         response.sendRedirect(request.getContextPath() + "/login?error=true");
     }
 
@@ -57,17 +56,7 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutS
             HttpSession session = request.getSession(false);
             if (session != null) {
                 session.invalidate();
-            }
-
-            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-            for (GrantedAuthority authority : authorities) {
-                if (authority.getAuthority().equals("ROLE_ADMIN")) {
-                    response.sendRedirect(request.getContextPath() + "/home-page");
-                    return;
-                } else if (authority.getAuthority().equals("ROLE_USER")) {
-                    response.sendRedirect(request.getContextPath() + "/home-page");
-                    return;
-                }
+                session.removeAttribute("USERNAME");
             }
         }
         response.sendRedirect(request.getContextPath() + "/login?logout=true");

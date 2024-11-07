@@ -12,7 +12,7 @@ public interface ProductService {
 
     List<Product> findAllByCategory(String categoryName);
 
-
+    public void updateProductQuantity(Product product);
     void removeByProductId(int productId);
 
     void saveProduct(MultipartFile multipartFile, Product product) throws IOException;
