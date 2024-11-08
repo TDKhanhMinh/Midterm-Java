@@ -32,6 +32,17 @@ CREATE TABLE customer_role (
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- Thêm một khách hàng mới
+INSERT INTO customer (first_name, last_name, password, confrim_password, email, image, district, province, ward, birthday) 
+VALUES ('Admin', 'User', '$2a$12$knicDTzYUKNqBW5sIn7gNuYXnxB4f2HbXYzFqJDt3oCcSYjE5bPR.
+', 'admin', 'admin@admin.com', 'image_url', 'district_name', 'province_name', 'ward_name', '1980-01-01');
+
+-- Lấy customer_id của khách hàng mới
+SET @customer_id = LAST_INSERT_ID();
+
+-- Gán vai trò ROLE_ADMIN cho người dùng mới
+INSERT INTO customer_role (role_id, customer_id)
+SELECT role_id, @customer_id FROM role WHERE name = 'ROLE_ADMIN';
 
 CREATE TABLE `order` (
     order_id INT NOT NULL AUTO_INCREMENT,
@@ -54,16 +65,13 @@ CREATE TABLE category (
 
 
 CREATE TABLE cart (
-    id INT NOT NULL AUTO_INCREMENT,
+    cart_id INT NOT NULL AUTO_INCREMENT,
     total_items INT,
     total_price DECIMAL(10, 2),
     customer_id INT,
-    PRIMARY KEY (id),
+    PRIMARY KEY (cart_id),
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
-
-
 
 
 CREATE TABLE product (
@@ -71,7 +79,7 @@ CREATE TABLE product (
     name VARCHAR(100),
     original_price DECIMAL(10, 2),
     sale_price DECIMAL(10, 2),
-    image VARCHAR(255),
+    image longblob,
     quantity INT,
     category_id INT,
     PRIMARY KEY (product_id),
@@ -98,9 +106,7 @@ CREATE TABLE cart_items (
     cart_id INT,
     product_id INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (cart_id) REFERENCES cart(id),
+    FOREIGN KEY (cart_id) REFERENCES cart(cart_id),
     FOREIGN KEY (product_id) REFERENCES product(product_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO role (name) VALUES ('ROLE_USER');
-INSERT INTO role (name) VALUES ('ROLE_ADMIN');
