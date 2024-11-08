@@ -43,10 +43,10 @@
 
             <!-- Topbar -->
             <th:block th:replace="~{header_admin :: header_admin}"></th:block>
+
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-
             <div class="container-sm d-flex justify-content-center">
                 <div th:if="${success}">
                     <div class="alert alert-success" th:text="${success}"></div>
@@ -55,66 +55,79 @@
                     <div class="alert alert-warning" th:text="${error}"></div>
                 </div>
                 <div th:object="${size}" th:if="${size==0}">
-                    <p>No order</p>
+                    <p>No Product</p>
                 </div>
             </div>
-            <table class="table mx-2" th:object="${size}" th:if="${size>0}">
-                <thead>
-                <tr>
-                    <th scope="col">Mã đơn hàng</th>
-                    <th scope="col">Địa chỉ</th>
-                    <th scope="col">Ngày đặt hàng</th>
-                    <th scope="col">Tổng giá</th>
-                    <th scope="col">Mã khách hàng</th>
-                    <th scope="col">Trạng thái</th>
-                    <th scope="col">Ngày giao hàng</th>
-                    <th class="text-center" scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="item: ${orders}">
-                    <th th:text="${item.oder_id}"></th>
-                    <td th:text="${item.address}"></td>
-                    <td th:text="${item.date}"></td>
-                    <td class="priceSale" th:text="${item.total_price/10}"></td>
-                    <td th:text="${item.user.customerId}"></td>
-                    <td th:text="${item.status}"></td>
-                    <td th:text="${item.expected_date}"></td>
-                    <td class="text-center">
-                        <a th:href="@{/admin/deleteOrder(orderId=${item.oder_id})}"
-                           class="btn btn-danger btn-sm"
-                           onclick="if (!(confirm('Are you sure to delete?'))) return false">
-                            Delete
-                        </a>
+            <button type="button" class="btn btn-info mx-2 mb-2">
+                <a style="text-decoration: none;" class="text-white" th:href="@{/admin/addProduct}">Add new Product</a>
+            </button>
+            <div class="container-fluid">
+                <table class="table table-hover mx-2" th:object="${size}" th:if="${size>0}">
+                    <thead>
+                    <tr class="table-info">
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Sale</th>
+                        <th scope="col">Image</th>
+                        <th class="text-center" scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="tmpProduct: ${products}">
+                        <!--                    <th scope="row" th:text="${start.index+1}"></th>-->
+                        <td th:text="${tmpProduct.name}"></td>
+                        <td th:text="${tmpProduct.productType}"></td>
+                        <td th:text="${tmpProduct.category?.name}"></td>
+                        <td class="priceSale" th:text="${tmpProduct.originalPrice}+'đ'"></td>
+                        <td th:text="${tmpProduct.quantity}"></td>
+                        <td th:text="${tmpProduct.salePrice}+'%'"></td>
+                        <td><img style="width: 50px; height: 50px" th:src="|data:image/jpeg;base64,${tmpProduct.imageUrl}|"
+                                 alt="Product Image"/>
+                        </td>
+                        <td class="text-center">
+                            <a id="updateBtn" th:href="@{/admin/updateProduct(productId=${tmpProduct.productId})}"
+                               class="btn btn-info btn-sm ">
+                                Update
+                            </a>
+                            <!--End update category-->
+                            <a th:href="@{/admin/deleteProduct(productId=${tmpProduct.productId})}"
+                               class="btn btn-danger btn-sm"
+                               onclick="if (!(confirm('Are you sure to delete?'))) return false">
+                                Delete
+                            </a>
 
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- /.container-fluid -->
 
-
-            <nav class="d-flex align-items-center justify-content-center" aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li th:if="${currentPage != 0}" class="page-item">
-                        <a class="page-link" th:href="@{'/admin/order/' + ${currentPage - 1}}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li th:each="i : ${#numbers.sequence(1, totalPages)}"
-                        th:classappend="${currentPage == i - 1 ? 'active' : ''}"
-                        class="page-item">
-                        <a th:href="@{'/admin/order/' + ${i - 1}}"
-                           class="page-link"
-                        ><span th:text="${i}"></span></a>
-                    </li>
-                    <li th:if="${currentPage + 1 != totalPages}"
-                        class="page-item">
-                        <a class="page-link" th:href="@{'/admin/order/' + ${currentPage + 1}}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                <nav class="d-flex align-items-center justify-content-center" aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li th:if="${currentPage != 0}" class="page-item">
+                            <a class="page-link" th:href="@{'/admin/product/' + ${currentPage - 1}}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li th:each="i : ${#numbers.sequence(1, totalPages)}"
+                            th:classappend="${currentPage == i - 1 ? 'active' : ''}"
+                            class="page-item">
+                            <a th:href="@{'/admin/product/' + ${i - 1}}"
+                               class="page-link"
+                            ><span th:text="${i}"></span></a>
+                        </li>
+                        <li th:if="${currentPage + 1 != totalPages}"
+                            class="page-item">
+                            <a class="page-link" th:href="@{'/admin/product/' + ${currentPage + 1}}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
         <!-- End of Main Content -->
 
@@ -138,8 +151,6 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
-
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -150,6 +161,7 @@
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
+
             </div>
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
@@ -160,7 +172,6 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript-->
 <script th:src="@{/access/vendor/jquery/jquery.min.js}"></script>
 
 <script th:src="@{/access/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>

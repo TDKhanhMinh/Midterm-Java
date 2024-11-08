@@ -36,19 +36,19 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String getAdmin() {
-        return "admin";
+        return "admin-temple/admin";
     }
 
     @GetMapping("/showLogin")
     public String getShowLogin() {
-        return "login";
+        return "user-temple/login";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session, Model model) {
         session.removeAttribute("USERNAME");
         model.addAttribute("success", "Log out successfully");
-        return "login";
+        return "user-temple/login";
     }
 
     // Start Controller category
@@ -59,11 +59,11 @@ public class AdminController {
         model.addAttribute("size", categories.size());
         model.addAttribute("title", "Category");
         model.addAttribute("categoryNew", new Category());
-        return "category";
+        return "manager-temple/category";
     }
 
     @PostMapping("/addCategory")
-    public String addCategory(@ModelAttribute("categoryNew") Category category, Model model, RedirectAttributes redirectAttributes) {
+    public String addCategory(@ModelAttribute("categoryNew") Category category, RedirectAttributes redirectAttributes) {
         try {
             if (category.getName() == null || category.getName().trim().isEmpty()) {
                 redirectAttributes.addFlashAttribute("error", "Please enter a category name");
@@ -86,7 +86,7 @@ public class AdminController {
     public String updateCategory(@RequestParam("categoryId") int categoryId, Model theModel) {
         Category category = categoryService.findById(categoryId);
         theModel.addAttribute("categoryUpdate", category);
-        return "update_category";
+        return "manager-temple/update_category";
     }
 
 
@@ -142,7 +142,7 @@ public class AdminController {
         model.addAttribute("totalPages", product.getTotalPages());
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("products", product);
-        return "product";
+        return "manager-temple/product";
     }
 
     @GetMapping("/addProduct")
@@ -151,7 +151,7 @@ public class AdminController {
         List<Category> listCategories = categoryRepo.findAll();
         listCategories.removeIf(Category::is_deleted);
         model.addAttribute("categories", listCategories);
-        return "add_product";
+        return "manager-temple/add_product";
     }
 
     @PostMapping("/saveProduct")
@@ -176,7 +176,7 @@ public class AdminController {
         List<Category> listCategories = categoryRepo.findAll();
         listCategories.removeIf(Category::is_deleted);
         model.addAttribute("categories", listCategories);
-        return "update_product";
+        return "manager-temple/update_product";
     }
 
     @PostMapping("/saveUpdateProduct")
@@ -209,7 +209,7 @@ public class AdminController {
         model.addAttribute("totalPages", orders.getTotalPages());
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("orders", orders);
-        return "order_manager";
+        return "manager-temple/order_manager";
     }
 
     //Customer controller
@@ -222,8 +222,8 @@ public class AdminController {
             model.addAttribute("totalPages", users.getTotalPages());
             model.addAttribute("currentPage", pageNo);
             model.addAttribute("users", users);
-            return "list-customers";
-        } else return "login";
+            return "manager-temple/list-customers";
+        } else return "user-temple/login";
     }
 
     @GetMapping("/deleteUser")

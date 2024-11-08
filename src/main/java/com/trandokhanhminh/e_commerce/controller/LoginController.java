@@ -5,7 +5,6 @@ import com.trandokhanhminh.e_commerce.reponsitory.RoleRepo;
 import com.trandokhanhminh.e_commerce.reponsitory.UserRepo;
 import com.trandokhanhminh.e_commerce.service.UserService;
 import com.trandokhanhminh.e_commerce.service.UserServiceImpl;
-import jakarta.annotation.security.PermitAll;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -49,37 +47,37 @@ public class LoginController {
 
     @RequestMapping("/showLogin")
     public String showLogin() {
-        return "login";
+        return "user-temple/login";
     }
 
     @GetMapping("/showRegister")
     public String showRegister(Model model) {
         User customer = new User();
         model.addAttribute("customer", customer);
-        return "registration-form";
+        return "user-temple/registration-form";
     }
 
     @PostMapping("/checkRegisterCustomer")
     public String saveCustomer(@Valid @ModelAttribute("customer") User theCustomer, BindingResult result, Model theModel) {
         if (result.hasErrors()) {
             theModel.addAttribute("customer", theCustomer);
-            return "registration-form";
+            return "user-temple/registration-form";
         }
         String userName = theCustomer.getEmail();
         User customer = customerService.findCustomerByEmail(userName);
         if (customer != null) {
             theModel.addAttribute("customer", theCustomer);
             theModel.addAttribute("error", "Email has already been registered");
-            return "registration-form";
+            return "user-temple/registration-form";
         }
         if (theCustomer.getPassword().equals(theCustomer.getConfirmPassword())) {
             userService.saveCustomer(theCustomer);
             theModel.addAttribute("success", "Successfully registered");
-            return "login";
+            return "user-temple/login";
         } else {
             theModel.addAttribute("customer", theCustomer);
             theModel.addAttribute("error", "Password is not same");
-            return "registration-form";
+            return "user-temple/registration-form";
         }
     }
 
@@ -89,7 +87,7 @@ public class LoginController {
         model.addAttribute("success", "Log out successfully");
         session.removeAttribute("USERNAME");
         System.out.println("User logged out");
-        return "login";
+        return "user-temple/login";
     }
 }
 

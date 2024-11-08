@@ -62,45 +62,47 @@
                     data-bs-target="#exampleModal"
                     data-bs-whatever="@mdo">Add new category
             </button>
-            <table class="table mx-2" th:object="${size}" th:if="${size>0}">
-                <thead>
-                <tr>
-                    <th scope="col">Numerical order</th>
-                    <th scope="col">Name</th>
-                    <th class="text-center" scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="tmpCategory: ${categories}">
-                    <th scope="row" th:text="${tmpCategory.categoryId}"></th>
-                    <td th:text="${tmpCategory.name}">Name</td>
-                    <td class="text-center">
-                        <!--Update category-->
-                        <a id="updateBtn" th:href="@{/admin/updateCategory(categoryId=${tmpCategory.categoryId})}"
-                           class="btn btn-info btn-sm ">
-                            Update
-                        </a>
-                        <!--End update category-->
+            <div class="container-fluid">
+                <table class="table mx-2 table-hover" th:object="${size}" th:if="${size>0}">
+                    <thead>
+                    <tr class="table-info">
+                        <th scope="col">Numerical order</th>
+                        <th scope="col">Name</th>
+                        <th class="text-center" scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="tmpCategory: ${categories}">
+                        <th scope="row" th:text="${tmpCategory.categoryId}"></th>
+                        <td th:text="${tmpCategory.name}">Name</td>
+                        <td class="text-center">
+                            <!--Update category-->
+                            <a id="updateBtn" th:href="@{/admin/updateCategory(categoryId=${tmpCategory.categoryId})}"
+                               class="btn btn-info btn-sm ">
+                                Update
+                            </a>
+                            <!--End update category-->
 
-                        <a th:href="@{/admin/deleteCategory(categoryId=${tmpCategory.categoryId})}"
-                           class="btn btn-danger btn-sm"
-                           onclick="if (!(confirm('Are you sure to delete?'))) return false">
-                            Delete
-                        </a>
-                        <a th:if="${tmpCategory.is_active}==false"
-                           th:href="@{/admin/enableCategory(categoryId=${tmpCategory.categoryId})}"
-                           class="btn btn-success btn-sm ">
-                            Enable
-                        </a>
-                        <a th:if="${tmpCategory.is_active}==true"
-                           th:href="@{/admin/disableCategory(categoryId=${tmpCategory.categoryId})}"
-                           class="btn btn-warning btn-sm ">
-                            Disable
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                            <a th:href="@{/admin/deleteCategory(categoryId=${tmpCategory.categoryId})}"
+                               class="btn btn-danger btn-sm"
+                               onclick="if (!(confirm('Are you sure to delete?'))) return false">
+                                Delete
+                            </a>
+                            <a th:if="${tmpCategory.is_active}==false"
+                               th:href="@{/admin/enableCategory(categoryId=${tmpCategory.categoryId})}"
+                               class="btn btn-success btn-sm ">
+                                Enable
+                            </a>
+                            <a th:if="${tmpCategory.is_active}==true"
+                               th:href="@{/admin/disableCategory(categoryId=${tmpCategory.categoryId})}"
+                               class="btn btn-warning btn-sm ">
+                                Disable
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <!-- End of Main Content -->
 

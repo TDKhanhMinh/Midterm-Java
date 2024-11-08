@@ -15,10 +15,8 @@
 
 
 <body>
-<th:block th:insert="~{header_on :: header_on}" th:if="${session.USERNAME}"></th:block>
-
-
-<th:block th:insert="~{ header_off :: header_off}" th:unless="${session.USERNAME}"></th:block>
+<th:block th:insert="~{user-temple/header_on :: header_on}" th:if="${session.USERNAME}"></th:block>
+<th:block th:insert="~{ user-temple/header_off :: header_off}" th:unless="${session.USERNAME}"></th:block>
 
 <div class="container">
     <div th:if="${success}">
@@ -452,7 +450,7 @@
 
 
 
-<th:block th:insert="~{ footer :: footer}"></th:block>
+<th:block th:insert="~{ user-temple/footer :: footer}"></th:block>
 
 </body>
 

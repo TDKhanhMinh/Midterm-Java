@@ -43,7 +43,7 @@ public class OrderController {
         model.addAttribute("address", address);
         model.addAttribute("user", user);
         model.addAttribute("cart", cart);
-        return "check_out";
+        return "another-temple/check_out";
     }
 
     @GetMapping("/placeOrder")
@@ -52,7 +52,7 @@ public class OrderController {
         List<Order> orderList = user.getOrders();
         model.addAttribute("user", user);
         model.addAttribute("orderList", orderList);
-        return "place_order";
+        return "another-temple/place_order";
     }
 
     @PostMapping("/saveOrder")

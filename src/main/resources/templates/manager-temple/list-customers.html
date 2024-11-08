@@ -59,58 +59,60 @@
                 </div>
 
             </div>
-            <table class="table mx-2" th:object="${size}" th:if="${size>0}">
-                <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Họ vè tên</th>
-                    <th scope="col">Giới tính</th>
-                    <th scope="col">Số điện thoại</th>
-                    <th scope="col">Email</th>
-                    <th class="text-center" scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="item: ${users}">
-                    <th th:text="${item.customerId}"></th>
-                    <td th:text="${item.firstName+' '+item.lastName}"></td>
-                    <td th:text="${item.gender}"></td>
-                    <td th:text="${item.phone}"></td>
-                    <td th:text="${item.email}"></td>
-                    <td class="text-center">
-                        <a th:href="@{/admin/deleteUser(userId=${item.customerId})}"
-                           class="btn btn-danger btn-sm"
-                           onclick="if (!(confirm('Are you sure to delete?'))) return false">
-                            Delete
-                        </a>
+            <div class="container-fluid">
+                <table class="table table-hover mx-2" th:object="${size}" th:if="${size>0}">
+                    <thead>
+                    <tr class="table-info">
+                        <th scope="col">ID</th>
+                        <th scope="col">Họ vè tên</th>
+                        <th scope="col">Giới tính</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Email</th>
+                        <th class="text-center" scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item: ${users}">
+                        <th th:text="${item.customerId}"></th>
+                        <td th:text="${item.firstName+' '+item.lastName}"></td>
+                        <td th:text="${item.gender}"></td>
+                        <td th:text="${item.phone}"></td>
+                        <td th:text="${item.email}"></td>
+                        <td class="text-center">
+                            <a th:href="@{/admin/deleteUser(userId=${item.customerId})}"
+                               class="btn btn-danger btn-sm"
+                               onclick="if (!(confirm('Are you sure to delete?'))) return false">
+                                Delete
+                            </a>
 
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-            <nav class="d-flex align-items-center justify-content-center" aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li th:if="${currentPage != 0}" class="page-item">
-                        <a class="page-link" th:href="@{'/admin/user/' + ${currentPage - 1}}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li th:each="i : ${#numbers.sequence(1, totalPages)}"
-                        th:classappend="${currentPage == i - 1 ? 'active' : ''}"
-                        class="page-item">
-                        <a th:href="@{'/admin/user/' + ${i - 1}}"
-                           class="page-link"
-                        ><span th:text="${i}"></span></a>
-                    </li>
-                    <li th:if="${currentPage + 1 != totalPages}"
-                        class="page-item">
-                        <a class="page-link" th:href="@{'/admin/user/' + ${currentPage + 1}}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                <nav class="d-flex align-items-center justify-content-center" aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li th:if="${currentPage != 0}" class="page-item">
+                            <a class="page-link" th:href="@{'/admin/user/' + ${currentPage - 1}}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li th:each="i : ${#numbers.sequence(1, totalPages)}"
+                            th:classappend="${currentPage == i - 1 ? 'active' : ''}"
+                            class="page-item">
+                            <a th:href="@{'/admin/user/' + ${i - 1}}"
+                               class="page-link"
+                            ><span th:text="${i}"></span></a>
+                        </li>
+                        <li th:if="${currentPage + 1 != totalPages}"
+                            class="page-item">
+                            <a class="page-link" th:href="@{'/admin/user/' + ${currentPage + 1}}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
         <!-- End of Main Content -->
 

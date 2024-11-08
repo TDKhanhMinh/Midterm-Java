@@ -39,6 +39,7 @@ public class UserConfig {
                         .requestMatchers("/admin/**", "/").hasRole("ADMIN")
                         .requestMatchers("/showRegister").permitAll()
                         .requestMatchers("/showLogin").permitAll()
+                        .requestMatchers("/api/users/**").permitAll()
                         .anyRequest().authenticated())
 
                 .formLogin(login -> login

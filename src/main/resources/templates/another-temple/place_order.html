@@ -17,7 +17,7 @@
 
 </head>
 <body>
-<th:block th:insert="~{header_on :: header_on}"></th:block>
+<th:block th:insert="~{user-temple/header_on :: header_on}"></th:block>
 
 
 
@@ -34,9 +34,9 @@
         <div class="col-md-10">
             <div class="rounded">
                 <div class="table-responsive table-borderless">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
-                        <tr>
+                        <tr class="table-info">
                             <th>Mã đơn hàng</th>
                             <th>Ngày đặt hàng</th>
                             <th>Phương thức thanh toán</th>
@@ -68,7 +68,7 @@
 </div>
 
 
-<th:block th:insert="~{ footer :: footer}"></th:block>
+<th:block th:insert="~{ user-temple/footer :: footer}"></th:block>
 
 <!-- First load Popper.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>

@@ -37,7 +37,7 @@ public class HomeController {
         model.addAttribute("categoryList", categoryList);
         System.out.println(categoryList);
         model.addAttribute("products", products);
-        return "home";
+        return "user-temple/home";
     }
 
     @GetMapping("/uploadHome")
@@ -51,7 +51,7 @@ public class HomeController {
         User user = userService.findCustomerByEmail(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("product", product);
-        return "product_details";
+        return "another-temple/product_details";
     }
 
     @GetMapping("/allProducts")
@@ -65,7 +65,7 @@ public class HomeController {
         model.addAttribute("brandName", brandName);
         model.addAttribute("products", products);
         model.addAttribute("productsSuggest", randomProducts);
-        return "all_product";
+        return "another-temple/all_product";
     }
 
     @GetMapping("/search")
@@ -73,7 +73,7 @@ public class HomeController {
         List<Product> product = productService.findProductByKey(searchKey);
         model.addAttribute("products", product);
         System.out.println(product);
-        return "search_result";
+        return "another-temple/search_result";
     }
 
     @GetMapping("/searchProduct")
@@ -108,7 +108,7 @@ public class HomeController {
         model.addAttribute("products", product);
         model.addAttribute("brandName", brand);
         System.out.println(product);
-        return "search_result";
+        return "another-temple/search_result";
     }
 
 
@@ -122,7 +122,7 @@ public class HomeController {
                     .toList();
             model.addAttribute("products", randomProducts);
             model.addAttribute("brandName", brand);
-            return "search_result";
+            return "another-temple/search_result";
         }
         List<Product> products = productService.findAllByCategory(brand);
         Collections.shuffle(products);
@@ -131,7 +131,7 @@ public class HomeController {
                 .toList();
         model.addAttribute("products", randomProducts);
         model.addAttribute("brandName", brand);
-        return "search_result";
+        return "another-temple/search_result";
     }
 
     @GetMapping("/saleAsc")
@@ -140,13 +140,13 @@ public class HomeController {
             List<Product> products = productService.sortProductsBySalePriceDesc(brand);
             model.addAttribute("products", products);
             model.addAttribute("brandName", brand);
-            return "search_result";
+            return "another-temple/search_result";
         }
         List<Product> products = productService.findAllByOrderBySalePriceAsc();
         model.addAttribute("products", products);
         model.addAttribute("brandName", brand);
 
-        return "search_result";
+        return "another-temple/search_result";
     }
 
     @GetMapping("/priceASC")
@@ -156,13 +156,13 @@ public class HomeController {
             model.addAttribute("products", products);
             model.addAttribute("brandName", brand);
 
-            return "search_result";
+            return "another-temple/search_result";
         }
         List<Product> products = productService.findAllByOrderByOriginalPriceAsc();
         model.addAttribute("products", products);
         model.addAttribute("brandName", brand);
 
-        return "search_result";
+        return "another-temple/search_result";
     }
 
     @GetMapping("/priceDESC")
@@ -172,11 +172,11 @@ public class HomeController {
             model.addAttribute("products", products);
             model.addAttribute("brandName", brand);
 
-            return "search_result";
+            return "another-temple/search_result";
         }
         List<Product> products = productService.findAllByOrderByOriginalPriceDesc();
         model.addAttribute("products", products);
         model.addAttribute("brandName", brand);
-        return "search_result";
+        return "another-temple/search_result";
     }
 }

@@ -45,7 +45,7 @@ public class CartController {
         }
         model.addAttribute("cart", cart);
         model.addAttribute("products", randomProducts);
-        return "cart";
+        return "another-temple/cart";
     }
 
     @PostMapping("/addToCart")

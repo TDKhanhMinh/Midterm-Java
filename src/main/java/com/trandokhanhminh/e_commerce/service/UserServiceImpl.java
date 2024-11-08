@@ -71,7 +71,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteCustomerById(int id) {
-
         customersRepo.deleteById(id);
     }
 
@@ -137,7 +136,6 @@ public class UserServiceImpl implements UserService {
             SimpleGrantedAuthority tempAuthority = new SimpleGrantedAuthority(tempRole.getName());
             authorities.add(tempAuthority);
         }
-
         return authorities;
     }
 }

@@ -11,23 +11,23 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/access/css/home.css}"/>
     <link rel="stylesheet" th:href="@{/access/css/default.css}"/>
+
 </head>
 
 
 <body>
-<th:block th:insert="~{header_on :: header_on}" th:if="${session.USERNAME}"></th:block>
+<th:block th:insert="~{user-temple/header_on :: header_on}" th:if="${session.USERNAME}"></th:block>
 
 
-<th:block th:insert="~{ header_off :: header_off}" th:unless="${session.USERNAME}"></th:block>
+<th:block th:insert="~{user-temple/header_off :: header_off}" th:unless="${session.USERNAME}"></th:block>
 
 <div class="container">
-
 </div>
 <div class="container text-center mt-4">
-    <h2 class="text-uppercase" th:text="'đồng hồ chính hãng'"></h2>
+    <h2 class="text-uppercase" th:text="'đồng hồ '+${brandName}+' chính hãng'"></h2>
     <p>
-    <span style="font-size: 95%;">Với nhiều mẫu mã đa dạng, chất lượng đảm bảo và giá cả phải chăng,
-        <strong>SHOPDONGHO.com</strong> là một trong những địa chỉ mua hàng uy tín và chất lượng
+    <span style="font-size: 95%;">Với nhiều mẫu mã đa dạng, chất lượng đảm bảo và giá cả phải chăng, <strong>SHOPDONGHO.com</strong> là một trong những địa chỉ mua <strong
+            th:text="${brandName}"></strong> uy tín và chất lượng
     </span>
     </p>
 </div>
@@ -77,19 +77,6 @@
 
     </div>
     <hr class="my-4">
-    <div th:if="${products.size() == 0 }" class="alert alert-info text-center row">
-        <p class="col-md-12 fs-5">
-            Sản phẩm này hiện đang hết hàng
-        </p>
-        <a th:href="@{/home-page}">
-            <div class="col-md-12 d-flex align-items-center justify-content-center">
-                <div style="width: 300px; height: 40px;" class="bg-success rounded-2">
-                    <span class=" text-white mt-2">Mua mặt hàng khác</span>
-                </div>
-            </div>
-        </a>
-    </div>
-
     <div class="col-md-8" id="customer-form" style="display: none;">
         <form th:action="@{/searchProduct}" method="get" class="customer_info form-control"
               novalidate="novalidate">
@@ -188,11 +175,29 @@
     </div>
 </div>
 
+
 <div class="products">
     <div class="container-sm" style="width: 80%">
         <div class="row">
             <section class="product-wrapper pt-70">
-                <div class="container-fluid rounded-2" style="background-color: #e3f4ff">
+                <div th:if="${products.size() == 0 }" class="alert alert-info text-center row">
+                    <p class="col-md-12 fs-5">
+                        Sản phẩm này hiện đang hết hàng
+                    </p>
+                    <a th:href="@{/home-page}">
+                        <div class="col-md-12 d-flex align-items-center justify-content-center">
+                            <div style="width: 300px; height: 40px;" class="bg-success rounded-2">
+                                <span class=" text-white mt-2">Mua mặt hàng khác</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div th:if="${success}" class="pt-2" >
+                    <div class="alert alert-success mt-2 text-center" th:text="${success}"></div>
+                </div>
+                <div th:if="${products.size()>0}" class="container-fluid rounded-2" style="background-color: #e3f4ff">
+                    <h3 th:text="'Đồng hồ '+${brandName}" class=" pt-2 text-center"
+                        style="text-transform: uppercase"></h3>
                     <div class="row">
                         <div class="col-md-3 col-sm-6 mb-4" th:each="tmpProduct: ${products}">
                             <form th:action="@{/addToCart}" method="post">
@@ -245,7 +250,77 @@
 
                     </div>
                 </div>
+                <div class="pt-5 mb-4">
+                    <h4 class="mb-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-lightbulb-fill" viewBox="0 0 16 16">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"/>
+                        </svg>
+                        Gợi ý cho bạn
+                    </h4>
+                </div>
+
             </section>
+            <div class="container bg-body-secondary">
+                <div class="row">
+                    <div th:if="${start.index<6}" class="col-md-2" th:each="tmpProduct,start:${productsSuggest}">
+                        <form th:action="@{/addToCart}" method="post" style="min-height: 300px">
+                            <div class="product-style-3 mt-30 border border-2 border-dark rounded shadow">
+                                <div class="product-image d-flex justify-content-center align-items-center"
+                                     style="background-color: white">
+                                    <div class="product-item active d-flex align-items-center justify-content-center">
+                                        <a th:href="@{/productDetails(productId=${tmpProduct.productId})}">
+                                            <img class="rounded-0 " style="width: 120px;height:120px;"
+                                                 th:src="|data:image/jpeg;base64,${tmpProduct.imageUrl}|"
+                                                 alt="product"/>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="product-content ">
+                                    <a style="text-decoration: none;"
+                                       th:href="@{/productDetails(productId=${tmpProduct.productId})}">
+                                        <h4 style="font-size: 10px;
+                                                       width: 120px;
+                                                       white-space: nowrap;
+                                                       overflow: hidden;
+                                                       text-overflow: ellipsis;"
+                                            th:text="${tmpProduct.category.name.split(' ')[0]}+' '+${tmpProduct.name}"
+                                            class="title"></h4>
+                                    </a>
+
+                                    <div>
+                                            <span class="priceOriginal price-original"
+                                                  style="text-decoration: line-through; font-size: 16px;"
+                                                  th:text="${tmpProduct.originalPrice}+'đ'"></span>
+                                        <span class="rounded-2"
+                                              style=" font-size: 16px; color: red;margin-left: 10px;
+                padding: 2px 2px; background-color:#f4c2c2;"
+                                              th:text="- ${tmpProduct.salePrice}+'%'"></span>
+                                        <div class="product-price-cart">
+                                        <span
+                                                th:text="${tmpProduct.originalPrice -
+                                    tmpProduct.originalPrice*tmpProduct.salePrice/100}+'đ'"
+                                                class="priceSale price"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-price-cart d-flex align-items-center justify-content-center mb-4">
+                                        <input type="hidden" th:value="${tmpProduct.productId}" name="productId">
+                                        <button type="submit" class="main-btn primary-btn cart"
+                                                style="font-size: 10px">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-cart-check-fill mb-2"
+                                                 viewBox="0 0 16 16">
+                                                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708"/>
+                                            </svg>
+                                            Thêm vào giỏ hàng
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -340,10 +415,9 @@
 </section>
 
 
-<th:block th:insert="~{ footer :: footer}"></th:block>
+<th:block th:insert="~{ user-temple/footer :: footer}"></th:block>
 
 </body>
-
 
 <script th:src="@{/access/js/home.js}"></script>
 

@@ -4,7 +4,6 @@ import com.trandokhanhminh.e_commerce.entity.User;
 import com.trandokhanhminh.e_commerce.reponsitory.UserRepo;
 import com.trandokhanhminh.e_commerce.service.ProductService;
 import com.trandokhanhminh.e_commerce.service.UserService;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class CustomersController {
@@ -43,7 +41,7 @@ public class CustomersController {
     public String addForm(Model theModel) {
         User theCustomer = new User();
         theModel.addAttribute("customer", theCustomer);
-        return "registration-form";
+        return "user-temple/registration-form";
     }
 
 
@@ -51,7 +49,7 @@ public class CustomersController {
     public String getProfile(@RequestParam("customerId") int customerId, Model model) {
         User customer = customerService.findCustomerById(customerId);
         model.addAttribute("customer", customer);
-        return "profile";
+        return "user-temple/profile";
     }
 
     @PostMapping("/saveProfile")
@@ -65,7 +63,7 @@ public class CustomersController {
             result.getAllErrors().forEach(error -> {
                 System.out.println(error.getDefaultMessage());
             });
-            return "update-profile";
+            return "user-temple/update-profile";
         } else {
             user.setFirstName(customer.getFirstName());
             user.setLastName(customer.getLastName());
@@ -86,7 +84,7 @@ public class CustomersController {
     public String update(@RequestParam("customerId") int theCustomerId, Model theModel) {
         User theCustomer = userRepo.findCustomerByCustomerId(theCustomerId);
         theModel.addAttribute("customerUpdate", theCustomer);
-        return "update-profile";
+        return "user-temple/update-profile";
     }
 
     @GetMapping("/delete")
@@ -99,7 +97,7 @@ public class CustomersController {
     public String save(@Valid @ModelAttribute("customer") User theCustomer, BindingResult result, Model theModel) {
         if (result.hasErrors()) {
             theModel.addAttribute("customer", theCustomer);
-            return "registration-form";
+            return "user-temple/registration-form";
         } else {
             customerService.updateCustomer(theCustomer);
             return "redirect:/list";
@@ -111,14 +109,14 @@ public class CustomersController {
     public String getForgotPassword(Principal principal, Model model) {
         User user = customerService.findCustomerByEmail(principal.getName());
         model.addAttribute("user", user);
-        return "forgot-password";
+        return "user-temple/forgot-password";
     }
 
     @GetMapping("/changePassword")
     public String changePassword(Model model, Principal principal) {
         User user = customerService.findCustomerByEmail(principal.getName());
         model.addAttribute("user", user);
-        return "change-password";
+        return "user-temple/change-password";
     }
 
     @PostMapping("/savePassword")

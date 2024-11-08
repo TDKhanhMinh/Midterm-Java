@@ -11,14 +11,8 @@
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/access/css/home.css}"/>
-
-
-    <!-- JavaScript imports - order is important -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- First load Popper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
-    <!-- Then load Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
     <title>Header</title>
 
@@ -26,7 +20,8 @@
 
 <body>
 <th:block th:fragment="header_on">
-    <div class="container-fluid  border-bottom header-full" style="background-color: white; max-height: 125px;position:sticky; top: -120px">
+    <div class="container-fluid  border-bottom header-full"
+         style="background-color: white; max-height: 125px;position:sticky; top: -120px">
         <div class="row flex-nowrap" style="max-height: 65px">
             <div class="col-md-2 mt-2 ml-5">
                 <a style="font-size: small" class="d-flex justify-content-center mt-2"
@@ -54,7 +49,10 @@
 
             <div class="col-md-2 mt-4 d-flex flex-nowrap justify-content-center">
                 <a th:href="@{/cart}" class="btn btn-sm btn-hover-on rounded">
-                    <img style="width: 30px; height: 30px" th:src="@{/access/img/icons8-cart-48 (2).png}" alt="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-cart3" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg>
                 </a>
                 <div class="btn-group dropdown">
                     <button class="btn btn-sm btn-hover-on rounded mx-2 dropdown-toggle" type="button"
@@ -65,7 +63,6 @@
                         <li>
                             <a style="font-size:large;color: black" class="dropdown-item mt-2 disabled">
                                 <i class="fa-solid fa-circle-user"></i>
-                                <!--                                <label class="mx-2" sec:authentication="principal.username"></label>-->
                                 <label class="mx-2" sec:authentication="principal.username"></label>
                             </a>
                         </li>
