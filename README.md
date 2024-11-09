@@ -1,6 +1,8 @@
 # E-Commerce Spring boot project
 ## Watch Store
 - ERD diagram:
-  ![Untitled](https://github.com/user-attachments/assets/e3db00dd-b4f4-4650-84dd-1122ab4f04df)
+![ERD-Diagram](https://github.com/user-attachments/assets/7aeb64ac-cc99-40a8-9634-7e2f7ef1f739)
+
+
 
   
