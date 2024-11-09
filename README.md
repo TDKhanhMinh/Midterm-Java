@@ -33,7 +33,10 @@
   - Sử dụng git để tải đồ án về máy: git clone https://github.com/TDKhanhMinh/Midterm-Java.git
   - Chạy Mysql với port 3307
   - Thực hiện đoạn SQL script đã được cung cấp(e-commerce-new-data-script.sql)
-    ![Screenshot 2024-11-09 154103](https://github.com/user-attachments/assets/4a1ef5a5-eba3-45ee-95ae-e46fc395ee10)
+    + ![Screenshot 2024-11-09 154103](https://github.com/user-attachments/assets/4a1ef5a5-eba3-45ee-95ae-e46fc395ee10)
+  - Sau khi chạy đoạn SQL script trên, dữ liệu sẽ được thêm vào mặc định 1 người dùng là admin(admin@admin.com,admin)
+  - Người dùng mở trình duyệt và nhập localhost:8080
+  - Sau đó đăng nhập bằng tên tài khoản và mật khẩu đã được cung cấp để tiếp tục(bắt buộc phải thực hiện bước này đầu tiên)
 
 
   
