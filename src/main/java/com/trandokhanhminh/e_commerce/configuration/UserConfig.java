@@ -9,9 +9,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@EnableWebSecurity
 @Configuration
+//@EnableWebSecurity
 public class UserConfig {
 
     @Bean
@@ -27,26 +28,20 @@ public class UserConfig {
         return authenticationProvider;
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("*/img/**", "*/css/**", "*/js/**", "*/scss/**", "*/vendor/**");
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity, UserSuccessHandler userSuccessHandler) throws Exception {
         httpSecurity.authorizeHttpRequests(config -> config
                         .requestMatchers("/").hasRole("USER")
-                        .requestMatchers("/admin/**", "/").hasRole("ADMIN")
-                        .requestMatchers("/showRegister").permitAll()
-                        .requestMatchers("/showLogin").permitAll()
-                        .requestMatchers("/api/users/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/showRegister", "/checkRegisterCustomer", "/showLogin", "/forgotPassword", "/resetPassword").permitAll()
                         .anyRequest().authenticated())
 
                 .formLogin(login -> login
                         .loginPage("/showLogin")
                         .loginProcessingUrl("/login")
                         .successHandler(userSuccessHandler)
-                        .failureForwardUrl("/showLogin?error=true")
+                        .failureUrl("/showLogin?error=true")
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
@@ -59,5 +54,9 @@ public class UserConfig {
         return httpSecurity.build();
     }
 
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("*/img/**", "*/css/**", "*/js/**", "*/scss/**", "*/vendor/**");
+    }
 
 }

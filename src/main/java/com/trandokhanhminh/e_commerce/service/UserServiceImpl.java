@@ -32,12 +32,11 @@ public class UserServiceImpl implements UserService {
         this.roleDAO = roleDAO;
     }
 
-    @Override
-    public boolean checkLogin(String email, String password) {
-        User customer = customersRepo.findCustomerByEmail(email);
-        return customer != null && customer.getPassword().equals(password);
-    }
 
+    @Override
+    public boolean checkForgot(String email, String password, String confirmPassword) {
+        return password.equals(confirmPassword);
+    }
 
     @Override
     public List<User> findAll() {

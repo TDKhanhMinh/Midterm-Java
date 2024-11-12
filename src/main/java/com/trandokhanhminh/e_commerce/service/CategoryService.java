@@ -24,7 +24,7 @@ public interface CategoryService {
 
     void enableById(int id);
 
-    void saveCategory(Category category);
+
 
 
 }

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -106,9 +107,7 @@ public class CustomersController {
 
 
     @GetMapping("/forgotPassword")
-    public String getForgotPassword(Principal principal, Model model) {
-        User user = customerService.findCustomerByEmail(principal.getName());
-        model.addAttribute("user", user);
+    public String getForgotPassword() {
         return "user-temple/forgot-password";
     }
 
@@ -129,12 +128,26 @@ public class CustomersController {
     }
 
     @PostMapping("/resetPassword")
-    public String resetPassword(RedirectAttributes redirectAttributes, @RequestParam("email") String email, @RequestParam("password") String password) {
-        User user = customerService.findCustomerByEmail(email);
-        user.setPassword(encoder.encode(password));
-        userRepo.save(user);
-        redirectAttributes.addFlashAttribute("success", "Password reset successfully");
-        return "redirect:/showLogin";
+    public String resetPassword(@Validated RedirectAttributes redirectAttributes,
+                                @RequestParam("email") String email,
+                                @RequestParam("password") String password,
+                                @RequestParam("confirmPassword") String confirmPassword) {
+        if (email.isEmpty() || password.isEmpty() | confirmPassword.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "All fields are required");
+            return "redirect:/forgotPassword";
+        } else if (!customerService.checkForgot(email, password, confirmPassword)) {
+            redirectAttributes.addFlashAttribute("error", "Passwords do not match");
+            return "redirect:/forgotPassword";
+        } else if (customerService.findCustomerByEmail(email) == null) {
+            redirectAttributes.addFlashAttribute("error", "Email does not exist");
+            return "redirect:/forgotPassword";
+        } else {
+            User user = customerService.findCustomerByEmail(email);
+            user.setPassword(encoder.encode(password));
+            userRepo.save(user);
+            redirectAttributes.addFlashAttribute("success", "Password reset successfully");
+            return "redirect:/showLogin";
+        }
     }
 
 

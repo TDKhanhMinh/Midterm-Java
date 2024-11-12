@@ -142,11 +142,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepo.productPage(pageable);
     }
 
-    @Override
-    public Page<Product> searchProduct(int pageNum, String search) {
-        Pageable pageable = PageRequest.of(pageNum, 8);
-        return productRepo.productSearch(search, pageable);
-    }
 
     @Override
     public List<Product> findProductByKey(String brandName) {

@@ -79,8 +79,5 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
-    @Override
-    public void saveCategory(Category category) {
-        categoryRepo.save(category);
-    }
+
 }

@@ -49,7 +49,7 @@ public class CartController {
     }
 
     @PostMapping("/addToCart")
-    public String addToCart(Model model, Principal principal,RedirectAttributes redirectAttributes,
+    public String addToCart(Model model, Principal principal, RedirectAttributes redirectAttributes,
                             @RequestParam("productId") int productId,
                             @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
         Product product = productService.findProductByProductId(productId);
@@ -70,6 +70,18 @@ public class CartController {
         model.addAttribute("cart", cart);
         redirectAttributes.addFlashAttribute("success", "Thêm vào giỏ hàng thành công");
         return "redirect:/productDetails?productId=" + productId;
+    }
+
+    @PostMapping("/addToCartInCart")
+    public String addToCartInCart(Model model, RedirectAttributes redirectAttributes,
+                                  Principal principal, @RequestParam("productId") int productId,
+                                  @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity) {
+        Product product = productService.findProductByProductId(productId);
+        User user = userService.findCustomerByEmail(principal.getName());
+        Cart cart = cartService.addToCart(product, quantity, user);
+        model.addAttribute("cart", cart);
+        redirectAttributes.addFlashAttribute("success", "Thêm vào giỏ hàng thành công");
+        return "redirect:/cart";
     }
 
     @PostMapping("/addToCartNow")
@@ -106,11 +118,12 @@ public class CartController {
     }
 
     @GetMapping("/deleteCart")
-    public String deleteCart(Principal principal, @RequestParam("itemId") int productId, Model model) {
+    public String deleteCart(Principal principal, @RequestParam("itemId") int productId, Model model, RedirectAttributes attributes) {
         User user = userService.findCustomerByEmail(principal.getName());
         Product product = productService.findProductByProductId(productId);
         Cart cart = cartService.deleteCartItem(user, product);
         model.addAttribute("cart", cart);
+        attributes.addFlashAttribute("success", "Sản phẩm đã được xóa khỏi giỏ hàng");
         return "redirect:/cart";
     }
 

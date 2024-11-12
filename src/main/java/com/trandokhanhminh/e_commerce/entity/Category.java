@@ -2,6 +2,7 @@ package com.trandokhanhminh.e_commerce.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class Category {
     public boolean is_deleted;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "category")
+    @JsonIgnore
     private List<Product> products;
 
     public Category(String name) {

@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
-    boolean checkLogin(String email, String password);
+    boolean checkForgot(String email, String password,String confirmPassword);
 
     List<User> findAll();
 

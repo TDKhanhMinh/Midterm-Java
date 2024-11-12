@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.Set;
 
@@ -31,6 +32,7 @@ public class Cart {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+    @JsonIgnore
     private User user;
     @OneToMany(cascade = CascadeType.DETACH, mappedBy = "cart")
     private Set<CartItems> cartItems;

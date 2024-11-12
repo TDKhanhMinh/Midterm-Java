@@ -13,6 +13,7 @@ public interface ProductService {
     List<Product> findAllByCategory(String categoryName);
 
     public void updateProductQuantity(Product product);
+
     void removeByProductId(int productId);
 
     void saveProduct(MultipartFile multipartFile, Product product) throws IOException;
@@ -37,7 +38,6 @@ public interface ProductService {
 
     Page<Product> pageProduct(int pageNo);
 
-    Page<Product> searchProduct(int pageNum, String search);
 
     List<Product> findProductByKey(String brandName);
 

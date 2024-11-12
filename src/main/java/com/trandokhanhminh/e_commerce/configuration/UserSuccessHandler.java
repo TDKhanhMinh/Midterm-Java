@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 @Component
+
 public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutSuccessHandler {
 
     private final UserService userService;
@@ -32,9 +33,12 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutS
 
         User theUser = userService.findCustomerByEmail(userName);
         HttpSession session = request.getSession();
-        session.setAttribute("USERNAME", theUser.getFirstName());
-        session.setAttribute("id", theUser.getCustomerId());
-
+        if (theUser != null) {
+            session.setAttribute("USERNAME", theUser.getFirstName());
+            session.setAttribute("id", theUser.getCustomerId());
+        } else {
+            System.err.println("User not found in database: " + userName);
+        }
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority authority : authorities) {
             if (authority.getAuthority().equals("ROLE_ADMIN")) {
@@ -52,11 +56,11 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler, LogoutS
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         if (authentication != null) {
-
             HttpSession session = request.getSession(false);
             if (session != null) {
                 session.invalidate();
                 session.removeAttribute("USERNAME");
+                System.out.println("User has been logged out");
             }
         }
         response.sendRedirect(request.getContextPath() + "/login?logout=true");

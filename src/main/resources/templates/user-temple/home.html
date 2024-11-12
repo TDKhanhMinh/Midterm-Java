@@ -26,9 +26,7 @@
         <div class="alert alert-success" th:text="${error}"></div>
     </div>
 </div>
-
-
-<div class="container pt-10">
+<div class="container">
     <div class="row d-flex align-items-center justify-content-center">
         <div class="col-md-12">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -45,21 +43,24 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://demo.ecommercehtml.com/templates/3/assets/images/header-7/header-1.jpg"
+                        <img style="max-height: 650px"
+                             src="https://shopdongho.com.vn/cdn/shop/files/DHCH_3ce079d2-fee8-40f5-88b3-35e216c75b8d.png?v=1694231308"
+                             class="d-block w-100"
+                             alt="...">
+                    </div>
+                    <div class="carousel-item ">
+                        <img src="https://donghoduyanh.com/images/slideshow/2024/10/10/compress/citizen-sale_1728556124.jpg.webp"
                              class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://demo.ecommercehtml.com/assets/images/header-4/header-3.jpg"
+                        <img style="max-height: 650px"
+                             src="https://demo.ecommercehtml.com/assets/images/content-card-5/content-7.jpg"
                              class="d-block w-100"
                              alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://demo.ecommercehtml.com/assets/images/content-card-5/content-7.jpg"
-                             class="d-block w-100"
-                             alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://demo.ecommercehtml.com/assets/images/header-4/header-3.jpg"
+                        <img style="max-height: 650px"
+                             src="https://donghoduyanh.com/images/slideshow/2024/11/11/compress/sale-dong-ho-treo-tuong-new_1731319167.jpg.webp"
                              class="d-block w-100"
                              alt="...">
                     </div>
@@ -267,7 +268,8 @@
         <span>Sắp xếp theo:</span>
         <a th:href="@{/saleAsc(brand=${'all'})}" class="mx-2 my-2 text-dark-emphasis">Giảm giá</a>
         <a th:href="@{/bestSeller(brand=${'all'})}" class="mx-2 my-2 text-dark-emphasis">Bán chạy</a>
-        <a style="display: inline-block" class="text-dark-emphasis dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <a style="display: inline-block" class="text-dark-emphasis dropdown-toggle" type="button"
+           id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             Giá
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -374,13 +376,13 @@
         </form>
     </div>
 </div>
-<div  th:each="categoryItem,step:${categoryList}" class="products">
+<div th:each="categoryItem,step:${categoryList}" class="products">
     <div th:if="${categoryItem.getProducts().size() > 0}" class="container-sm" style="width: 80%;">
         <div class="row">
             <section class="product-wrapper pt-70">
                 <div class="container-fluid rounded-2"
                      th:style="'background-color: ' + (${step.index % 2 == 0} ? '#e3f4ff' : '#fffcf2')">
-                    <h3 th:text="'Đồng hồ '+${categoryItem.name}" class=" pt-2 text-center"
+                    <h3 th:text="'Đồng hồ '+${categoryItem.name}" class=" pt-4 text-center"
                         style="text-transform: uppercase"></h3>
                     <div class="row">
                         <div class="col-md-3 col-sm-6 mb-4"
@@ -444,10 +446,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 
 <th:block th:insert="~{ user-temple/footer :: footer}"></th:block>

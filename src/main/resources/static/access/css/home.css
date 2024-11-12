@@ -584,6 +584,7 @@ span {
     display: -o-flex;
     display: flex;
     justify-content: center;
+    margin: -5px;
 }
 .navbar-style-12 .navbar-container .main-navbar ul li {
     list-style: none;

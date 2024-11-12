@@ -86,6 +86,7 @@ public class LoginController {
     public String logout(HttpSession session, Model model) {
         model.addAttribute("success", "Log out successfully");
         session.removeAttribute("USERNAME");
+        session.invalidate();
         System.out.println("User logged out");
         return "user-temple/login";
     }
