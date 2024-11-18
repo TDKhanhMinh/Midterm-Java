@@ -202,6 +202,13 @@ public class AdminController {
         return "redirect:/admin/order/0";
     }
 
+    @GetMapping("/updateOrder")
+    public String updateOrder(@RequestParam("orderId") int orderId) {
+        orderService.updateOrder(orderId);
+        return "redirect:/admin/order/0";
+    }
+
+
     @GetMapping("/order/{pageNum}")
     public String getOrder(@PathVariable("pageNum") int pageNum, Model model) {
         Page<Order> orders = orderService.pageOrder(pageNum);

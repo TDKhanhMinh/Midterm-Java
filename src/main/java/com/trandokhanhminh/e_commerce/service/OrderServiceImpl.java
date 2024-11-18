@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void saveOrder(Cart cart, String location) {
         Order order = new Order();
-        order.setStatus("Đang vận chuyển");
+        order.setStatus("Đang chờ duyệt");
         order.setDate(new java.sql.Date(System.currentTimeMillis()));
         Random random = new Random();
         int date = random.nextInt(4) + 2;
@@ -65,6 +65,13 @@ public class OrderServiceImpl implements OrderService {
         cart.setTotal_price(0);
         cartRepo.save(cart);
         orderRepo.save(order);
+    }
+
+    @Override
+    public void updateOrder(int id) {
+        Order oldOrder = orderRepo.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+        oldOrder.setStatus("Đang chờ đơn vị vận chuyển");
+        orderRepo.save(oldOrder);
     }
 
     @Override

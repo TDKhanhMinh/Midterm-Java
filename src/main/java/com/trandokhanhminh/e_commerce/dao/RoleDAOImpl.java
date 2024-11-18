@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public class RoleDAOImpl implements RoleDAO {
     private EntityManager entity;
     private RoleDAO roleDAO;
-    private RoleRepo roleRepo;
+    private final RoleRepo roleRepo;
 
     public RoleDAOImpl(RoleRepo roleRepo) {
         this.roleRepo = roleRepo;

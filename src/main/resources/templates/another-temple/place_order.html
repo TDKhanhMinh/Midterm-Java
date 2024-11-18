@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center row">
-        <div class="col-md-10">
+        <div class="col-md-11">
             <div class="rounded">
                 <div class="table-responsive table-borderless">
                     <table class="table table-hover">
@@ -54,7 +54,7 @@
                             <td th:text="${order.expected_date}"></td>
                             <td th:text="${order.status}"></td>
                             <td class="priceSale" th:text="${order.total_price/10}"></td>
-                            <td><a onclick="if (!(confirm('Bạn có muốn hủy đơn hàng này không'))) return false"
+                            <td><a class="btn btn-danger btn-sm" onclick="if (!(confirm('Bạn có muốn hủy đơn hàng này không'))) return false"
                                    th:href="@{/deleteOrder(orderId=${order.oder_id})}">Hủy đơn hàng</a></td>
 
                         </tr>

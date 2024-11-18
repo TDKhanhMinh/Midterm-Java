@@ -34,9 +34,15 @@ public class HomeController {
     public String showHome(Model model) {
         List<Category> categoryList = categoryService.findALL();
         List<Product> products = productService.findAllProducts();
+        List<Product> result = productService.findAllProducts();
+        Collections.shuffle(result);
+        List<Product> randomProducts = result.stream()
+                .limit(20)
+                .toList();
+
         model.addAttribute("categoryList", categoryList);
-        System.out.println(categoryList);
         model.addAttribute("products", products);
+        model.addAttribute("productsSuggest", randomProducts);
         return "user-temple/home";
     }
 
@@ -56,15 +62,32 @@ public class HomeController {
 
     @GetMapping("/allProducts")
     public String showAllProducts(Model model, @RequestParam("brandName") String brandName) {
-        List<Product> products = productService.findAllByCategory(brandName);
         List<Product> result = productService.findAllProducts();
         Collections.shuffle(result);
         List<Product> randomProducts = result.stream()
                 .limit(20)
                 .toList();
-        model.addAttribute("brandName", brandName);
-        model.addAttribute("products", products);
+        if (brandName.equals("all")) {
+            model.addAttribute("brandName", "Xu Hướng");
+            model.addAttribute("products", randomProducts);
+        } else {
+            List<Product> products = productService.findAllByCategory(brandName);
+            model.addAttribute("brandName", brandName);
+            model.addAttribute("products", products);
+        }
         model.addAttribute("productsSuggest", randomProducts);
+        return "another-temple/all_product";
+    }
+
+    @GetMapping("/allProduct")
+    public String showAllProductsWithoutBrand(Model model) {
+        List<Product> result = productService.findAllProducts();
+        Collections.shuffle(result);
+        List<Product> randomProducts = result.stream()
+                .limit(20)
+                .toList();
+        model.addAttribute("products", randomProducts);
+        model.addAttribute("brandName", "Bán Chạy");
         return "another-temple/all_product";
     }
 
@@ -107,7 +130,7 @@ public class HomeController {
         List<Product> product = productService.findAllUser(brand, type, minPrice, maxPrice);
         model.addAttribute("products", product);
         model.addAttribute("brandName", brand);
-        System.out.println(product);
+
         return "another-temple/search_result";
     }
 

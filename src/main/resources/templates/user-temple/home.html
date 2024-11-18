@@ -5,450 +5,697 @@
     <title>Home Page</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/access/css/home.css}"/>
-    <link rel="stylesheet" th:href="@{/access/css/default.css}"/>
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/access/css/home.css}" />
+    <link rel="stylesheet" th:href="@{/access/css/default.css}" />
+
+    <style>
+        .option-watch:hover {
+            opacity: 0.8;
+        }
+    </style>
 </head>
 
 
 <body>
-<th:block th:insert="~{user-temple/header_on :: header_on}" th:if="${session.USERNAME}"></th:block>
-<th:block th:insert="~{ user-temple/header_off :: header_off}" th:unless="${session.USERNAME}"></th:block>
+    <th:block th:insert="~{user-temple/header_on :: header_on}" th:if="${session.USERNAME}"></th:block>
+    <th:block th:insert="~{ user-temple/header_off :: header_off}" th:unless="${session.USERNAME}"></th:block>
 
-<div class="container">
-    <div th:if="${success}">
-        <div class="alert alert-success" th:text="${success}"></div>
+    <div class="container">
+        <div th:if="${success}">
+            <div class="alert alert-success" th:text="${success}"></div>
+        </div>
+        <div th:if="${error}">
+            <div class="alert alert-success" th:text="${error}"></div>
+        </div>
     </div>
-    <div th:if="${error}">
-        <div class="alert alert-success" th:text="${error}"></div>
-    </div>
-</div>
-<div class="container">
-    <div class="row d-flex align-items-center justify-content-center">
-        <div class="col-md-12">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                            class="active"
-                            aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="col-md-12">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
                             aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                             aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
                             aria-label="Slide 4"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img style="max-height: 650px"
-                             src="https://shopdongho.com.vn/cdn/shop/files/DHCH_3ce079d2-fee8-40f5-88b3-35e216c75b8d.png?v=1694231308"
-                             class="d-block w-100"
-                             alt="...">
                     </div>
-                    <div class="carousel-item ">
-                        <img src="https://donghoduyanh.com/images/slideshow/2024/10/10/compress/citizen-sale_1728556124.jpg.webp"
-                             class="d-block w-100" alt="...">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img style="max-height: 650px"
+                                src="https://shopdongho.com.vn/cdn/shop/files/DHCH_3ce079d2-fee8-40f5-88b3-35e216c75b8d.png?v=1694231308"
+                                class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item ">
+                            <img src="https://donghoduyanh.com/images/slideshow/2024/10/10/compress/citizen-sale_1728556124.jpg.webp"
+                                class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img style="max-height: 500px"
+                                src="https://image.donghohaitrieu.com/wp-content/uploads/2024/10/seiko-presage-classic-series.jpg"
+                                class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img style="max-height: 650px"
+                                src="https://donghoduyanh.com/images/slideshow/2024/11/11/compress/sale-dong-ho-treo-tuong-new_1731319167.jpg.webp"
+                                class="d-block w-100" alt="...">
+                        </div>
                     </div>
-                    <div class="carousel-item">
-                        <img style="max-height: 650px"
-                             src="https://demo.ecommercehtml.com/assets/images/content-card-5/content-7.jpg"
-                             class="d-block w-100"
-                             alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img style="max-height: 650px"
-                             src="https://donghoduyanh.com/images/slideshow/2024/11/11/compress/sale-dong-ho-treo-tuong-new_1731319167.jpg.webp"
-                             class="d-block w-100"
-                             alt="...">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<section class="section product-wrapper pt-70">
-    <div class="section-content-top-brand">
-        <div class="col-inner">
-            <div class="text text-center mb-4">
-                <h2>THƯƠNG HIỆU ĐỒNG HỒ</h2>
-            </div>
-            <div class="container-sm top-brand">
-                <ul class="row d-flex justify-content-center">
-                    <li class="col-lg-2"><a href="https://shopdongho.com/casio/"><img decoding="async" width="100%"
-                                                                                      height="100%"
-                                                                                      src="https://media.shopdongho.com/2023/02/8Z9BW1Fc-hinh-anh-logo-thuong-hieu-casio.png"
-                                                                                      alt="casio">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/edifice/"><img decoding="async" width="100%"
-                                                                                        height="100%"
-                                                                                        src="https://media.shopdongho.com/2023/02/JLO4EEaf-hinh-anh-logo-thuong-hieu-edifice.png"
-                                                                                        alt="edifice">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/g-shock/"><img decoding="async" width="100%"
-                                                                                        height="100%"
-                                                                                        src="https://media.shopdongho.com/2023/02/UxgpAlLK-hinh-anh-logo-thuong-hieu-g-shock.png"
-                                                                                        alt="g-shock">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/mtp/"><img decoding="async" width="100%"
-                                                                                    height="100%"
-                                                                                    src="https://media.shopdongho.com/2023/02/ZICWJyhL-hinh-anh-logo-thuong-hieu-mtp.png"
-                                                                                    alt="casio mtp">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/ltp/"><img decoding="async" width="100%"
-                                                                                    height="100%"
-                                                                                    src="https://media.shopdongho.com/2023/02/9dlQDqhL-hinh-anh-logo-thuong-hieu-ltp.png"
-                                                                                    alt="casio ltp">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/olym-pianus/"><img decoding="async"
-                                                                                            width="100%"
-                                                                                            height="100%"
-                                                                                            src="https://media.shopdongho.com/2023/02/BGgbt52v-hinh-anh-logo-thuong-hieu-olym-pianus-2.png"
-                                                                                            alt="olym pianus">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/orient/"><img decoding="async" width="100%"
-                                                                                       height="100%"
-                                                                                       src="https://media.shopdongho.com/2023/02/cadkrMXC-hinh-anh-logo-thuong-hieu-orient.png"
-                                                                                       alt="orient">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/citizen/"><img decoding="async" width="100%"
-                                                                                        height="100%"
-                                                                                        src="https://media.shopdongho.com/2023/02/hEn5qCs8-hinh-anh-logo-thuong-hieu-citizen.png"
-                                                                                        alt="citizen">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/seiko/"><img decoding="async" width="100%"
-                                                                                      height="100%"
-                                                                                      src="https://media.shopdongho.com/2023/02/nAYpsdxd-hinh-anh-logo-thuong-hieu-seiko.png"
-                                                                                      alt="seiko">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/pierre-lannier/"><img decoding="async"
-                                                                                               width="100%"
-                                                                                               height="100%"
-                                                                                               src="https://media.shopdongho.com/2023/02/TVSzVOuI-hinh-anh-logo-thuong-hieu-pierre-lannier.png"
-                                                                                               alt="pierre lannier">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/daniel-wellington/"><img decoding="async"
-                                                                                                  width="100%"
-                                                                                                  height="100%"
-                                                                                                  src="https://media.shopdongho.com/2023/02/vWNOj8hU-hinh-anh-logo-thuong-hieu-daniel-welington.png"
-                                                                                                  alt="daniel welington">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/mvmt/"><img decoding="async" width="100%"
-                                                                                     height="100%"
-                                                                                     src="https://media.shopdongho.com/2023/02/OzEhcMn2-hinh-anh-logo-thuong-hieu-mvmt.png"
-                                                                                     alt="mvmt">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/olympia-star/"><img decoding="async"
-                                                                                             width="100%" height="100%"
-                                                                                             src="https://media.shopdongho.com/2023/02/sT7WZcCv-hinh-anh-logo-thuong-hieu-olympia-star.png"
-                                                                                             alt="olympia star">
-                    </a></li>
-                    <li class="col-lg-2"><a href="https://shopdongho.com/percent/"><img decoding="async" width="100%"
-                                                                                        height="100%"
-                                                                                        src="https://media.shopdongho.com/2023/03/hinh-anh-logo-thuong-hieu-percent.png"
-                                                                                        alt="percent">
-                    </a></li>
-                </ul>
+    <section class="section product-wrapper">
+        <div class="section-content-top-brand">
+            <div class="col-inner">
+                <div class="text text-center mb-4">
+                    <h2>THƯƠNG HIỆU ĐỒNG HỒ</h2>
+                </div>
+                <div class="container-sm top-brand">
+                    <ul class="row d-flex justify-content-center">
+                        <li class="col-lg-2"><a href="https://shopdongho.com/casio/"><img decoding="async" width="100%"
+                                    height="100%"
+                                    src="https://media.shopdongho.com/2023/02/8Z9BW1Fc-hinh-anh-logo-thuong-hieu-casio.png"
+                                    alt="casio">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/edifice/"><img decoding="async"
+                                    width="100%" height="100%"
+                                    src="https://media.shopdongho.com/2023/02/JLO4EEaf-hinh-anh-logo-thuong-hieu-edifice.png"
+                                    alt="edifice">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/g-shock/"><img decoding="async"
+                                    width="100%" height="100%"
+                                    src="https://media.shopdongho.com/2023/02/UxgpAlLK-hinh-anh-logo-thuong-hieu-g-shock.png"
+                                    alt="g-shock">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/mtp/"><img decoding="async" width="100%"
+                                    height="100%"
+                                    src="https://media.shopdongho.com/2023/02/ZICWJyhL-hinh-anh-logo-thuong-hieu-mtp.png"
+                                    alt="casio mtp">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/ltp/"><img decoding="async" width="100%"
+                                    height="100%"
+                                    src="https://media.shopdongho.com/2023/02/9dlQDqhL-hinh-anh-logo-thuong-hieu-ltp.png"
+                                    alt="casio ltp">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/olym-pianus/"><img decoding="async"
+                                    width="100%" height="100%"
+                                    src="https://media.shopdongho.com/2023/02/BGgbt52v-hinh-anh-logo-thuong-hieu-olym-pianus-2.png"
+                                    alt="olym pianus">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/orient/"><img decoding="async" width="100%"
+                                    height="100%"
+                                    src="https://media.shopdongho.com/2023/02/cadkrMXC-hinh-anh-logo-thuong-hieu-orient.png"
+                                    alt="orient">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/citizen/"><img decoding="async"
+                                    width="100%" height="100%"
+                                    src="https://media.shopdongho.com/2023/02/hEn5qCs8-hinh-anh-logo-thuong-hieu-citizen.png"
+                                    alt="citizen">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/seiko/"><img decoding="async" width="100%"
+                                    height="100%"
+                                    src="https://media.shopdongho.com/2023/02/nAYpsdxd-hinh-anh-logo-thuong-hieu-seiko.png"
+                                    alt="seiko">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/pierre-lannier/"><img decoding="async"
+                                    width="100%" height="100%"
+                                    src="https://media.shopdongho.com/2023/02/TVSzVOuI-hinh-anh-logo-thuong-hieu-pierre-lannier.png"
+                                    alt="pierre lannier">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/daniel-wellington/"><img decoding="async"
+                                    width="100%" height="100%"
+                                    src="https://media.shopdongho.com/2023/02/vWNOj8hU-hinh-anh-logo-thuong-hieu-daniel-welington.png"
+                                    alt="daniel welington">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/mvmt/"><img decoding="async" width="100%"
+                                    height="100%"
+                                    src="https://media.shopdongho.com/2023/02/OzEhcMn2-hinh-anh-logo-thuong-hieu-mvmt.png"
+                                    alt="mvmt">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/olympia-star/"><img decoding="async"
+                                    width="100%" height="100%"
+                                    src="https://media.shopdongho.com/2023/02/sT7WZcCv-hinh-anh-logo-thuong-hieu-olympia-star.png"
+                                    alt="olympia star">
+                            </a></li>
+                        <li class="col-lg-2"><a href="https://shopdongho.com/percent/"><img decoding="async"
+                                    width="100%" height="100%"
+                                    src="https://media.shopdongho.com/2023/03/hinh-anh-logo-thuong-hieu-percent.png"
+                                    alt="percent">
+                            </a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="content-card-style-4 bg-white pt-70 pb-50">
-    <div class="container shadow p-3 mb-5 bg-body rounded">
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-7 col-sm-8">
-                <div class="single-content mt-15 text-center">
-                    <div class="content-icon">
-                        <i class="fa-solid fa-truck-fast"></i>
-                    </div>
-                    <div class="content-content">
-                        <h4 class="title"><a href="#0">Giao hàng nhanh chóng</a></h4>
-                        <p>Miễn phí vận chuyển</p>
+    </section>
+    <section class="content-card-style-4 bg-white pb-50">
+        <div class="container shadow p-3 mb-5 bg-body rounded">
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-md-7 col-sm-8">
+                    <div class="single-content mt-15 text-center">
+                        <div class="content-icon">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div class="content-content">
+                            <h4 class="title"><a href="#0">Giao hàng nhanh chóng</a></h4>
+                            <p>Miễn phí vận chuyển</p>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-7 col-sm-8">
-                <div class="single-content mt-15 text-center">
-                    <div class="content-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
-                             class="bi bi-shield-check" viewBox="0 0 16 16">
-                            <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56"/>
-                            <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
-                        </svg>
-                    </div>
-                    <div class="content-content">
-                        <h4 class="title"><a href="#0">Bảo hành chính hãng</a></h4>
-                        <p>
-                            Thủ tục nhanh gọn, thay pin miễn phí
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-7 col-sm-8">
-                <div class="single-content mt-15 text-center">
-                    <div class="content-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
-                             class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-                            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
-                            <path fill-rule="evenodd"
-                                  d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
-                        </svg>
-                    </div>
-                    <div class="content-content">
-                        <h4 class="title"><a href="#0">Đổi hàng trong 7 ngày</a></h4>
-                        <p>1 đổi 1 trong 7 ngày với sản phẩm lỗi</p>
+                <div class="col-lg-3 col-md-7 col-sm-8">
+                    <div class="single-content mt-15 text-center">
+                        <div class="content-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
+                                class="bi bi-shield-check" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56" />
+                                <path
+                                    d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0" />
+                            </svg>
+                        </div>
+                        <div class="content-content">
+                            <h4 class="title"><a href="#0">Bảo hành chính hãng</a></h4>
+                            <p>
+                                Thủ tục nhanh gọn, thay pin miễn phí
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-7 col-sm-8">
-                <div class="single-content mt-15 text-center">
-                    <div class="content-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
-                             class="bi bi-cash-coin" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                  d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8m5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0"/>
-                            <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195z"/>
-                            <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083q.088-.517.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z"/>
-                            <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 6 6 0 0 1 3.13-1.567"/>
-                        </svg>
+                <div class="col-lg-3 col-md-7 col-sm-8">
+                    <div class="single-content mt-15 text-center">
+                        <div class="content-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
+                                class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                                <path fill-rule="evenodd"
+                                    d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
+                            </svg>
+                        </div>
+                        <div class="content-content">
+                            <h4 class="title"><a href="#0">Đổi hàng trong 7 ngày</a></h4>
+                            <p>1 đổi 1 trong 7 ngày với sản phẩm lỗi</p>
+                        </div>
                     </div>
-                    <div class="content-content">
-                        <h4 class="title"><a href="#0">Trả góp không lãi suất</a></h4>
-                        <p>Trả trước 1 phần, 2 phần còn lại trả sau</p>
+                </div>
+                <div class="col-lg-3 col-md-7 col-sm-8">
+                    <div class="single-content mt-15 text-center">
+                        <div class="content-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
+                                class="bi bi-cash-coin" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8m5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0" />
+                                <path
+                                    d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195z" />
+                                <path
+                                    d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083q.088-.517.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z" />
+                                <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 6 6 0 0 1 3.13-1.567" />
+                            </svg>
+                        </div>
+                        <div class="content-content">
+                            <h4 class="title"><a href="#0">Trả góp không lãi suất</a></h4>
+                            <p>Trả trước 1 phần, 2 phần còn lại trả sau</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<div class="container" style="width: 80%">
-    <div class="container" style="height: 50px">
-        <button id="shop-button" class="btn btn-outline-secondary my-2 fw-bold">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel"
-                 viewBox="0 0 16 16">
-                <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
-            </svg>
-            Lọc
-        </button>
-        <a th:href="@{/allProducts(brandName=${'Casio MTP'})}" class="rounded-2 btn btn-outline-secondary mx-2 my-2"
-           style="background-color: rgba(247, 247, 247, 0.8)">
-            <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/99/b8/99b80762d901e26f614d8cd23a8acd8d.png"
-                 style="width: 80px;height: 20px;" alt="Casio">
-        </a>
-        <a th:href="@{/allProducts(brandName=${'Casio Edifice'})}" class="rounded-2 btn btn-outline-secondary mx-2 my-2"
-           style="background-color: rgba(247, 247, 247, 0.8)">
-            <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/7264/01/54/0154a778f5b3b9aedd9aa43494d3b4de.png"
-                 style="width: 80px;height: 20px;" alt="Casio">
-        </a>
-        <a th:href="@{/allProducts(brandName=${'Casio G-Shock'})}" class="rounded-2 btn btn-outline-secondary mx-2 my-2"
-           style="background-color: rgba(247, 247, 247, 0.8)">
-            <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/7264/8d/39/8d3928c9a09fe81896276c6fa5f50368.png"
-                 style="width: 80px;height: 20px;" alt="Casio">
-        </a>
-        <a th:href="@{/allProducts(brandName=${'Seiko'})}" class="rounded-2 btn btn-outline-secondary mx-2 my-2"
-           style="background-color: rgba(247, 247, 247, 0.8)">
-            <img src="https://th.bing.com/th/id/R.e7a37e9fa91208d2aaa432cb87cd3f04?rik=xlbl9MCk4RJUBg&pid=ImgRaw&r=0"
-                 style="width: 80px;height: 20px;" alt="Casio">
-        </a>
-    </div>
-    <div class="container mt-4 flex-nowrap">
-        <span>Sắp xếp theo:</span>
-        <a th:href="@{/saleAsc(brand=${'all'})}" class="mx-2 my-2 text-dark-emphasis">Giảm giá</a>
-        <a th:href="@{/bestSeller(brand=${'all'})}" class="mx-2 my-2 text-dark-emphasis">Bán chạy</a>
-        <a style="display: inline-block" class="text-dark-emphasis dropdown-toggle" type="button"
-           id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Giá
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" th:href="@{/priceASC(brand=${'all'})}">Giá thấp - cao</a></li>
-            <li><a class="dropdown-item" th:href="@{/priceDESC(brand=${'all'})}">Giá cao - thấp</a></li>
-        </ul>
+    </section>
+    <div class="container" style="width: 80%">
+        <div class="container" style="height: 50px">
+            <button id="shop-button" class="btn btn-outline-secondary my-2 fw-bold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z" />
+                </svg>
+                Lọc
+            </button>
+            <a th:href="@{/allProducts(brandName=${'Casio MTP'})}" class="rounded-2 btn btn-outline-secondary mx-2 my-2"
+                style="background-color: rgba(247, 247, 247, 0.8)">
+                <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/99/b8/99b80762d901e26f614d8cd23a8acd8d.png"
+                    style="width: 80px;height: 20px;" alt="Casio">
+            </a>
+            <a th:href="@{/allProducts(brandName=${'Casio Edifice'})}"
+                class="rounded-2 btn btn-outline-secondary mx-2 my-2"
+                style="background-color: rgba(247, 247, 247, 0.8)">
+                <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/7264/01/54/0154a778f5b3b9aedd9aa43494d3b4de.png"
+                    style="width: 80px;height: 20px;" alt="Casio">
+            </a>
+            <a th:href="@{/allProducts(brandName=${'Casio G-Shock'})}"
+                class="rounded-2 btn btn-outline-secondary mx-2 my-2"
+                style="background-color: rgba(247, 247, 247, 0.8)">
+                <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/7264/8d/39/8d3928c9a09fe81896276c6fa5f50368.png"
+                    style="width: 80px;height: 20px;" alt="Casio">
+            </a>
+            <a th:href="@{/allProducts(brandName=${'Seiko'})}" class="rounded-2 btn btn-outline-secondary mx-2 my-2"
+                style="background-color: rgba(247, 247, 247, 0.8)">
+                <img src="https://th.bing.com/th/id/R.e7a37e9fa91208d2aaa432cb87cd3f04?rik=xlbl9MCk4RJUBg&pid=ImgRaw&r=0"
+                    style="width: 80px;height: 20px;" alt="Casio">
+            </a>
+        </div>
+        <div class="container mt-4 flex-nowrap">
+            <span>Sắp xếp theo:</span>
+            <a th:href="@{/saleAsc(brand=${'all'})}" class="mx-2 my-2 text-dark-emphasis">Giảm giá</a>
+            <a th:href="@{/bestSeller(brand=${'all'})}" class="mx-2 my-2 text-dark-emphasis">Bán chạy</a>
+            <a style="display: inline-block" class="text-dark-emphasis dropdown-toggle" type="button"
+                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Giá
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" th:href="@{/priceASC(brand=${'all'})}">Giá thấp - cao</a></li>
+                <li><a class="dropdown-item" th:href="@{/priceDESC(brand=${'all'})}">Giá cao - thấp</a></li>
+            </ul>
 
-    </div>
-    <hr class="my-4">
-    <div class="col-md-8" id="customer-form" style="display: none;">
-        <form th:action="@{/searchProduct}" method="get" class="customer_info form-control"
-              novalidate="novalidate">
-            <div>
-                <div class="container row" style="width: 95%">
-                    <p class="fw-bold">Hãng</p>
-                    <label class="form-control mx-2 my-2 " style="width: fit-content">
-                        <input name="brand" type="checkbox" th:value="${'Casio LTP'}" th:text="${' Casio LTP'}">
-                    </label>
-                    <label class="form-control mx-2 my-2" style="width: fit-content">
-                        <input name="brand" type="checkbox" th:value="${'Casio Edifice'}" th:text="${' Casio Edifice'}">
-                    </label>
-                    <label class="form-control mx-2 my-2" style="width: fit-content">
-                        <input name="brand" type="checkbox" th:value="${'Casio G-Shock'}" th:text="${' Casio G-Shock'}">
-                    </label>
-                    <label class="form-control mx-2 my-2" style="width: fit-content">
-                        <input name="brand" type="checkbox" th:value="${'Casio Sheen '}" th:text="${' Casio Sheen '}">
-                    </label>
-                    <label class="form-control mx-2 my-2" style="width: fit-content">
-                        <input name="brand" type="checkbox" th:value="${'Pierre Lannier'}"
-                               th:text="${' Pierre Lannier'}">
-                    </label>
-                    <label class="form-control mx-2 my-2" style="width: fit-content">
-                        <input name="brand" type="checkbox" th:value="${'Daniel Wellington'}"
-                               th:text="${' Daniel Wellington'}">
-                    </label>
-                    <label class="form-control mx-2 my-2" style="width: fit-content">
-                        <input name="brand" type="checkbox" th:value="${'Seiko'}" th:text="${' Seiko'}">
-                    </label>
-                    <label class="form-control mx-2 my-2" style="width: fit-content">
-                        <input name="brand" type="checkbox" th:value="${'MVMT'}" th:text="${' MVMT'}">
-                    </label>
-                    <label class="form-control mx-2 my-2" style="width: fit-content">
-                        <input name="brand" type="checkbox" th:value="${'Casio MTP'}" th:text="${' Casio MTP'}">
-                    </label>
-                </div>
-                <hr class="my-2">
-                <div class="container row" style="width: 95%">
-                    <div class="col-md-5">
-                        <div class="container row">
-                            <p class="fw-bold">Đối tượng sử dụng</p>
-                            <div class="row flex-nowrap">
+        </div>
+        <hr class="my-4">
+        <div class="col-md-8" id="customer-form" style="display: none;">
+            <form th:action="@{/searchProduct}" method="get" class="customer_info form-control" novalidate="novalidate">
+                <div>
+                    <div class="container row" style="width: 95%">
+                        <p class="fw-bold">Hãng</p>
+                        <label class="form-control mx-2 my-2 " style="width: fit-content">
+                            <input name="brand" type="checkbox" th:value="${'Casio LTP'}" th:text="${' Casio LTP'}">
+                        </label>
+                        <label class="form-control mx-2 my-2" style="width: fit-content">
+                            <input name="brand" type="checkbox" th:value="${'Casio Edifice'}"
+                                th:text="${' Casio Edifice'}">
+                        </label>
+                        <label class="form-control mx-2 my-2" style="width: fit-content">
+                            <input name="brand" type="checkbox" th:value="${'Casio G-Shock'}"
+                                th:text="${' Casio G-Shock'}">
+                        </label>
+                        <label class="form-control mx-2 my-2" style="width: fit-content">
+                            <input name="brand" type="checkbox" th:value="${'Casio Sheen '}"
+                                th:text="${' Casio Sheen '}">
+                        </label>
+                        <label class="form-control mx-2 my-2" style="width: fit-content">
+                            <input name="brand" type="checkbox" th:value="${'Pierre Lannier'}"
+                                th:text="${' Pierre Lannier'}">
+                        </label>
+                        <label class="form-control mx-2 my-2" style="width: fit-content">
+                            <input name="brand" type="checkbox" th:value="${'Daniel Wellington'}"
+                                th:text="${' Daniel Wellington'}">
+                        </label>
+                        <label class="form-control mx-2 my-2" style="width: fit-content">
+                            <input name="brand" type="checkbox" th:value="${'Seiko'}" th:text="${' Seiko'}">
+                        </label>
+                        <label class="form-control mx-2 my-2" style="width: fit-content">
+                            <input name="brand" type="checkbox" th:value="${'MVMT'}" th:text="${' MVMT'}">
+                        </label>
+                        <label class="form-control mx-2 my-2" style="width: fit-content">
+                            <input name="brand" type="checkbox" th:value="${'Casio MTP'}" th:text="${' Casio MTP'}">
+                        </label>
+                    </div>
+                    <hr class="my-2">
+                    <div class="container row" style="width: 95%">
+                        <div class="col-md-5">
+                            <div class="container row">
+                                <p class="fw-bold">Đối tượng sử dụng</p>
+                                <div class="row flex-nowrap">
+                                    <label class="form-control mx-2 my-2" style="width: fit-content">
+
+                                        <input name="type" type="checkbox" th:value="${'Nam'}" th:text="${' Nam'}">
+                                        <img src="https://cdn.tgdd.vn/ValueIcons/8b2f1b4b1b3ea22a4135b590a9e1da67.png"
+                                            style="width: 45px; height: 50px;" alt="Image">
+                                    </label>
+                                    <label class="form-control mx-2 my-2" style="width: fit-content">
+                                        <input name="type" type="checkbox" th:value="${'Nữ'}" th:text="${' Nữ'}">
+                                        <img src="https://cdn.tgdd.vn/ValueIcons/382008e8a35dd863e5ede0bc36dd4805.png"
+                                            style="width: 50px; height: 50px;" alt="Image">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="container row" style="width: 95%">
+                                <p class="fw-bold">Giá</p>
                                 <label class="form-control mx-2 my-2" style="width: fit-content">
-
-                                    <input name="type" type="checkbox" th:value="${'Nam'}" th:text="${' Nam'}">
-                                    <img src="https://cdn.tgdd.vn/ValueIcons/8b2f1b4b1b3ea22a4135b590a9e1da67.png"
-                                         style="width: 45px; height: 50px;" alt="Image">
+                                    <input name="rangePrice" type="checkbox" th:value="${'0,1000000'}"
+                                        th:text="${' Dưới 1 triệu'}">
                                 </label>
                                 <label class="form-control mx-2 my-2" style="width: fit-content">
-                                    <input name="type" type="checkbox" th:value="${'Nữ'}" th:text="${' Nữ'}">
-                                    <img src="https://cdn.tgdd.vn/ValueIcons/382008e8a35dd863e5ede0bc36dd4805.png"
-                                         style="width: 50px; height: 50px;" alt="Image">
+                                    <input name="rangePrice" type="checkbox" th:value="${'1000000,3000000'}"
+                                        th:text="${' Từ 1 - 3 triệu'}">
+                                </label>
+                                <label class="form-control mx-2 my-2" style="width: fit-content">
+                                    <input name="rangePrice" type="checkbox" th:value="${'3000000,5000000'}"
+                                        th:text="${' Từ 3 - 5 triệu'}">
+                                </label>
+                                <label class="form-control mx-2 my-2" style="width: fit-content">
+                                    <input name="rangePrice" type="checkbox" th:value="${'5000000,7000000'}"
+                                        th:text="${' Từ 5 - 7 triệu'}">
+                                </label>
+                                <label class="form-control mx-2 my-2" style="width: fit-content">
+                                    <input name="rangePrice" type="checkbox" th:value="${'7000000,10000000'}"
+                                        th:text="${' Từ 7 - 10 triệu'}">
+                                </label>
+                                <label class="form-control mx-2 my-2" style="width: fit-content">
+                                    <input name="rangePrice" type="checkbox" th:value="${'10000000'}"
+                                        th:text="${' Trên 10 triệu'}">
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7">
-                        <div class="container row" style="width: 95%">
-                            <p class="fw-bold">Giá</p>
-                            <label class="form-control mx-2 my-2" style="width: fit-content">
-                                <input name="rangePrice" type="checkbox" th:value="${'0,1000000'}"
-                                       th:text="${' Dưới 1 triệu'}">
-                            </label>
-                            <label class="form-control mx-2 my-2" style="width: fit-content">
-                                <input name="rangePrice" type="checkbox" th:value="${'1000000,3000000'}"
-                                       th:text="${' Từ 1 - 3 triệu'}">
-                            </label>
-                            <label class="form-control mx-2 my-2" style="width: fit-content">
-                                <input name="rangePrice" type="checkbox" th:value="${'3000000,5000000'}"
-                                       th:text="${' Từ 3 - 5 triệu'}">
-                            </label>
-                            <label class="form-control mx-2 my-2" style="width: fit-content">
-                                <input name="rangePrice" type="checkbox" th:value="${'5000000,7000000'}"
-                                       th:text="${' Từ 5 - 7 triệu'}">
-                            </label>
-                            <label class="form-control mx-2 my-2" style="width: fit-content">
-                                <input name="rangePrice" type="checkbox" th:value="${'7000000,10000000'}"
-                                       th:text="${' Từ 7 - 10 triệu'}">
-                            </label>
-                            <label class="form-control mx-2 my-2" style="width: fit-content">
-                                <input name="rangePrice" type="checkbox" th:value="${'10000000'}"
-                                       th:text="${' Trên 10 triệu'}">
-                            </label>
-                        </div>
+                </div>
+
+                <hr class="my-2">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="btn">
+                        <button type="submit" value="Submit" class="btn btn-primary form-control">Tìm kiếm</button>
                     </div>
                 </div>
-            </div>
-
-            <hr class="my-2">
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="btn">
-                    <button type="submit" value="Submit" class="btn btn-primary form-control">Tìm kiếm</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<div th:each="categoryItem,step:${categoryList}" class="products">
-    <div th:if="${categoryItem.getProducts().size() > 0}" class="container-sm" style="width: 80%;">
-        <div class="row">
-            <section class="product-wrapper pt-70">
-                <div class="container-fluid rounded-2"
-                     th:style="'background-color: ' + (${step.index % 2 == 0} ? '#e3f4ff' : '#fffcf2')">
-                    <h3 th:text="'Đồng hồ '+${categoryItem.name}" class=" pt-4 text-center"
-                        style="text-transform: uppercase"></h3>
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 mb-4"
-                             th:each="tmpProduct, iterStat : ${categoryItem.getProducts()}"
-                             th:if="${iterStat.index < 8} ">
-                            <form th:action="@{/addToCart}" method="post">
-                                <div class="product-style-3 mt-30 border border-2 border-dark rounded shadow">
-                                    <div class="product-image d-flex justify-content-center align-items-center"
-                                         style="background-color: white">
-                                        <div class="product-item active d-flex align-items-center justify-content-center">
-                                            <a th:href="@{/productDetails(productId=${tmpProduct.productId})}">
-                                                <img class="rounded-0 "
-                                                     th:src="|data:image/jpeg;base64,${tmpProduct.imageUrl}|"
-                                                     alt="product"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <a th:href="@{/productDetails(productId=${tmpProduct.productId})}"><h4
-                                                th:text="${tmpProduct.category.name.split(' ')[0]}+' '+${tmpProduct.name}"
-                                                class="title"></h4></a>
-
-                                        <div>
-                                            <span class="priceOriginal price-original"
-                                                  style="text-decoration: line-through; font-size: 16px;"
-                                                  th:text="${tmpProduct.originalPrice}+'đ'"></span>
-                                            <span class="rounded-2"
-                                                  style=" font-size: 16px; color: red;margin-left: 10px;
-                padding: 2px 2px; background-color:#f4c2c2;"
-                                                  th:text="- ${tmpProduct.salePrice}+'%'"></span>
-                                            <div class="product-price-cart">
-                                        <span
-                                                th:text="${tmpProduct.originalPrice -
-                                    tmpProduct.originalPrice*tmpProduct.salePrice/100}+'đ'"
-                                                class="priceSale price"></span>
-                                            </div>
-                                        </div>
-                                        <div class="product-price-cart d-flex align-items-center justify-content-center mb-4">
-                                            <input type="hidden" th:value="${tmpProduct.productId}" name="productId">
-                                            <button type="submit" class="main-btn primary-btn cart">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                     fill="currentColor" class="bi bi-cart-check-fill mb-2"
-                                                     viewBox="0 0 16 16">
-                                                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708"/>
-                                                </svg>
-                                                Thêm vào giỏ hàng
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="d-flex justify-content-center mb-4">
-                            <a th:href="@{/allProducts(brandName=${categoryItem.name})}" style="width: 200px"
-                               class="btn btn-sm btn-outline-primary float-right mt-5"><span
-                                    class="">Xem Thêm</span></a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </form>
         </div>
     </div>
-</div>
 
 
-<th:block th:insert="~{ user-temple/footer :: footer}"></th:block>
+
+    <div class="products">
+        <div class="container-sm" style="width: 80%;">
+            <div class="row">
+                <section class="product-wrapper">
+                    <div class="row">
+                        <img class="rounded-top"
+                            src="https://www.watchstore.vn/images/block/compress/banner-sale-off_1715327436.webp"
+                            alt="banner">
+                    </div>
+                    <div class="container-fluid rounded-bottom"
+                        th:style="'background-image: linear-gradient(to bottom, #80EAFF, #004080);'">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 mb-2" th:each="tmpProduct, iterStat : ${productsSuggest}"
+                                th:if="${iterStat.index < 8} ">
+                                <form th:action="@{/addToCart}" method="post">
+                                    <div class="product-style-3 mt-30 border border-2 border-dark rounded shadow">
+                                        <div class="product-image d-flex justify-content-center align-items-center"
+                                            style="background-color: white">
+                                            <div
+                                                class="product-item active d-flex align-items-center justify-content-center">
+                                                <a th:href="@{/productDetails(productId=${tmpProduct.productId})}">
+                                                    <img class="rounded-0 "
+                                                        th:src="|data:image/jpeg;base64,${tmpProduct.imageUrl}|"
+                                                        alt="product" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <a th:href="@{/productDetails(productId=${tmpProduct.productId})}">
+                                                <h4 th:text="${tmpProduct.category.name.split(' ')[0]}+' '+${tmpProduct.name}"
+                                                    class="title"></h4>
+                                            </a>
+
+                                            <div>
+                                                <span class="priceOriginal price-original"
+                                                    style="text-decoration: line-through; font-size: 16px;"
+                                                    th:text="${tmpProduct.originalPrice}+'đ'"></span>
+                                                <span class="rounded-2" style=" font-size: 16px; color: red;margin-left: 10px;
+                padding: 2px 2px; background-color:#f4c2c2;" th:text="- ${tmpProduct.salePrice}+'%'"></span>
+                                                <div class="product-price-cart">
+                                                    <span th:text="${tmpProduct.originalPrice -
+                                    tmpProduct.originalPrice*tmpProduct.salePrice/100}+'đ'"
+                                                        class="priceSale price"></span>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="product-price-cart d-flex align-items-center justify-content-center mb-4">
+                                                <input type="hidden" th:value="${tmpProduct.productId}"
+                                                    name="productId">
+                                                <button type="submit" class="main-btn primary-btn cart">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-cart-check-fill mb-2"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                                    </svg>
+                                                    Thêm vào giỏ hàng
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="d-flex justify-content-center mb-4">
+                                <a th:href="@{/allProduct}" style="width: 200px"
+                                    class="btn btn-sm btn-light text-dark float-right mt-5"><span class="">Xem
+                                        Thêm</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4 my-4">
+        <div class="text-center">
+            <h4 class="text-uppercase ">Chọn đồng hồ phù hợp</h4>
+            <span>Cửa hàng chúng tôi cung cấp đa dạng mẫu đồng hồ theo nhiều phong cách khác nhau</span>
+        </div>
+        <div class="container-sm" style="max-width: 80%;">
+            <a th:href="@{/allProducts(brandName=${'all'})}" class="mt-4 mx-2">
+                <div class="image shadow rounded-3 option-watch" style="width: 230px;height: 100px;">
+                    <img class="rounded-3"
+                        src="https://www.watchstore.vn/images/collections_home/2024/09/06/resized/small-web-banner-xu-huong-2024_1725589299.webp"
+                        alt="image">
+                </div>
+                <span style="padding-left: 65px;" class="text-body m-2 "><strong>Xu hướng</strong></span>
+            </a>
+            <a th:href="@{/allProducts(brandName=${'Casio Sheen '})}" class="mt-4 mx-2">
+                <div class="image shadow rounded-3 option-watch" style="width: 230px;height: 100px;">
+                    <img class="rounded-3"
+                        src="https://www.watchstore.vn/images/collections_home/2024/09/06/resized/small-web-banner-baby-g_1725596682.webp"
+                        alt="image">
+                </div>
+                <span style="padding-left: 45px;" class="text-body m-2 "><strong>Casio Sheen cá tính</strong></span>
+            </a>
+            <a th:href="@{/allProducts(brandName=${'Casio G-Shock'})}" class="mt-4 mx-2">
+                <div class="image shadow rounded-3 option-watch" style="width: 230px;height: 100px;">
+                    <img class="rounded-3"
+                        src="https://www.watchstore.vn/images/collections_home/2024/09/06/resized/small-web-banner-g-shock_1725589299.webp"
+                        alt="image">
+                </div>
+                <span style="padding-left: 45px;" class="text-body m-2 "><strong>G-Shock thể thao</strong></span>
+            </a>
+            <a th:href="@{/allProducts(brandName=${'Daniel Wellington'})}" class="mt-4 mx-2">
+                <div class="image shadow rounded-3 option-watch" style="width: 230px;height: 100px;">
+                    <img class="rounded-3"
+                        src="https://www.watchstore.vn/images/collections_home/2024/09/06/resized/small-web-banner-quan-doi_1725598290.webp"
+                        alt="image">
+                </div>
+                <span style="padding-left: 40px;" class="text-body m-2 "><strong>Quân đội mạnh mẽ</strong></span>
+            </a><a th:href="@{/allProducts(brandName=${'Pierre Lannier'})}" class="mt-4 mx-2">
+                <div class="image shadow rounded-3 option-watch" style="width: 230px;height: 100px;">
+                    <img class="rounded-3"
+                        src="https://www.watchstore.vn/images/collections_home/2024/09/06/resized/small-web-banner-tissot_1725589299.webp"
+                        alt="image">
+                </div>
+                <span style="padding-left: 10px;" class="text-body m-2 "><strong>Pierre Lannier sang
+                        trọng</strong></span>
+            </a><a th:href="@{/allProducts(brandName=${'Casio LTP'})}" class="mt-4 mx-2">
+                <div class="image shadow rounded-3 option-watch" style="width: 230px;height: 100px;">
+                    <img class="rounded-3"
+                        src="https://www.watchstore.vn/images/collections_home/2024/09/06/resized/small-web-banner-casio-ltp_1725589299.webp"
+                        alt="image">
+                </div>
+                <span style="padding-left: 45px;" class="text-body m-2 "><strong>Casio LTP nữ tính</strong></span>
+            </a><a th:href="@{/allProducts(brandName=${'Casio MTP'})}" class="mt-4 mx-2">
+                <div class="image shadow rounded-3 option-watch" style="width: 230px;height: 100px;">
+                    <img class="rounded-3"
+                        src="https://www.watchstore.vn/images/collections_home/2024/09/06/resized/small-web-banner-casio-mtp_1725589299.webp"
+                        alt="image">
+                </div>
+                <span style="padding-left: 30px;" class="text-body m-2 "><strong>Casio MTP thanh lịch</strong></span>
+            </a><a th:href="@{/allProducts(brandName=${'Seiko'})}" class="mt-4 mx-2">
+                <div class="image shadow rounded-3 option-watch" style="width: 230px;height: 100px;">
+                    <img class="rounded-3"
+                        src="https://www.watchstore.vn/images/collections_home/2024/09/06/resized/small-web-banner-giong-rolex_1725589710.webp"
+                        alt="image">
+                </div>
+                <span style="padding-left: 75px;" class="text-body m-2 "><strong>Mẫu khác</strong></span>
+            </a>
+        </div>
+    </div>
+
+
+    <div th:each="categoryItem,step:${categoryList}" class="products">
+        <div th:if="${categoryItem.getProducts().size() > 0}" class="container-sm" style="width: 80%;">
+            <div class="row">
+                <section class="product-wrapper pt-70">
+                    <div class="container-fluid rounded-2"
+                        th:style="'background-image: ' + (${step.index % 2 == 0} ? 'linear-gradient(to bottom, #64E9FF, #0172AF':'linear-gradient(to bottom, #09D1C7, #213A58)')">
+                        <div class="text-center pt-2"><span
+                                th:style="'background-image: ' + (${step.index % 2 == 0} ? 'linear-gradient(to bottom, #FFFFFF, #A9A9A9':'linear-gradient(to bottom, #FFFFFF, #D3D3D3)')"
+                                th:text="'Đồng hồ '+${categoryItem.name}"
+                                class=" px-4 py-2 rounded-pill text-center fw-bold fs-3 shadow text-uppercase"
+                                style="box-sizing: border-box;"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 mb-2"
+                                th:each="tmpProduct, iterStat : ${categoryItem.getProducts()}"
+                                th:if="${iterStat.index < 8} ">
+                                <form th:action="@{/addToCart}" method="post">
+                                    <div class="product-style-3 mt-30 border border-2 border-dark rounded shadow">
+                                        <div class="product-image d-flex justify-content-center align-items-center"
+                                            style="background-color: white">
+                                            <div
+                                                class="product-item active d-flex align-items-center justify-content-center ">
+                                                <a th:href="@{/productDetails(productId=${tmpProduct.productId})}">
+                                                    <img class="rounded-0 "
+                                                        th:src="|data:image/jpeg;base64,${tmpProduct.imageUrl}|"
+                                                        alt="product" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <a th:href="@{/productDetails(productId=${tmpProduct.productId})}">
+                                                <h4 th:text="${tmpProduct.category.name.split(' ')[0]}+' '+${tmpProduct.name}"
+                                                    class="title"></h4>
+                                            </a>
+
+                                            <div>
+                                                <span class="priceOriginal price-original"
+                                                    style="text-decoration: line-through; font-size: 16px;"
+                                                    th:text="${tmpProduct.originalPrice}+'đ'"></span>
+                                                <span class="rounded-2" style=" font-size: 16px; color: red;margin-left: 10px;
+                padding: 2px 2px; background-color:#f4c2c2;" th:text="- ${tmpProduct.salePrice}+'%'"></span>
+                                                <div class="product-price-cart">
+                                                    <span th:text="${tmpProduct.originalPrice -
+                                    tmpProduct.originalPrice*tmpProduct.salePrice/100}+'đ'"
+                                                        class="priceSale price"></span>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="product-price-cart d-flex align-items-center justify-content-center mb-4">
+                                                <input type="hidden" th:value="${tmpProduct.productId}"
+                                                    name="productId">
+                                                <button type="submit" class="main-btn primary-btn cart">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-cart-check-fill mb-2"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                                    </svg>
+                                                    Thêm vào giỏ hàng
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="d-flex justify-content-center mb-4">
+                                <a th:href="@{/allProducts(brandName=${categoryItem.name})}" style="width: 200px"
+                                    class="btn btn-sm btn-outline-light float-right mt-5"><span class="">Xem
+                                        Thêm</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-sm" style="max-width: 85%;padding-top: 48px;">
+        <h4 class="text-uppercase text-center my-4 ">Tin Tức về đồng hồ</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="https://www.watchstore.vn/news/mau-dong-ho-treo-tuong-trang-tri-phong-khach-893"
+                    class="container-sm d-flex justify-content-center" style="cursor: pointer;">
+                    <div class="image mx-4 bg-secondary-subtle rounded-3">
+                        <img class="rounded-top"
+                            src="https://www.watchstore.vn/images/news/2024/11/18/large/mau-dong-ho-treo-tuong-trang-tri-phong-khach_1731925607.webp"
+                            alt="image" style="object-fit: contain; max-height: 340px;">
+                        <div class="container-sm">
+                            <h6 class="mt-4">10+ mẫu đồng hồ treo tường trang trí phòng khách hợp mệnh phong thủy</h6>
+                            <p class="text-body">
+                                Những mẫu đồng hồ treo tường trang trí phòng khách, đa phong cách thiết kế đến từ thương
+                                hiệu
+                                Seiko Nhật Bản chắc chắn khiến bạn ưng ý khi lắp đặt. Các sản phẩm nhiều kiểu dáng tròn,
+                                chữ
+                                nhật đảm bảo sự tinh tế và độ phù hợp với từng kiểu nội thất để bạn thỏa sức lựa chọn
+                                mẫu
+                                yêu
+                                thích.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="https://www.watchstore.vn/news/y-nghia-dong-ho-trong-phong-thuy-892"
+                    class="d-flex flex-nowrap bg-secondary-subtle rounded-3" style="max-height: 120px;">
+                    <img class="rounded-2 m-2"
+                        src="https://www.watchstore.vn/images/news/2024/11/18/resized/y-nghia-cua-dong-ho-trong-phong-thuy_1731924839.webp"
+                        alt="image" style="max-width: 200px; max-height: 100px;">
+                    <div class="content mx-2">
+                        <h6 class="mt-2">Ý nghĩa của đồng hồ trong phong thủy. Cách bày trí cải thiện sức khỏe</h6>
+                        <p class="text-body">Đồng hồ không chỉ là công cụ đo thời gian mà còn mang ý nghĩa phong thủy
+                            sâu sắc, ảnh
+                            hưởng đến sức...</p>
+                    </div>
+                </a>
+                <a href="https://www.watchstore.vn/news/qua-tang-20-11-891"
+                    class="d-flex flex-nowrap bg-secondary-subtle rounded-3 my-3" style="max-height: 120px;">
+                    <img class="rounded-2 m-2"
+                        src="https://www.watchstore.vn/images/news/2024/11/15/resized/qua-tang-20-11_1731667000.webp"
+                        alt="image" style="max-width: 200px; max-height: 100px;">
+                    <div class="content mx-2">
+                        <h6 class="mt-2">
+                            10 món quà tặng 20/11 độc đáo, hữu dụng cho thầy cô vui
+                        </h6>
+                        <p class="text-body">WatchStore đề xuất bạn nên chọn 10 món quà tặng 20/11 cho thầy cô được gợi
+                            ý trong bài viết dưới đây...</p>
+                    </div>
+                </a>
+                <a href="https://donghoduyanh.com/the-gioi-dong-ho/grand-seiko-ton-vinh-chau-a-thai-binh-duong-voi-phien-ban-gioi-han-n3478.html"
+                    class="d-flex flex-nowrap bg-secondary-subtle rounded-3 my-3" style="max-height: 120px;">
+                    <img class="rounded-2 m-2"
+                        src="https://donghoduyanh.com/images/news/2024/11/16/large/untitled_1731732759.jpg.webp"
+                        alt="image" style="max-width: 200px; max-height: 100px;">
+                    <div class="content mx-2">
+                        <h6 class="mt-2">
+                            Grand Seiko tôn vinh Châu Á Thái Bình Dương với phiên bản giới hạn SBGJ285 tuyệt đẹp
+                        </h6>
+                        <p class="text-body">
+                            Để kỷ niệm 2 năm có mặt tại Châu Á - Thái Bình Dương, Grand Seiko giới thiệu SBGJ285, một
+                            chiếc đồng hồ phiên bản giới...</p>
+                    </div>
+                </a>
+                <a href="https://donghoduyanh.com/tu-van-giai-dap/huong-dan-day-du-ve-num-van-tren-dong-ho-deo-tay-n3477.html"
+                    class="d-flex flex-nowrap bg-secondary-subtle rounded-3 my-3" style="max-height: 120px;">
+                    <img class="rounded-2 m-2"
+                        src="https://donghoduyanh.com/images/news/2024/11/18/resized/shields-and-roses-looking-at-iconic-modern-tudor-watches-blackbay-fifty-eight-crown-rose1_1731891502.jpg.webp"
+                        alt="image" style="max-width: 200px; max-height: 100px;">
+                    <div class="content mx-2">
+                        <h6 class="mt-2">
+                            Hướng dẫn đầy đủ về núm vặn trên đồng hồ đeo tay</h6>
+                        <p class="text-body">
+                            Một bộ phận quan trọng của đồng hồ mà bạn sẽ tìm thấy ở hầu hết các loại đồng hồ, bất kể
+                            kiểu dáng, chính là núm vặn....</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+
+    <th:block th:insert="~{ user-temple/footer :: footer}"></th:block>
 
 </body>
 
@@ -459,5 +706,5 @@
 
 <!-- Then load Bootstrap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
-</html>
 
+</html>

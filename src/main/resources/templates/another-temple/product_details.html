@@ -17,6 +17,12 @@
             padding: 10px 20px;
             border: 1px solid #d5d0d0;
         }
+
+        .product-detail {
+            height: 50px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
     </style>
 
 
@@ -38,7 +44,8 @@
             <div class="main-image d-flex justify-content-end">
                 <img id="mainImage" style="width: 400px;height: 400px;"
                      th:src="|data:image/jpeg;base64,${product.imageUrl}|" alt="Main Image"
-                     class=""></div>
+                     class="">
+            </div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-6">
@@ -63,7 +70,62 @@
             </h5>
             <p><strong th:text="'Mã sản phẩm: '+${product.name}"></strong></p>
             <p th:text="'Loại máy: Automatic (Máy cơ tự động)'"></p>
-            <div class="form-control">
+        </div>
+    </div>
+    <div class="container-fluid d-flex justify-content-end">
+        <div class="col-md-6">
+            <div class="m-4 rounded-2 location-shop">
+                <p class="mt-2  fw-bolder"
+                   th:text="'thông số sản phẩm - '+${product.category.name.split(' ')[0]}+'-'+${product.name}"
+                   style="text-transform: uppercase"></p>
+                <div class="row bg-secondary-subtle product-detail">
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div><strong>Thương hiệu: </strong><span th:text="${product.category.name}"></span></div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div><strong>Xuất xứ: </strong><span>Nhật Bản</span></div>
+                    </div>
+                </div>
+                <div class="row product-detail">
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div><strong>Đối tượng: </strong><span th:text="${product.productType}"></span></div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div><strong>Kháng nước: </strong><span id="atm"></span></div>
+                    </div>
+                </div>
+                <div class="row product-detail bg-secondary-subtle">
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div><strong>Loại máy: </strong><span>Cơ tự động</span></div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div><strong>Chất liệu kính: </strong><span>Kính Sapphire</span></div>
+                    </div>
+                </div>
+                <div class="row product-detail">
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div><strong>Chất liệu dây: </strong><span>Dây da</span></div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div><strong>Kích thước mặt: </strong><span id="size"></span></div>
+                    </div>
+                </div>
+                <div class="row product-detail bg-secondary-subtle">
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div>
+                            <strong>Độ dày: </strong>
+                            <span id="thickness"></span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div><strong>Khoảng trữ cót: </strong><span id="time"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-control mt-4">
                 <h6 class="text-uppercase text-danger">Khuyến mãi</h6>
                 <div>
                     <p>
@@ -245,6 +307,24 @@
 </div>
 <th:block th:insert="~{ user-temple/footer :: footer}"></th:block>
 
+<script>
+    const spanElement = document.getElementById('thickness');
+    const randomValue = (Math.random() * (13 - 10) + 10).toFixed(2);
+    spanElement.textContent = `${randomValue}mm`;
+
+    const spanElementSize = document.getElementById('size');
+    const randomValueSize = (Math.random() * (45 - 42) + 38).toFixed(2);
+    spanElementSize.textContent = `${randomValueSize}mm`;
+
+    const spanElementTime = document.getElementById('time');
+    const randomValueTime = (Math.random() * (45 - 42) + 38).toFixed(0);
+    spanElementTime.textContent = `${randomValueTime} tiếng`;
+
+    const spanElementAtm = document.getElementById('atm');
+    const randomValueAtm = (Math.random() * (5 - 3) + 3).toFixed(0);
+    spanElementAtm.textContent = `${randomValueAtm}atm`;
+
+</script>
 <!-- Additional Info Section -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
 

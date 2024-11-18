@@ -995,7 +995,7 @@ span {
 .navbar-style-12 .navbar-container .main-navbar .main-menu-horizontal li:hover .sub-menu {
     opacity: 1;
     visibility: visible;
-    top: 100%;
+    top: 90%;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {

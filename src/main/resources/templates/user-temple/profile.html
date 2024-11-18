@@ -130,7 +130,7 @@
                         <div class="profile-footer mt-45">
                             <div class="profile-title">
                                 <h5 class="title">Cards</h5>
-                                <a class="profile-link" href="#0">Add Cards</a>
+<!--                                <a class="profile-link" href="#0">Add Cards</a>-->
                             </div>
                             <div class="profile-card-info">
                                 <div class="row">
@@ -140,7 +140,7 @@
                                                 <img th:src="@{/access/img/visa.png}" alt="Card"/>
                                             </div>
                                             <div class="card-info media-body">
-                                                <h5 class="card-name">Musa Ahmed</h5>
+                                                <h5 class="card-name" th:text="${customer.lastName}+' '+${customer.firstName}">Musa Ahmed</h5>
                                                 <p class="card-number">
                                                     .... 4534 <span>02/20</span>
                                                 </p>
@@ -156,7 +156,7 @@
                                                 />
                                             </div>
                                             <div class="card-info media-body">
-                                                <h5 class="card-name">Musa Ahmed</h5>
+                                                <h5 class="card-name" th:text="${customer.lastName}+' '+${customer.firstName}">Musa Ahmed</h5>
                                                 <p class="card-number">
                                                     .... 4534 <span>02/20</span>
                                                 </p>
@@ -169,7 +169,7 @@
                                                 <img th:src="@{/access/img/mastercard.png}" alt="Card"/>
                                             </div>
                                             <div class="card-info media-body">
-                                                <h5 class="card-name">Musa Ahmed</h5>
+                                                <h5 class="card-name" th:text="${customer.lastName}+' '+${customer.firstName}"></h5>
                                                 <p class="card-number">
                                                     .... 4534 <span>02/20</span>
                                                 </p>

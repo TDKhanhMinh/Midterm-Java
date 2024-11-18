@@ -81,10 +81,14 @@
                         <td th:text="${item.user.customerId}"></td>
                         <td th:text="${item.status}"></td>
                         <td th:text="${item.expected_date}"></td>
-                        <td class="text-center">
+                        <td class="text-center d-flex flex-nowrap">
+                            <a th:href="@{/admin/updateOrder(orderId=${item.oder_id})}"
+                               class="btn btn-success btn-sm mx-2">
+                                Accept
+                            </a>
                             <a th:href="@{/admin/deleteOrder(orderId=${item.oder_id})}"
                                class="btn btn-danger btn-sm"
-                               onclick="if (!(confirm('Are you sure to delete?'))) return false">
+                               onclick="if (!(confirm('Are you sure to delete this order?'))) return false">
                                 Delete
                             </a>
 
@@ -95,7 +99,8 @@
                 <nav class="d-flex align-items-center justify-content-center" aria-label="Page navigation example">
                     <ul class="pagination">
                         <li th:if="${currentPage != 0}" class="page-item">
-                            <a class="page-link" th:href="@{'/admin/order/' + ${currentPage - 1}}" aria-label="Previous">
+                            <a class="page-link" th:href="@{'/admin/order/' + ${currentPage - 1}}"
+                               aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>

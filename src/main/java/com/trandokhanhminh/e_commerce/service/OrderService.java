@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 public interface OrderService {
     void saveOrder(Cart cart, String location);
 
+    void updateOrder(int id);
+
     void deleteOrder(int orderId);
 
     Page<Order> pageOrder(int pageNo);

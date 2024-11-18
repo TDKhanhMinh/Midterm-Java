@@ -192,12 +192,20 @@
                         </div>
                     </a>
                 </div>
-                <div th:if="${success}" class="pt-2" >
+                <div th:if="${success}" class="pt-2">
                     <div class="alert alert-success mt-2 text-center" th:text="${success}"></div>
                 </div>
                 <div th:if="${products.size()>0}" class="container-fluid rounded-2" style="background-color: #e3f4ff">
-                    <h3 th:text="'Đồng hồ '+${brandName}" class=" pt-2 text-center"
-                        style="text-transform: uppercase"></h3>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="text-center pt-2 bg-secondary-subtle rounded-pill shadow mt-4" style="max-width: 40%;">
+                        <span
+                                th:text="'Đồng hồ '+${brandName}"
+                                class=" px-4 py-2  text-center fw-bold fs-3"
+                                style="text-transform: uppercase;box-sizing: border-box;">
+                        </span>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-3 col-sm-6 mb-4" th:each="tmpProduct: ${products}">
                             <form th:action="@{/addToCart}" method="post">
