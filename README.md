@@ -39,6 +39,8 @@
   - Sau đó đăng nhập bằng tên tài khoản và mật khẩu đã được cung cấp để tiếp tục(bắt buộc phải thực hiện bước này đầu tiên)
     ## Video demo
     https://drive.google.com/file/d/1h7_USnfDOxtp-eUiijFSAQafilhzrau5/view?usp=drive_link
+    ##Link video demo Youtube
+    https://youtu.be/DBsgWAezRV8?si=XQ_VSRxiRamI1iR8
 
 
   
