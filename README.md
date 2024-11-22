@@ -37,6 +37,10 @@
   - Sau khi chạy đoạn SQL script trên, dữ liệu sẽ được thêm vào mặc định 1 người dùng là admin(admin@admin.com,admin)
   - Người dùng mở trình duyệt và nhập localhost:8080
   - Sau đó đăng nhập bằng tên tài khoản và mật khẩu đã được cung cấp để tiếp tục(bắt buộc phải thực hiện bước này đầu tiên)
+    ## Video demo Google drive
+    https://drive.google.com/file/d/1h7_USnfDOxtp-eUiijFSAQafilhzrau5/view?usp=drive_link
+    ## Link video demo Youtube
+    https://youtu.be/DBsgWAezRV8?si=XQ_VSRxiRamI1iR8
 
 
   
