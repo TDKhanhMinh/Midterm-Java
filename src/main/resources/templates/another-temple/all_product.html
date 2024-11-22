@@ -298,16 +298,16 @@
 
                                     <div>
                                             <span class="priceOriginal price-original"
-                                                  style="text-decoration: line-through; font-size: 16px;"
-                                                  th:text="${tmpProduct.originalPrice}+'đ'"></span>
+                                                  style="text-decoration: line-through; font-size: 12px;"
+                                                  th:text="${tmpProduct.originalPrice}"></span>
                                         <span class="rounded-2"
                                               style=" font-size: 16px; color: red;margin-left: 10px;
                 padding: 2px 2px; background-color:#f4c2c2;"
                                               th:text="- ${tmpProduct.salePrice}+'%'"></span>
                                         <div class="product-price-cart">
-                                        <span
+                                        <span style="font-size: 18px"
                                                 th:text="${tmpProduct.originalPrice -
-                                    tmpProduct.originalPrice*tmpProduct.salePrice/100}+'đ'"
+                                    tmpProduct.originalPrice*tmpProduct.salePrice/100}"
                                                 class="priceSale price"></span>
                                         </div>
                                     </div>

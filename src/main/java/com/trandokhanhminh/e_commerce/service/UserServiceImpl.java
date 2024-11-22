@@ -85,6 +85,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateUserPhone(String phone, User user) {
+        User oldUser = customersRepo.findById(user.getCustomerId()).orElseThrow();
+        oldUser.setPhone(phone);
+        customersRepo.save(oldUser);
+    }
+
+    @Override
     public void updateCustomer(User customer) {
         User user = customersRepo.findCustomerByCustomerId(customer.getCustomerId());
 

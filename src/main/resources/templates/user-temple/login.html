@@ -17,8 +17,8 @@
     <link rel="stylesheet" th:href="@{/access/css/login.css}"/>
 
 </head>
-<body class="bg-gradient-primary">
-<div class="vh-100 mt-4">
+<body  >
+<div class="vh-90 mt-4">
     <div class="container h-custom">
         <div th:if="${success}">
             <div class="alert alert-success" th:text="${success}"></div>
@@ -41,7 +41,7 @@
                                 <div th:if="${param.error}" class="alert alert-danger mt-3 text-center" role="alert">
                                     Tên tài khoản hoặc mật khẩu không chính xác.
                                 </div>
-                                <form class="my-4" th:action="@{/login}" method="POST">
+                                <form class="my-4 shadow" th:action="@{/login}" method="POST">
 
                                     <div class="text-center">
                                         <h1 class="h4 text-white mb-2">User Login</h1>
@@ -91,6 +91,7 @@
     </div>
 
 </div>
+<th:block th:insert="~{ user-temple/footer :: footer}"></th:block>
 <!-- partial -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

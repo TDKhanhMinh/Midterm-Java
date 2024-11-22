@@ -11,5 +11,15 @@ public interface OrderService {
 
     void deleteOrder(int orderId);
 
+    void setOrderStatusTransport(int orderId);
+
+    void setOrderStatusCanceled(int orderId);
+
+    void setOrderStatusDelivered(int orderId);
+
+    Order findOrderById(int id);
+
     Page<Order> pageOrder(int pageNo);
+
+    Page<Order> pageOrderByStatus(int pageNo, String status);
 }

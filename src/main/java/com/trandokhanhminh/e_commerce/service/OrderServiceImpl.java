@@ -80,8 +80,41 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void setOrderStatusTransport(int orderId) {
+        Order oldOrder = orderRepo.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+        oldOrder.setStatus("Đang giao");
+        orderRepo.save(oldOrder);
+    }
+
+    @Override
+    public void setOrderStatusDelivered(int orderId) {
+        Order oldOrder = orderRepo.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+        oldOrder.setStatus("Đã giao");
+        orderRepo.save(oldOrder);
+    }
+
+    @Override
+    public Order findOrderById(int id) {
+        return orderRepo.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+    }
+
+    @Override
+    public void setOrderStatusCanceled(int orderId) {
+        Order oldOrder = orderRepo.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+        oldOrder.setStatus("Đã hủy");
+        orderRepo.save(oldOrder);
+    }
+
+    @Override
     public Page<Order> pageOrder(int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, 10);
         return orderRepo.orderPage(pageable);
+    }
+
+
+    @Override
+    public Page<Order> pageOrderByStatus(int pageNo, String status) {
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        return orderRepo.pageOrderByStatus(pageable, status);
     }
 }

@@ -59,6 +59,10 @@
                 </div>
             </div>
             <div class="container-fluid">
+                <div class="container-sm text-center my-4">
+                    <h3 th:if="${status != ''}" th:text="'Đơn hàng '+${status}"></h3>
+                    <h3 th:if="${status == ''}" th:text="'Tất cả Đơn hàng'"></h3>
+                </div>
                 <table class="table table-hover mx-2 " th:object="${size}" th:if="${size>0}">
                     <thead>
                     <tr class="table-info">
@@ -66,31 +70,47 @@
                         <th scope="col">Địa chỉ</th>
                         <th scope="col">Ngày đặt hàng</th>
                         <th scope="col">Tổng giá</th>
-                        <th scope="col">Mã khách hàng</th>
+<!--                        <th scope="col">Mã khách hàng</th>-->
                         <th scope="col">Trạng thái</th>
-                        <th scope="col">Ngày giao hàng</th>
+                        <th scope="col">Ngày giao hàng dự kiến</th>
                         <th class="text-center" scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="item: ${orders}">
                         <th th:text="${item.oder_id}"></th>
-                        <td th:text="${item.address}"></td>
+                        <td><h6 style="width: 300px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+                                th:text="${item.address}"></h6></td>
                         <td th:text="${item.date}"></td>
                         <td class="priceSale" th:text="${item.total_price/10}"></td>
-                        <td th:text="${item.user.customerId}"></td>
+<!--                        <td th:text="${item.user.customerId}"></td>-->
                         <td th:text="${item.status}"></td>
                         <td th:text="${item.expected_date}"></td>
                         <td class="text-center d-flex flex-nowrap">
-                            <a th:href="@{/admin/updateOrder(orderId=${item.oder_id})}"
-                               class="btn btn-success btn-sm mx-2">
+                            <a th:if="${item.status=='Đang chờ duyệt'}"
+                               th:href="@{/admin/updateOrder(orderId=${item.oder_id})}"
+                               class="btn btn-success btn-sm " style="margin-right: 10px;">
                                 Accept
                             </a>
-                            <a th:href="@{/admin/deleteOrder(orderId=${item.oder_id})}"
+                            <a th:if="${item.status == 'Đã hủy' || status == 'all'}"
+                               th:href="@{/admin/deleteOrder(orderId=${item.oder_id})}"
                                class="btn btn-danger btn-sm"
                                onclick="if (!(confirm('Are you sure to delete this order?'))) return false">
                                 Delete
                             </a>
+                            <a th:if="${item.status=='Đang chờ đơn vị vận chuyển'}"
+                               th:href="@{/admin/setOrderStatusTransport(orderId=${item.oder_id})}"
+                               class="btn btn-success btn-sm " style="margin-right: 10px;">
+                                Accept
+                            </a>
+                            <a th:if="${item.status=='Đang giao'}"
+                               th:href="@{/admin/setOrderStatusDelivered(orderId=${item.oder_id})}"
+                               class="btn btn-success btn-sm " style="margin-right: 10px;">
+                                Accept
+                            </a>
+                            <a class="btn btn-info btn-sm"
+                               th:if="${item.status=='Đã giao'}" style="margin-right: 10px; "
+                               th:href="@{/admin/orderInfo(orderId=${item.oder_id})}">Information</a>
 
                         </td>
                     </tr>
@@ -99,21 +119,19 @@
                 <nav class="d-flex align-items-center justify-content-center" aria-label="Page navigation example">
                     <ul class="pagination">
                         <li th:if="${currentPage != 0}" class="page-item">
-                            <a class="page-link" th:href="@{'/admin/order/' + ${currentPage - 1}}"
+                            <a class="page-link" th:href="@{/admin/order/{pageNum}(pageNum=${currentPage - 1}, status=${status})}"
                                aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li th:each="i : ${#numbers.sequence(1, totalPages)}"
-                            th:classappend="${currentPage == i - 1 ? 'active' : ''}"
-                            class="page-item">
-                            <a th:href="@{'/admin/order/' + ${i - 1}}"
-                               class="page-link"
-                            ><span th:text="${i}"></span></a>
+                            th:classappend="${currentPage == i - 1 ? 'active' : ''}" class="page-item">
+                            <a th:href="@{/admin/order/{pageNum}(pageNum=${i - 1}, status=${status})}" class="page-link"><span
+                                    th:text="${i}"></span></a>
                         </li>
-                        <li th:if="${currentPage + 1 != totalPages}"
-                            class="page-item">
-                            <a class="page-link" th:href="@{'/admin/order/' + ${currentPage + 1}}" aria-label="Next">
+                        <li th:if="${currentPage + 1 != totalPages}" class="page-item">
+                            <a class="page-link" th:href="@{/admin/order/{pageNum}(pageNum=${currentPage + 1}, status=${status})}"
+                               aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>

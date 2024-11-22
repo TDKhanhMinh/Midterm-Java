@@ -1,5 +1,5 @@
 function formatPrice(price) {
-    return price.toLocaleString('vi-VN') + 'đ';
+    return price.toLocaleString('vi-VN') + ' VNĐ';
 }
 
 function cleanAndParsePrice(priceElement) {

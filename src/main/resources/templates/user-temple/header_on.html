@@ -80,7 +80,7 @@
                             </a>
                         </li>
                         <li>
-                            <a style="" class="dropdown-item mt-2" th:href="@{/placeOrder}">
+                            <a style="" class="dropdown-item mt-2" th:href="@{/placeOrder(orderType=(${'all'}))}">
                                 <h6>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-layout-text-sidebar-reverse" viewBox="0 0 16 16">
@@ -108,7 +108,7 @@
                         </li>
                         <li>
                             <a style="font-size: small" class="dropdown-item mt-2" th:href="@{/logout}">
-                                <h6><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <h6><i class="fa-solid fa-arrow-right-from-bracket" style="transform: rotate(180deg);"></i>
                                     Đăng xuất</h6>
                             </a>
                         </li>

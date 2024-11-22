@@ -8,6 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepo extends JpaRepository<Order,Integer> {
+public interface OrderRepo extends JpaRepository<Order, Integer> {
     @Query(" select o from  Order o ")
-    Page<Order> orderPage(Pageable pageable);}
+    Page<Order> orderPage(Pageable pageable);
+
+    @Query(" select o from  Order o where " + "(:status is null or o.status =:status)")
+    Page<Order> pageOrderByStatus(Pageable pageable, String status);
+}
+
+

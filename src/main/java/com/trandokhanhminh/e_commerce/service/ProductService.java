@@ -38,7 +38,6 @@ public interface ProductService {
 
     Page<Product> pageProduct(int pageNo);
 
-
     List<Product> findProductByKey(String brandName);
 
     List<Product> findAllUser(String categoryName, String type, Double minPrice, Double maxPrice);

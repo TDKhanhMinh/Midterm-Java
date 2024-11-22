@@ -87,7 +87,7 @@
             <div class="row flex-wrap">
                 <div class="col-md-12">
                     <div class="mb-2" style="font-weight: 700">
-                        <h4>Giỏ hàng</h4>
+                        <h4>Thông tin đơn hàng</h4>
                         <hr class="mt-2">
                         <div class=" bg-body-secondary rounded-2 mt-4 p-3">
                             <div th:each="item:${cart.cartItems}" class="container pt-2 pb-2">
@@ -98,12 +98,12 @@
                                         <span class="priceSale" th:text="${item.product.originalPrice -
                                     item.product.originalPrice*item.product.salePrice/100}+'đ'"></span>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <span th:text="'Số lượng: '+${item.quantity}"></span>
                                     </div>
-                                    <div class="col-md-4 ">
-                                        <span th:text="'Tổng giá: '"></span>
-                                        <span class="priceSale" th:text="${item.totalPrice/10}"></span>
+                                    <div class="col-md-5 ">
+                                        <span th:text="'Thành tiền: '"></span>
+                                        <span class="priceSale fw-bolder text-danger" th:text="${item.totalPrice/10}"></span>
                                     </div>
                                 </div>
                                 <hr class="my-2">
@@ -130,13 +130,13 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <h6 class="">Tổng tiền phí vận chuyển</h6>
-                                    <h6>0đ</h6>
+                                    <h6>0 VNĐ</h6>
                                 </div>
                                 <hr class="my-4">
 
                                 <div class="d-flex justify-content-between">
                                     <h6 class="">Tổng tiền thanh toán</h6>
-                                    <h6 class=" priceSale" th:text="${cart.total_price/10}"></h6>
+                                    <h6 class=" priceSale fw-bold text-danger" th:text="${cart.total_price/10}"></h6>
                                 </div>
                                 <hr class="my-4">
                                 <div class="form-group">

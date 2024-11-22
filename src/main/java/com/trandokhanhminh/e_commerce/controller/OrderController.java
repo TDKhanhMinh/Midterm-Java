@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -47,12 +48,83 @@ public class OrderController {
     }
 
     @GetMapping("/placeOrder")
-    public String placeOrder(Principal principal, Model model) {
+    public String placeOrder(Principal principal, Model model,
+                             @RequestParam("orderType") String orderType) {
         User user = userService.findCustomerByEmail(principal.getName());
         List<Order> orderList = user.getOrders();
-        model.addAttribute("user", user);
-        model.addAttribute("orderList", orderList);
-        return "another-temple/place_order";
+        switch (orderType) {
+            case "all" -> {
+                model.addAttribute("user", user);
+                model.addAttribute("orderList", orderList);
+                model.addAttribute("status", "all");
+                return "another-temple/place_order";
+            }
+            case "wait" -> {
+                List<Order> waiting = new ArrayList<>();
+                for (Order order : orderList) {
+
+                    if (order.getStatus().equals("Đang chờ duyệt")) {
+                        waiting.add(order);
+                    }
+                }
+                model.addAttribute("user", user);
+                model.addAttribute("orderList", waiting);
+                model.addAttribute("status", "wait");
+                return "another-temple/place_order";
+            }
+            case "prepare" -> {
+                List<Order> prepare = new ArrayList<>();
+                for (Order order : orderList) {
+                    if (order.getStatus().equals("Đang chờ đơn vị vận chuyển")) {
+                        prepare.add(order);
+                    }
+                }
+                model.addAttribute("user", user);
+                model.addAttribute("status", "prepare");
+                model.addAttribute("orderList", prepare);
+                return "another-temple/place_order";
+            }
+            case "transport" -> {
+                List<Order> transport = new ArrayList<>();
+                for (Order order : orderList) {
+                    if (order.getStatus().equals("Đang giao")) {
+                        transport.add(order);
+                    }
+                }
+                model.addAttribute("user", user);
+                model.addAttribute("orderList", transport);
+                model.addAttribute("status", "transport");
+
+                return "another-temple/place_order";
+            }
+            case "delivered" -> {
+                List<Order> delivered = new ArrayList<>();
+                for (Order order : orderList) {
+                    if (order.getStatus().equals("Đã giao")) {
+                        delivered.add(order);
+                    }
+                }
+                model.addAttribute("user", user);
+                model.addAttribute("status", "delivered");
+
+                model.addAttribute("orderList", delivered);
+                return "another-temple/place_order";
+            }
+            default -> {
+                List<Order> canceled = new ArrayList<>();
+                for (Order order : orderList) {
+                    if (order.getStatus().equals("Đã hủy")) {
+                        canceled.add(order);
+                    }
+                }
+                model.addAttribute("user", user);
+                model.addAttribute("status", "canceled");
+
+                model.addAttribute("orderList", canceled);
+                return "another-temple/place_order";
+            }
+        }
+
     }
 
     @PostMapping("/saveOrder")
@@ -60,24 +132,44 @@ public class OrderController {
                             @Param("city") String city,
                             @Param("district") String district,
                             @Param("ward") String ward,
-                            @Param("address") String address) {
-        if (address.isEmpty() || city.isEmpty() || district.isEmpty() || ward.isEmpty()) {
+                            @Param("address") String address,
+                            @Param("phone") String phone) {
+        if (address.isEmpty() || city.isEmpty() || district.isEmpty() || ward.isEmpty() || phone.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Vui lòng nhập địa chỉ cụ thể");
             return "redirect:/checkout";
         } else {
             User user = userService.findCustomerByEmail(principal.getName());
+            userService.updateUserPhone(phone, user);
             Cart cart = user.getCart();
-            String location = address + "," + ward + "," + district + "," + city;
+            String location = address + ", " + ward + ", " + district + ", " + city;
             orderService.saveOrder(cart, location);
+            String orderType = "all";
             redirectAttributes.addFlashAttribute("success", "Đặt hàng thành công");
-            return "redirect:/placeOrder";
+            return "redirect:/placeOrder?orderType=" + orderType;
+
         }
     }
 
-    @GetMapping("/deleteOrder")
+    @GetMapping("/orderInfo")
+    public String getOrderInfo(@RequestParam("orderId") int oderId,
+                               Principal principal, Model model) {
+        User user = userService.findCustomerByEmail(principal.getName());
+        List<Order> orderList = user.getOrders();
+        for (Order order : orderList) {
+            if (order.getOder_id() == oderId) {
+                model.addAttribute("user", user);
+                model.addAttribute("order", order);
+                return "another-temple/order_information";
+            }
+        }
+        return "another-temple/order_information";
+    }
+
+    @GetMapping("/canceledOrder")
     public String deleteOrder(@RequestParam("orderId") int orderId, RedirectAttributes redirectAttributes) {
-        orderService.deleteOrder(orderId);
+        String orderType = "all";
+        orderService.setOrderStatusCanceled(orderId);
         redirectAttributes.addFlashAttribute("success", "Hủy đơn hàng thành công");
-        return "redirect:/placeOrder";
+        return "redirect:/placeOrder?orderType=" + orderType;
     }
 }

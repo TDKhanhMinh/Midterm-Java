@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -199,25 +200,67 @@ public class AdminController {
     @GetMapping("/deleteOrder")
     public String deleteOrder(@RequestParam("orderId") int orderId) {
         orderService.deleteOrder(orderId);
-        return "redirect:/admin/order/0";
+        String status = "";
+        return "redirect:/admin/order/0?status=" + status;
     }
 
     @GetMapping("/updateOrder")
     public String updateOrder(@RequestParam("orderId") int orderId) {
         orderService.updateOrder(orderId);
-        return "redirect:/admin/order/0";
+        String status = "";
+        return "redirect:/admin/order/0?status=" + status;
+    }
+
+    @GetMapping("/setOrderStatusTransport")
+    public String setOrderStatusTransport(@RequestParam("orderId") int orderId) {
+        orderService.setOrderStatusTransport(orderId);
+        String status = "";
+        return "redirect:/admin/order/0?status=" + status;
+    }
+
+    @GetMapping("/setOrderStatusDelivered")
+    public String setOrderStatusDelivered(@RequestParam("orderId") int orderId) {
+        orderService.setOrderStatusDelivered(orderId);
+        String status = "";
+        return "redirect:/admin/order/0?status=" + status;
     }
 
 
     @GetMapping("/order/{pageNum}")
-    public String getOrder(@PathVariable("pageNum") int pageNum, Model model) {
-        Page<Order> orders = orderService.pageOrder(pageNum);
+    public String getOrder(
+            @PathVariable("pageNum") int pageNum,
+            @RequestParam(name = "status", required = false) String status,
+            Model model) {
+        Page<Order> orders;
+        if (status.isEmpty()) {
+            orders = orderService.pageOrder(pageNum);
+            status = "";
+        } else {
+            orders = orderService.pageOrderByStatus(pageNum, status);
+        }
         model.addAttribute("size", orders.getSize());
         model.addAttribute("totalPages", orders.getTotalPages());
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("orders", orders);
+        model.addAttribute("status", status);
         return "manager-temple/order_manager";
     }
+
+    @GetMapping("/orderInfo")
+    public String getOrderInfo(@RequestParam("orderId") int oderId,
+                               Principal principal, Model model) {
+        User user = userService.findCustomerByEmail(orderService.findOrderById(oderId).getUser().getEmail());
+        List<Order> orderList = user.getOrders();
+        for (Order order : orderList) {
+            if (order.getOder_id() == oderId) {
+                model.addAttribute("user", user);
+                model.addAttribute("order", order);
+                return "manager-temple/order_information";
+            }
+        }
+        return "manager-temple/order_information";
+    }
+
 
     //Customer controller
 
@@ -236,7 +279,8 @@ public class AdminController {
     @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("userId") int userId) {
         userService.deleteCustomerById(userId);
-        return "redirect:/admin/user/0";
+        String status = "";
+        return "redirect:/admin/order/0?status=" + status;
     }
 
 }

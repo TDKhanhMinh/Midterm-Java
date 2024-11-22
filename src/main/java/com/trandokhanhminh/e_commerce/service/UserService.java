@@ -21,6 +21,7 @@ public interface UserService extends UserDetailsService {
 
     Page<User> userPage(int pageNo);
 
+    void updateUserPhone(String phone,User user);
     void updateCustomer(User customer);
 }
 
