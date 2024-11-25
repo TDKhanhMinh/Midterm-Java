@@ -38,9 +38,9 @@
   - Người dùng mở trình duyệt và nhập localhost:8080
   - Sau đó đăng nhập bằng tên tài khoản và mật khẩu đã được cung cấp để tiếp tục(bắt buộc phải thực hiện bước này đầu tiên)
     ## Video demo Google drive
-    https://drive.google.com/file/d/1h7_USnfDOxtp-eUiijFSAQafilhzrau5/view?usp=drive_link
+    https://drive.google.com/file/d/1Nt6DVOxw6CUU8P10SKCWaFw2gWlEOf7n/view?usp=sharing
     ## Link video demo Youtube
-    https://youtu.be/DBsgWAezRV8?si=XQ_VSRxiRamI1iR8
+    https://youtu.be/DBsgWAezRV8?si=XQ_VSRxiRamI1iR8](https://youtu.be/jF88eLFLzhs?si=_Mdi4L77BGf7kGWE
 
 
   
