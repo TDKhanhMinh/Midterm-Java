@@ -198,30 +198,35 @@ public class AdminController {
 
 
     @GetMapping("/deleteOrder")
-    public String deleteOrder(@RequestParam("orderId") int orderId) {
+    public String deleteOrder(@RequestParam("orderId") int orderId, RedirectAttributes redirectAttributes) {
         orderService.deleteOrder(orderId);
         String status = "";
+        redirectAttributes.addFlashAttribute("success","Successfully deleted order");
         return "redirect:/admin/order/0?status=" + status;
     }
 
     @GetMapping("/updateOrder")
-    public String updateOrder(@RequestParam("orderId") int orderId) {
+    public String updateOrder(@RequestParam("orderId") int orderId, RedirectAttributes redirectAttributes) {
         orderService.updateOrder(orderId);
         String status = "";
+        redirectAttributes.addFlashAttribute("success","Successfully accept order");
         return "redirect:/admin/order/0?status=" + status;
     }
 
     @GetMapping("/setOrderStatusTransport")
-    public String setOrderStatusTransport(@RequestParam("orderId") int orderId) {
+    public String setOrderStatusTransport(@RequestParam("orderId") int orderId, RedirectAttributes redirectAttributes) {
         orderService.setOrderStatusTransport(orderId);
         String status = "";
+        redirectAttributes.addFlashAttribute("success","Successfully set transport to order");
         return "redirect:/admin/order/0?status=" + status;
     }
 
     @GetMapping("/setOrderStatusDelivered")
-    public String setOrderStatusDelivered(@RequestParam("orderId") int orderId) {
+    public String setOrderStatusDelivered(@RequestParam("orderId") int orderId,RedirectAttributes redirectAttributes) {
         orderService.setOrderStatusDelivered(orderId);
         String status = "";
+        redirectAttributes.addFlashAttribute("success","Successfully set delivered to order");
+
         return "redirect:/admin/order/0?status=" + status;
     }
 
@@ -277,10 +282,10 @@ public class AdminController {
     }
 
     @GetMapping("/deleteUser")
-    public String deleteUser(@RequestParam("userId") int userId) {
+    public String deleteUser(@RequestParam("userId") int userId,RedirectAttributes redirectAttributes) {
         userService.deleteCustomerById(userId);
-        String status = "";
-        return "redirect:/admin/order/0?status=" + status;
+        redirectAttributes.addFlashAttribute("success","Successfully deleted user");
+        return "redirect:/admin/user/0";
     }
 
 }
